@@ -98,8 +98,16 @@ def _req(url, payload=None, method="GET"):
         with urllib.request.urlopen(req, timeout=180) as r:
             return json.load(r)
     except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", "replace")[:600]
-        raise SystemExit("HTTP %s from %s\n%s" % (e.code, url.split("?")[0], body))
+        body = e.read().decode("utf-8", "replace")
+        if e.code == 429 and "limit: 0" in body:
+            raise SystemExit(
+                "Image generation is not enabled for this API key.\n\n"
+                "Every image model reports a free-tier quota of 0 — they are paid-tier\n"
+                "only, so the key's project needs billing enabled. The key itself is\n"
+                "fine: text models answer normally.\n\n"
+                "Enable billing at https://aistudio.google.com/ (Settings -> Plan) or in\n"
+                "the Cloud console for the same project, then re-run this script.")
+        raise SystemExit("HTTP %s from %s\n%s" % (e.code, url.split("?")[0], body[:600]))
 
 
 def list_models(key):

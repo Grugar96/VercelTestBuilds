@@ -60,6 +60,26 @@ Regenerate them with:
 python3 tools/generate_images.py
 ```
 
+### Generating real photography with Gemini
+
+`tools/generate_images_gemini.py` will generate the twelve photographs from the
+prompts below and write them to `assets/img/<name>.png`, leaving the vector scenes
+in place until you wire the new files in:
+
+```bash
+export GEMINI_API_KEY=...
+python3 tools/generate_images_gemini.py --list-models   # what the key can reach
+python3 tools/generate_images_gemini.py                 # generate all twelve
+python3 tools/generate_images_gemini.py --wire          # point index.html at the PNGs
+```
+
+**Image generation requires a billed Google AI project.** Every image model
+(`gemini-3-pro-image`, `gemini-2.5-flash-image`, `gemini-3.1-flash-image`, …) reports
+a free-tier quota of `limit: 0` — they are paid-tier only. A key with no billing
+attached still works for text models but returns HTTP 429 for every image request;
+the script detects that case and says so. Enable billing in Google AI Studio under
+Settings → Plan, then re-run.
+
 ### Replacing the artwork with real photography
 
 Each file is referenced exactly once, by path, from `index.html` (the hero, sector,
