@@ -656,14 +656,14 @@ def avatar(initials, seed):
     # partly-photographed board still reads as one row rather than two styles.
     g = d.lingrad([("0", "#e8e8e8", "1"), ("1", "#d4d4d4", "1")], x1=0, y1=0, x2=1, y2=1)
     d.add('<rect width="600" height="600" fill="url(#%s)"/>' % g)
-    d.glow(430, 150, 380, "#B87333", 0.10)
+    d.glow(430, 150, 380, "#2C7CD4", 0.12)
     for i in range(3):
-        d.add('<circle cx="300" cy="330" r="%d" fill="none" stroke="#B87333" '
+        d.add('<circle cx="300" cy="330" r="%d" fill="none" stroke="#2C7CD4" '
               'stroke-width="1.5" opacity="%.2f"/>' % (170 + i * 52, 0.20 - i * 0.05))
     d.add('<text x="300" y="318" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" '
-          'font-size="170" font-weight="600" fill="#2C3E50" text-anchor="middle" '
+          'font-size="170" font-weight="600" fill="#0B2B60" text-anchor="middle" '
           'dominant-baseline="central" letter-spacing="6">%s</text>' % initials)
-    d.add('<rect x="228" y="430" width="144" height="3" fill="#B87333" opacity="0.9"/>')
+    d.add('<rect x="228" y="430" width="144" height="3" fill="#2C7CD4" opacity="0.9"/>')
     d.grain(0.06)
     return d.render()
 
@@ -672,7 +672,7 @@ def pattern():
     """Tiling background motif: mineral facet, oil drop, container."""
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">'
-        '<g fill="none" stroke="#1A1A1A" stroke-width="1.6" opacity="0.5">'
+        '<g fill="none" stroke="#0B2B60" stroke-width="1.6" opacity="0.5">'
         '<path d="M 40 34 L 66 22 L 84 42 L 68 66 L 40 62 Z"/>'
         '<path d="M 40 34 L 68 66 M 66 22 L 68 66"/>'
         '<path d="M 176 26 c 0 0 -20 24 -20 36 a 20 20 0 0 0 40 0 c 0 -12 -20 -36 -20 -36 Z"/>'

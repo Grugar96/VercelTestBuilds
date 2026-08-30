@@ -23,46 +23,62 @@
 
 /* ── 1. Design tokens ─────────────────────────────────────────────────── */
 :root {
-  /* Primary */
-  --charcoal:        #1A1A1A;
-  --slate:           #2C3E50;
+  /* ---- Brand primaries (SPGCL Brand Guide) ---- */
+  --navy-deep:       #051A3D;   /* darkest overlays, dark sections, footer */
+  --navy:            #0B2B60;   /* brand standard: headings on light */
+  --navy-light:      #1A4080;   /* hover / secondary */
+  --navy-tint:       #E8EDF5;   /* subtle card backgrounds */
   --white:           #FFFFFF;
 
-  /* Accent */
-  --copper:          #B87333;   /* brand accent: rules, icons, text on charcoal */
-  --copper-bright:   #d18b45;   /* numerals on charcoal */
-  --copper-deep:     #9a5d27;   /* copper text on light backgrounds */
-  /* Surfaces that carry white text. #B87333 with white is only 3.79:1, short of
-     WCAG AA; this shade is visually the same copper and clears it at 4.6:1. */
-  --copper-cta:      #A8652B;
-  --earth:           #6B4423;
-  --industrial:      #34495E;
+  /* ---- Accent blue family ----
+     #2C7CD4 is the brand standard but reaches only 4.25:1 with white and
+     3.82:1 on beige, short of WCAG AA for normal text. So it keeps every
+     NON-text job (dividers, icon fills, borders, focus rings, large display
+     text) and two other colours already in the brand palette carry text:
+       --accent-text  #1A5FA8  "Accent Dark"  6.47:1 white / 5.81:1 beige
+       --accent-on-dark #5B9FE3 "Accent Light" 6.15:1 on navy deep
+     Nothing here is invented — only assigned by contrast. */
+  --accent:          #2C7CD4;
+  --accent-text:     #1A5FA8;
+  --accent-on-dark:  #5B9FE3;
+  --accent-glow:     #E3F2FD;
 
-  /* Neutrals */
-  --grey-50:         #F8F9FA;
-  --grey-200:        #E4E7EA;
+  /* ---- Contextual (brand guide restricts these) ---- */
+  --green:           #6DB76D;   /* sustainability content only */
+  --earth:           #A06F4F;   /* resource / material contexts only */
+
+  /* ---- Warm accents: data and premium callouts ---- */
+  --copper:          #B87333;   /* 4.53:1 on navy deep; stats are large text */
+  --copper-deep:     #9a5d27;   /* copper text on light backgrounds */
+  --gold:            #D4A574;
+
+  /* ---- Neutrals ---- */
+  --beige:           #FDF1E3;   /* soft section backgrounds */
+  --grey-200:        #E0E0E0;   /* dividers, borders */
   --grey-400:        #9AA1A9;
-  --ink:             #333333;
+  --ink:             #333333;   /* body text — never pure black, per guide */
   --ink-muted:       #5c646c;
   --on-dark:         #E0E0E0;
-  --on-dark-muted:   rgba(255, 255, 255, 0.62);
+  --on-dark-muted:   rgba(255, 255, 255, 0.72);
 
-  /* Type */
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* ---- Type ---- */
+  --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 'Courier New', monospace;
 
   /* Fluid type scale — mobile floor ≈60% of the desktop ceiling, per brief */
-  --fs-hero:    clamp(2.7rem, 1.15rem + 5.3vw, 4.5rem);   /* 43 → 72px */
-  --fs-h2:      clamp(1.8rem, 1.0rem + 2.7vw, 3rem);      /* 29 → 48px */
-  --fs-h3:      clamp(1.35rem, 0.95rem + 1.35vw, 2rem);   /* 22 → 32px */
-  --fs-h4:      clamp(1.15rem, 1.0rem + 0.5vw, 1.5rem);   /* 18 → 24px */
+  --fs-hero:    clamp(2.7rem, 1.15rem + 5.3vw, 4.5rem);   /* 43 → 72px display */
+  --fs-h2:      clamp(1.8rem, 1.0rem + 2.7vw, 3rem);      /* 29 → 48px H1 */
+  --fs-h3:      clamp(1.35rem, 0.95rem + 1.35vw, 2rem);   /* 22 → 32px H2 */
+  --fs-h4:      clamp(1.15rem, 1.0rem + 0.5vw, 1.5rem);   /* 18 → 24px H3 */
   --fs-h5:      clamp(1.05rem, 0.98rem + 0.3vw, 1.25rem); /* 17 → 20px */
-  --fs-lede:    clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem);/* 17 → 20px */
+  --fs-lede:    clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem);/* 17 → 20px body large */
   --fs-body:    1rem;
-  --fs-caption: 0.875rem;
+  --fs-caption: 0.875rem;                                  /* UI label */
+  --fs-eyebrow: 0.75rem;                                   /* 12px */
   --fs-stat:    clamp(2.2rem, 0.9rem + 4.1vw, 4rem);      /* 38 → 64px */
   --fs-stat-sm: clamp(1.75rem, 1.1rem + 2.1vw, 2.75rem);
+  --measure:    800px;                                     /* max body width */
 
   /* Spacing */
   --sp-section: clamp(80px, 8.4vw, 120px);
@@ -76,12 +92,36 @@
   --pad-inline: clamp(24px, 5.5vw, 80px);
   --header-h: 80px;
 
-  /* Surface */
+  /* Surface — layered navy-tinted shadows, per the brand guide's depth spec */
   --radius: 8px;
-  --radius-lg: 12px;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --shadow-lift: 0 18px 44px rgba(0, 0, 0, 0.16);
+  --radius-lg: 16px;
+  --shadow:
+    0 2px 8px rgba(11, 43, 96, 0.04),
+    0 8px 24px rgba(11, 43, 96, 0.08),
+    0 16px 48px rgba(11, 43, 96, 0.12);
+  --shadow-lift:
+    0 8px 16px rgba(11, 43, 96, 0.12),
+    0 16px 32px rgba(11, 43, 96, 0.16),
+    0 24px 48px rgba(11, 43, 96, 0.20);
+  --shadow-cta:
+    0 4px 12px rgba(44, 124, 212, 0.25),
+    0 8px 24px rgba(44, 124, 212, 0.20);
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Gradient text. A solid colour is set first so the text stays legible where
+   background-clip:text is unsupported, then the gradient paints over it. */
+.grad-text {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.grad-text--on-dark {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-on-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* ── 2. Reset & base ──────────────────────────────────────────────────── */
@@ -114,12 +154,12 @@ p:last-child { margin-bottom: 0; }
 
 address { font-style: normal; }
 
-a { color: var(--industrial); text-decoration: none; }
+a { color: var(--accent-text); text-decoration: none; }
 
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
 :focus-visible {
-  outline: 3px solid var(--copper);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -130,7 +170,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   top: -100px;
   z-index: 1000;
   padding: 12px 20px;
-  background: var(--copper);
+  background: var(--accent-text);
   color: var(--white);
   font-weight: 600;
   border-radius: 0 0 var(--radius) var(--radius);
@@ -142,7 +182,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 h1, h2, h3, h4, h5 {
   margin: 0 0 0.5em;
   font-family: var(--font-heading);
-  color: var(--charcoal);
+  color: var(--navy);
   font-weight: 700;
   letter-spacing: -0.015em;
 }
@@ -156,20 +196,24 @@ h1, h2, h3, h4, h5 {
 
 .eyebrow {
   margin: 0 0 var(--sp-sm);
-  color: var(--copper);
-  font-size: var(--fs-caption);
-  font-weight: 600;
+  font-family: var(--font-heading);
+  color: var(--accent-on-dark);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
   line-height: 1.5;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-.eyebrow--dark { color: var(--copper-deep); }
+.eyebrow--dark { color: var(--accent-text); }
+.hero .eyebrow { color: var(--copper); }
 
 .lede {
+  max-width: var(--measure);
   font-size: var(--fs-lede);
   line-height: 1.6;
   color: var(--ink);
 }
+.split__body p, .section-head__sub, .vision-close { max-width: var(--measure); }
 
 .rule {
   display: block;
@@ -183,7 +227,7 @@ h1, h2, h3, h4, h5 {
 .center .rule { margin-inline: auto; }
 
 .todo {
-  color: var(--copper-deep);
+  color: var(--accent-text);
   font-style: italic;
   border-bottom: 1px dashed currentColor;
 }
@@ -199,8 +243,8 @@ h1, h2, h3, h4, h5 {
 
 .section { padding-block: var(--sp-section); position: relative; }
 .section--light  { background: var(--white); }
-.section--muted  { background: var(--grey-50); }
-.section--dark   { background: var(--charcoal); color: var(--on-dark); }
+.section--muted  { background: var(--beige); }
+.section--dark   { background: var(--navy-deep); color: var(--on-dark); }
 .section--dark p { color: var(--on-dark); }
 
 /* faded mineral / oil-drop / container motif */
@@ -238,7 +282,7 @@ h1, h2, h3, h4, h5 {
   padding: 16px 28px;
   border: 2px solid transparent;
   border-radius: var(--radius);
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: var(--fs-body);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -249,9 +293,9 @@ h1, h2, h3, h4, h5 {
 }
 .btn--sm { padding: 11px 20px; font-size: var(--fs-caption); }
 
-.btn--primary { background: var(--copper-cta); color: var(--white); }
+.btn--primary { background: var(--accent-text); color: var(--white); box-shadow: var(--shadow-cta); }
 .btn--primary:hover,
-.btn--primary:focus-visible { background: var(--copper-deep); transform: scale(1.02); }
+.btn--primary:focus-visible { background: var(--navy); transform: scale(1.02); }
 
 .btn--ghost { border-color: rgba(255, 255, 255, 0.5); color: var(--white); }
 .btn--ghost:hover,
@@ -265,7 +309,7 @@ h1, h2, h3, h4, h5 {
   position: relative;
   display: inline-block;
   padding-bottom: 3px;
-  color: var(--industrial);
+  color: var(--accent-text);
   font-weight: 500;
   text-underline-offset: 2px;
 }
@@ -283,8 +327,8 @@ h1, h2, h3, h4, h5 {
 .link-arrow:hover::before,
 .link-arrow:focus-visible::before { transform: scaleX(1); }
 .link-arrow:hover::after { transform: translateX(4px); }
-.link-arrow--copper { color: var(--copper); }
-.section--dark .link-arrow { color: var(--copper); }
+.link-arrow--copper { color: var(--accent-on-dark); }
+.section--dark .link-arrow { color: var(--accent-on-dark); }
 
 /* ── 6. Header / navigation ───────────────────────────────────────────── */
 .site-header {
@@ -292,13 +336,13 @@ h1, h2, h3, h4, h5 {
   inset: 0 0 auto;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(26, 26, 26, 0.95);
+  background: rgba(5, 26, 61, 0.95);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 .site-header.is-scrolled {
-  background: rgba(26, 26, 26, 1);
+  background: rgba(5, 26, 61, 1);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
 }
 .site-header__inner {
@@ -309,23 +353,17 @@ h1, h2, h3, h4, h5 {
   height: 100%;
 }
 
-.logo { display: block; color: var(--white); flex: 0 0 auto; }
-.logo__svg { width: 192px; height: auto; }
-.logo__mark {
-  font-family: var(--font-heading);
-  font-size: 23px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  fill: currentColor;
-}
-.logo__word {
-  font-family: var(--font-heading);
-  font-size: 8.1px;
-  font-weight: 500;
-  letter-spacing: 0.92px;
-  fill: currentColor;
-  opacity: 0.72;
-}
+/* Official lockup. The guide requires clear space of 1x the cap height on all
+   sides, and forbids shadows, glows, outlines and any recolouring of the
+   gradient — so the full-colour file is used as-is on light grounds. */
+.logo { display: block; flex: 0 0 auto; padding: 6px; }
+.logo__img { width: 176px; height: auto; }
+
+/* Header and footer sit on Navy Deep, where the guide specifies the WHITE
+   MONOCHROME variant. The source has an alpha channel, so flattening to black
+   and inverting yields exactly that lockup without shipping a second file. */
+.site-header .logo__img,
+.site-footer .logo__img { filter: brightness(0) invert(1); }
 
 .nav__list { display: flex; gap: clamp(14px, 1.9vw, 30px); }
 .nav__list a {
@@ -341,7 +379,7 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   left: 0; bottom: 0;
   width: 100%; height: 2px;
-  background: var(--copper);
+  background: var(--accent-on-dark);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s var(--ease);
@@ -374,7 +412,7 @@ h1, h2, h3, h4, h5 {
   .nav {
     position: fixed;
     inset: var(--header-h) 0 auto;
-    background: rgba(26, 26, 26, 0.985);
+    background: rgba(5, 26, 61, 0.985);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -406,7 +444,7 @@ h1, h2, h3, h4, h5 {
 
 /* keep logo + CTA + burger on one row on small handsets */
 @media (max-width: 560px) {
-  .logo__svg { width: 150px; }
+  .logo__img { width: 138px; }
   .site-header__actions { gap: 6px; }
   .site-header__actions .btn--sm { padding: 10px 14px; }
 }
@@ -432,12 +470,13 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* averages the 60% charcoal wash the brief calls for, while keeping the
-     sunset legible through the middle of the frame */
-  background: linear-gradient(180deg,
-    rgba(26, 26, 26, 0.74) 0%,
-    rgba(26, 26, 26, 0.40) 42%,
-    rgba(26, 26, 26, 0.80) 100%);
+  /* Brand guide hero overlay, plus a vertical pass that keeps the headline and
+     the stat bar legible without flattening the sunset in the middle. */
+  background:
+    linear-gradient(180deg, rgba(5, 26, 61, 0.55) 0%, rgba(5, 26, 61, 0) 34%,
+                    rgba(5, 26, 61, 0) 62%, rgba(5, 26, 61, 0.72) 100%),
+    linear-gradient(135deg, rgba(5, 26, 61, 0.88) 0%, rgba(11, 43, 96, 0.68) 50%,
+                    rgba(26, 64, 128, 0.48) 100%);
 }
 
 .hero__inner {
@@ -472,7 +511,7 @@ h1, h2, h3, h4, h5 {
   position: relative;
   padding-block: var(--sp-md);
   border-top: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(26, 26, 26, 0.34);
+  background: rgba(5, 26, 61, 0.34);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
@@ -490,9 +529,19 @@ h1, h2, h3, h4, h5 {
   font-size: var(--fs-stat);
   font-weight: 700;
   line-height: 1.05;
-  color: var(--copper-bright);
+  color: var(--copper);
   letter-spacing: -0.02em;
   white-space: nowrap;
+}
+/* Data highlights are copper per the guide. On the dark grounds the copper to
+   gold gradient is applied; on light the solid deeper copper keeps contrast. */
+.hero__stats .stat__num,
+.highlight-bar .stat__num,
+.sector-card__stat .stat__num {
+  background: linear-gradient(135deg, var(--copper) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .stat__num--sm { font-size: var(--fs-stat-sm); }
 
@@ -540,7 +589,7 @@ h1, h2, h3, h4, h5 {
 .principle__icon svg {
   width: 40px; height: 40px;
   fill: none;
-  stroke: var(--copper);
+  stroke: var(--accent);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -572,7 +621,7 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(26, 26, 26, 0.35) 0%, rgba(26, 26, 26, 0.72) 45%, rgba(26, 26, 26, 0.94) 100%);
+  background: linear-gradient(180deg, rgba(5, 26, 61, 0.35) 0%, rgba(5, 26, 61, 0.72) 45%, rgba(5, 26, 61, 0.94) 100%);
 }
 .sector-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lift); }
 .sector-card:hover .sector-card__img { transform: scale(1.05); }
@@ -589,7 +638,7 @@ h1, h2, h3, h4, h5 {
   width: 48px; height: 48px;
   margin-bottom: var(--sp-sm);
   fill: none;
-  stroke: var(--copper-bright);
+  stroke: var(--accent-on-dark);
   stroke-width: 1.4;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -617,7 +666,7 @@ h1, h2, h3, h4, h5 {
   left: 0; top: 0.72em;
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--copper-bright);
+  background: var(--accent-on-dark);
 }
 .sector-card__stat { display: flex; flex-direction: column; margin-bottom: var(--sp-md); }
 .sector-card .link-arrow { margin-top: auto; align-self: flex-end; }
@@ -689,7 +738,7 @@ h1, h2, h3, h4, h5 {
   display: inline-block;
   padding: 5px 12px;
   border-radius: 999px;
-  background: var(--copper-cta);
+  background: var(--accent-text);
   color: var(--white);
   font-size: 0.75rem;
   font-weight: 600;
@@ -718,10 +767,10 @@ h1, h2, h3, h4, h5 {
   transition: color 0.25s var(--ease), border-color 0.25s var(--ease),
               background-color 0.25s var(--ease);
 }
-.reach__tab:hover { color: var(--copper-bright); }
+.reach__tab:hover { color: var(--accent-on-dark); }
 .reach__tab.is-active {
-  border-left-color: var(--copper);
-  background: rgba(184, 115, 51, 0.1);
+  border-left-color: var(--accent);
+  background: rgba(44, 124, 212, 0.14);
   color: var(--white);
 }
 .reach__country { font-family: var(--font-heading); font-size: var(--fs-h5); font-weight: 600; }
@@ -753,7 +802,7 @@ h1, h2, h3, h4, h5 {
   border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 @media (min-width: 720px) { .reach__sites { grid-template-columns: repeat(2, 1fr); } }
-.reach__site h4 { margin-bottom: 4px; color: var(--copper-bright); }
+.reach__site h4 { margin-bottom: 4px; color: var(--accent-on-dark); }
 .reach__site p { color: var(--on-dark-muted); margin: 0; }
 
 /* ── 12. Investor centre ──────────────────────────────────────────────── */
@@ -776,7 +825,7 @@ h1, h2, h3, h4, h5 {
   width: 56px; height: 56px;
   margin-bottom: var(--sp-sm);
   fill: none;
-  stroke: var(--copper);
+  stroke: var(--accent);
   stroke-width: 1.4;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -793,14 +842,14 @@ h1, h2, h3, h4, h5 {
   border-top: 1px solid var(--grey-200);
   font-size: 0.9375rem;
 }
-.doc-list a:not(.pill) { color: var(--industrial); font-weight: 500; text-underline-offset: 2px; }
+.doc-list a:not(.pill) { color: var(--accent-text); font-weight: 500; text-underline-offset: 2px; }
 .doc-list a:not(.pill):hover { text-decoration: underline; }
 
 .pill {
   flex: 0 0 auto;
   padding: 4px 11px;
   border-radius: 999px;
-  background: var(--grey-50);
+  background: var(--beige);
   border: 1px solid var(--grey-200);
   color: var(--ink-muted);
   font-size: 0.75rem;
@@ -809,9 +858,9 @@ h1, h2, h3, h4, h5 {
   white-space: nowrap;
 }
 .pill--ok  { background: #e8f5ec; border-color: #bfe3cb; color: #1d6b39; }
-.pill--num { font-family: var(--font-mono); color: var(--copper-deep); background: #fbf4ed; border-color: #eddbc7; }
-.pill--req { background: var(--industrial); border-color: var(--industrial); color: var(--white); }
-.pill--req:hover { background: var(--charcoal); }
+.pill--num { font-family: var(--font-mono); color: var(--navy); background: var(--navy-tint); border-color: #cfd9e8; }
+.pill--req { background: var(--accent-text); border-color: var(--accent-text); color: var(--white); }
+.pill--req:hover { background: var(--navy-deep); }
 
 .highlight-bar {
   display: flex;
@@ -821,7 +870,7 @@ h1, h2, h3, h4, h5 {
   justify-content: space-between;
   margin-top: var(--sp-lg);
   padding: var(--sp-md) clamp(24px, 3.5vw, 48px);
-  background: var(--charcoal);
+  background: var(--navy-deep);
   border-radius: var(--radius);
 }
 .highlight-bar__stats {
@@ -856,7 +905,7 @@ h1, h2, h3, h4, h5 {
   margin-bottom: var(--sp-sm);
 }
 .leader h3 { margin-bottom: 2px; }
-.leader__role { margin-bottom: 10px; color: var(--copper-deep); font-weight: 500; }
+.leader__role { margin-bottom: 10px; color: var(--accent-text); font-weight: 500; }
 .leader__bio { color: var(--ink-muted); font-size: 0.9375rem; }
 
 /* margin-top:auto keeps the tag row on the baseline across cards of unequal bio length */
@@ -864,7 +913,7 @@ h1, h2, h3, h4, h5 {
 .tags li {
   padding: 4px 11px;
   border-radius: 999px;
-  background: var(--industrial);
+  background: var(--accent-text);
   color: var(--white);
   font-size: 0.75rem;
   font-weight: 500;
@@ -902,7 +951,7 @@ h1, h2, h3, h4, h5 {
 /* ── 15. Footer ───────────────────────────────────────────────────────── */
 .site-footer {
   padding-block: 80px 40px;
-  background: var(--charcoal);
+  background: var(--navy-deep);
   color: var(--on-dark);
 }
 .footer-grid {
@@ -924,7 +973,7 @@ h1, h2, h3, h4, h5 {
 }
 .footer-col li { margin-bottom: 10px; font-size: 0.9375rem; }
 .footer-col a { color: var(--on-dark-muted); transition: color 0.2s var(--ease); }
-.footer-col a:hover { color: var(--copper-bright); }
+.footer-col a:hover { color: var(--accent-on-dark); }
 .footer-col span { color: var(--on-dark-muted); }
 
 .footer-col--contact .logo { color: var(--white); margin-bottom: var(--sp-sm); }
@@ -952,7 +1001,7 @@ h1, h2, h3, h4, h5 {
 .footer-bottom p { margin: 0; }
 .footer-bottom, .footer-bottom a { color: var(--grey-400); font-size: var(--fs-caption); }
 .footer-bottom ul { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
-.footer-bottom a:hover { color: var(--copper-bright); }
+.footer-bottom a:hover { color: var(--accent-on-dark); }
 
 /* ── 16. Motion & reveals ─────────────────────────────────────────────── */
 .reveal {
