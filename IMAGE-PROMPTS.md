@@ -19,10 +19,10 @@ edge at **1600–2400px**. If your generator has no 4:5, use 3:4 — the crop ab
 
 | # | File | Ratio | Status |
 |---|---|---|---|
-| 1 | `hero-refinery` | 16:9 | Generated — Kling 3 Omni, 2K |
-| 2 | `sector-minerals` | 4:5 | Generated — Kling 3 Omni, 2K |
-| 3 | `sector-agro` | 4:5 | Generated — Kling 3 Omni, 2K |
-| 4 | `sector-logistics` | 4:5 | Generated — Kling 3 Omni, 2K |
+| 1 | `hero-refinery` | 16:9 | Generated — Kling 3 Omni 2K, 2720×1536 — **download needed** |
+| 2 | `sector-minerals` | 3:4 | Generated — Kling 3 Omni 2K, 1760×2368 — **download needed** |
+| 3 | `sector-agro` | 3:4 | Generated — Kling 3 Omni 2K, 1760×2368 — **download needed** |
+| 4 | `sector-logistics` | 3:4 | Generated — Kling 3 Omni 2K, 1760×2368 — **download needed** |
 | 5 | `news-mining` | 3:2 | **Yours to generate** |
 | 6 | `news-boardroom` | 16:10 | **Yours to generate** |
 | 7 | `news-product` | 16:10 | **Yours to generate** |
@@ -33,6 +33,29 @@ edge at **1600–2400px**. If your generator has no 4:5, use 3:4 — the crop ab
 | 12 | `loc-morocco` | 3:2 | **Yours to generate** |
 
 Board portraits are deliberately **not** on this list — see the note at the end.
+
+### Retrieving the four generated images
+
+They exist in the OpenArt account but are not in this repo: the build sandbox's
+egress proxy blocks `cdn.openart.ai`, so they could not be fetched automatically.
+From your own machine:
+
+```bash
+bash tools/fetch-openart.sh      # downloads all four under the right filenames
+python3 tools/wire_images.py     # repoints index.html at them
+```
+
+Or download them by hand from <https://openart.ai/my-creations> and save them into
+`assets/img/` as `hero-refinery.png`, `sector-minerals.png`, `sector-agro.png` and
+`sector-logistics.png`, then run `wire_images.py`.
+
+`wire_images.py` wires whatever rasters are present and leaves the rest on their
+generated `.svg`, so run it again as more images arrive. `--status` reports without
+changing anything and `--revert` puts everything back to the vector artwork.
+
+**Then update the alt text.** It currently describes the vector scene; alt text has
+to describe the image that is actually there. Re-run `npx html-validate index.html`
+and `node tools/test-a11y.js` afterwards.
 
 ---
 
