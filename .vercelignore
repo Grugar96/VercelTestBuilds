@@ -1,0 +1,8 @@
+# Dev tooling only — nothing here is served.
+node_modules/
+tools/
+.attachments/
+package.json
+package-lock.json
+README.md
+IMAGE-PROMPTS.md
