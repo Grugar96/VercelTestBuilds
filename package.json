@@ -1,0 +1,25 @@
+{
+  "name": "verceltestbuilds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grugar96/VercelTestBuilds.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grugar96/VercelTestBuilds/issues"
+  },
+  "homepage": "https://github.com/Grugar96/VercelTestBuilds#readme",
+  "devDependencies": {
+    "axe-core": "^4.13.0",
+    "html-validate": "^11.10.0",
+    "playwright": "^1.62.1"
+  }
+}
