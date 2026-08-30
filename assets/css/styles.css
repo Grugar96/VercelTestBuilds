@@ -320,9 +320,9 @@ h1, h2, h3, h4, h5 {
 }
 .logo__word {
   font-family: var(--font-heading);
-  font-size: 9.2px;
+  font-size: 8.1px;
   font-weight: 500;
-  letter-spacing: 1.35px;
+  letter-spacing: 0.92px;
   fill: currentColor;
   opacity: 0.72;
 }
