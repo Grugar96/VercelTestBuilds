@@ -60,6 +60,66 @@
     requestAnimationFrame(function () { document.body.classList.add('is-ready'); });
   });
 
+  /* ── Hero stat counters ────────────────────────────────────────────────
+     Each value rolls up to its figure from a little below it, so it reads as
+     settling rather than tallying from zero. The markup holds the real value,
+     so with JavaScript off — or with reduced motion — the correct figure is
+     simply what is already on the page. */
+  var counters = document.querySelectorAll('.hero__stats .stat__num');
+  if (counters.length && !reduceMotion) {
+    var COUNT_MS = 1000;
+    var FIRST_DELAY = 1200;     // matches the CSS reveal stagger
+    var STEP_DELAY = 200;
+
+    Array.prototype.forEach.call(counters, function (el, i) {
+      // split "₹365 Cr" into prefix, number and suffix
+      var parts = /^(\D*?)([\d.,]+)(.*)$/.exec(el.textContent.trim());
+      if (!parts) { return; }
+      var prefix = parts[1], raw = parts[2], suffix = parts[3];
+      var target = parseFloat(raw.replace(/,/g, ''));
+      if (!isFinite(target)) { return; }
+
+      var decimals = (raw.split('.')[1] || '').length;
+      var grouped = raw.indexOf(',') !== -1;
+      var format = function (value) {
+        var n = value.toFixed(decimals);
+        if (grouped) {
+          n = Number(n).toLocaleString('en-IN', {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+          });
+        }
+        return prefix + n + suffix;
+      };
+
+      // Start 12–25% below the figure, never less than 2 away, so small values
+      // still visibly move. Digits are monospaced, but the digit *count* can
+      // change mid-roll, so the final width is pinned first to avoid a jitter.
+      var offset = Math.max(2, Math.round(target * (0.12 + Math.random() * 0.13)));
+      var from = Math.max(0, target - offset);
+      var width = el.getBoundingClientRect().width;
+      if (width) { el.style.minWidth = width + 'px'; }
+      el.textContent = format(from);
+
+      window.setTimeout(function () {
+        var started = null;
+        var tick = function (now) {
+          if (started === null) { started = now; }
+          var p = Math.min(1, (now - started) / COUNT_MS);
+          var eased = 1 - Math.pow(1 - p, 3);       // easeOutCubic
+          if (p < 1) {
+            el.textContent = format(from + (target - from) * eased);
+            requestAnimationFrame(tick);
+          } else {
+            el.textContent = format(target);        // land exactly on the figure
+            el.style.minWidth = '';                 // release for resizing
+          }
+        };
+        requestAnimationFrame(tick);
+      }, FIRST_DELAY + i * STEP_DELAY);
+    });
+  }
+
   /* ── Global reach: country tabs ────────────────────────────────────── */
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.reach__tab'));
   var panels = Array.prototype.slice.call(document.querySelectorAll('.reach__panel'));

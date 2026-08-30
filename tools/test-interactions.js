@@ -47,6 +47,33 @@ const { chromium } = require('playwright');
       return t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)';
     }));
 
+  // hero counters roll, then land exactly on the figures in the markup
+  {
+    const p2 = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    const expected = ['₹365Cr', '3', '12+', '35+'];
+    await p2.goto('http://127.0.0.1:8123/', { waitUntil: 'domcontentloaded' });
+    await p2.waitForTimeout(1450);           // first counter is mid-roll here
+    const mid = await p2.$$eval('.hero__stats .stat__num', (n) => n.map((e) => e.textContent.trim()));
+    await p2.waitForTimeout(2600);           // all four settled
+    const done = await p2.$$eval('.hero__stats .stat__num', (n) => n.map((e) => e.textContent.trim()));
+    check('counters land on the markup values', JSON.stringify(done) === JSON.stringify(expected),
+      done.join(' | '));
+    check('counters actually animate', mid[0] !== expected[0], 'mid-roll showed ' + mid[0]);
+    await p2.close();
+  }
+
+  // reduced motion leaves the figures static
+  {
+    const p3 = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    await p3.emulateMedia({ reducedMotion: 'reduce' });
+    await p3.goto('http://127.0.0.1:8123/', { waitUntil: 'domcontentloaded' });
+    await p3.waitForTimeout(400);
+    const still = await p3.$$eval('.hero__stats .stat__num', (n) => n.map((e) => e.textContent.trim()));
+    check('reduced motion keeps figures static',
+      JSON.stringify(still) === JSON.stringify(['₹365Cr', '3', '12+', '35+']), still.join(' | '));
+    await p3.close();
+  }
+
   // every reveal fires after a scroll pass
   await page.evaluate(async () => {
     const root = document.documentElement;
