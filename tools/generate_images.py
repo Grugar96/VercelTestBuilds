@@ -652,21 +652,19 @@ def loc_morocco():
 def avatar(initials, seed):
     """Monogram portrait tile — used in place of photographs of real directors."""
     d = Doc(600, 600)
-    rnd = random.Random(seed)
-    base = rnd.choice(["#2C3E50", "#1A1A1A", "#34495E", "#3a2b1e"])
-    g = d.lingrad([("0", shade(base, 0.12), "1"), ("1", shade(base, -0.35), "1")],
-                  x1=0, y1=0, x2=1, y2=1)
+    # Matched to the #e0e0e0 studio backdrop of the real board headshots, so a
+    # partly-photographed board still reads as one row rather than two styles.
+    g = d.lingrad([("0", "#e8e8e8", "1"), ("1", "#d4d4d4", "1")], x1=0, y1=0, x2=1, y2=1)
     d.add('<rect width="600" height="600" fill="url(#%s)"/>' % g)
-    d.glow(430, 150, 380, "#B87333", 0.34)
+    d.glow(430, 150, 380, "#B87333", 0.10)
     for i in range(3):
         d.add('<circle cx="300" cy="330" r="%d" fill="none" stroke="#B87333" '
-              'stroke-width="1.5" opacity="%.2f"/>' % (170 + i * 52, 0.22 - i * 0.05))
-    d.add('<circle cx="300" cy="318" r="150" fill="#ffffff" opacity="0.05"/>')
+              'stroke-width="1.5" opacity="%.2f"/>' % (170 + i * 52, 0.20 - i * 0.05))
     d.add('<text x="300" y="318" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" '
-          'font-size="170" font-weight="600" fill="#f0e2d2" text-anchor="middle" '
+          'font-size="170" font-weight="600" fill="#2C3E50" text-anchor="middle" '
           'dominant-baseline="central" letter-spacing="6">%s</text>' % initials)
-    d.add('<rect x="228" y="430" width="144" height="3" fill="#B87333" opacity="0.85"/>')
-    d.grain(0.1)
+    d.add('<rect x="228" y="430" width="144" height="3" fill="#B87333" opacity="0.9"/>')
+    d.grain(0.06)
     return d.render()
 
 
