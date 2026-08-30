@@ -336,14 +336,15 @@ h1, h2, h3, h4, h5 {
   inset: 0 0 auto;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(5, 26, 61, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--grey-200);
   transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 .site-header.is-scrolled {
-  background: rgba(5, 26, 61, 1);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 16px rgba(11, 43, 96, 0.10);
 }
 .site-header__inner {
   display: flex;
@@ -362,7 +363,6 @@ h1, h2, h3, h4, h5 {
 /* Header and footer sit on Navy Deep, where the guide specifies the WHITE
    MONOCHROME variant. The source has an alpha channel, so flattening to black
    and inverting yields exactly that lockup without shipping a second file. */
-.site-header .logo__img,
 .site-footer .logo__img { filter: brightness(0) invert(1); }
 
 .nav__list { display: flex; gap: clamp(14px, 1.9vw, 30px); }
@@ -370,16 +370,17 @@ h1, h2, h3, h4, h5 {
   position: relative;
   display: block;
   padding: 6px 0;
-  color: var(--white);
+  color: var(--navy);
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
 }
+.nav__list a:hover, .nav__list a:focus-visible { color: var(--accent-text); }
 .nav__list a::after {
   content: "";
   position: absolute;
   left: 0; bottom: 0;
   width: 100%; height: 2px;
-  background: var(--accent-on-dark);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s var(--ease);
@@ -400,7 +401,7 @@ h1, h2, h3, h4, h5 {
 .nav-toggle span {
   display: block;
   height: 2px;
-  background: var(--white);
+  background: var(--navy);
   transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
 }
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -412,10 +413,11 @@ h1, h2, h3, h4, h5 {
   .nav {
     position: fixed;
     inset: var(--header-h) 0 auto;
-    background: rgba(5, 26, 61, 0.985);
+    background: rgba(255, 255, 255, 0.985);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--grey-200);
+    box-shadow: 0 12px 24px rgba(11, 43, 96, 0.10);
     max-height: 0;
     overflow: hidden;
     /* visibility (not just height) keeps the closed drawer's links out of the
@@ -434,7 +436,7 @@ h1, h2, h3, h4, h5 {
     padding: 8px var(--pad-inline) 24px;
   }
   .nav__list a { padding: 14px 0; font-size: 1.0625rem; }
-  .nav__list li + li { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+  .nav__list li + li { border-top: 1px solid var(--grey-200); }
 }
 
 @media (min-width: 900px) {
@@ -509,13 +511,44 @@ h1, h2, h3, h4, h5 {
 
 .hero__stats {
   position: relative;
-  padding-block: var(--sp-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(5, 26, 61, 0.34);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--pad-inline) clamp(32px, 5vw, 72px);
+}
+.hero__stats .stat-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-md) clamp(32px, 4.4vw, 64px);
+  width: auto;
+  max-width: 100%;
+  padding: var(--sp-md) clamp(24px, 3.3vw, 48px);
+  background: rgba(255, 255, 255, 0.10);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: var(--radius-lg);
+}
+.hero__stats .stat { align-items: flex-start; }
+
+/* Values and labels are different widths, so equal gaps alone read as ragged.
+   Hairline rules make the rhythm explicit, matching the investor bar. */
+/* below the divider breakpoint the four values sit as an aligned 2x2 */
+@media (max-width: 699px) {
+  .hero__stats .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: var(--sp-md) var(--sp-lg);
+  }
+}
+@media (min-width: 700px) {
+  .hero__stats .stat-bar { gap: var(--sp-md) 0; }
+  .hero__stats .stat { padding-inline: clamp(20px, 2.6vw, 38px); }
+  .hero__stats .stat + .stat { border-left: 1px solid rgba(255, 255, 255, 0.18); }
 }
 
+/* the inline bar under Leadership stays a four-up grid */
 .stat-bar {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
