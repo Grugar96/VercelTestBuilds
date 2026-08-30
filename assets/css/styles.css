@@ -728,6 +728,14 @@ h1, h2, h3, h4, h5 {
 .reach__count { font-size: var(--fs-caption); letter-spacing: 0.04em; opacity: 0.8; }
 
 .reach__panel[hidden] { display: none; }
+
+/* Panel imagery. One image fills the width; India carries two (Chennai HQ and
+   the Nellore plant) side by side from tablet up, stacked below that. */
+.reach__gallery { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
+@media (min-width: 720px) {
+  .reach__gallery--two { grid-template-columns: 1fr 1fr; }
+  .reach__gallery--two .reach__img { height: clamp(220px, 26vw, 340px); }
+}
 .reach__img {
   width: 100%;
   height: clamp(260px, 38vw, 500px);
