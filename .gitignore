@@ -1,5 +1,5 @@
-node_modules/
-*.log
-.DS_Store
+node_modules
+.next
+out
 .vercel
-.attachments/
+.env*.local
