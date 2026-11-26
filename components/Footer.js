@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="wrap">
           <div className="footer-grid">
             <div>
-              <img className="footer-logo" src="/img/logo.png" alt="Mulki Surf Brothers logo" width="96" height="96" loading="lazy" />
+              <img className="footer-logo" src="/img/logo-mark.png" alt="Mulki Surf Brothers logo" width="128" height="125" loading="lazy" />
               <p className="small" style={{ color: 'rgba(245,243,236,.75)' }}>Surf lessons, riverside stays and good people in Mulki, Karnataka.</p>
             </div>
             <div>

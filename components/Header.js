@@ -33,7 +33,7 @@ export default function Header() {
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <div className="wrap">
           <Link className="brand" href="/" aria-label="Mulki Surf Brothers home">
-            <img src="/img/logo.png" alt="Mulki Surf Brothers logo" width="52" height="52" />
+            <img src="/img/logo-mark.png" alt="Mulki Surf Brothers" width="96" height="94" />
           </Link>
           <nav className="nav" aria-label="Main">{links}</nav>
           <Link className="btn btn-primary header-cta" href="/book">Book</Link>
