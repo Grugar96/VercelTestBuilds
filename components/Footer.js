@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Wave from './Wave';
-import { NAV, ADDRESS, PHONE, PHONE_LABEL, EMAIL, INSTAGRAM, wa } from '@/lib/site';
+import { NAV, ADDRESS, PHONES, PHONE_LABEL, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, TAGLINE, wa } from '@/lib/site';
 
 export default function Footer() {
   return (
@@ -15,16 +15,16 @@ export default function Footer() {
             </div>
             <div>
               <h4>Visit</h4>
-              <ul className="small"><li>{ADDRESS.map((l, i) => <span key={l}>{l}{i < ADDRESS.length - 1 && <br />}</span>)}</li></ul>
+              <ul className="small"><li>{ADDRESS.map((l, i) => <span key={l}>{l}{i < ADDRESS.length - 1 && <br />}</span>)}</li><li><a href={MAPS}>Open in Google Maps</a></li></ul>
             </div>
             <div>
               <h4>Talk to us</h4>
               <ul className="small">
                 <li><a href={wa('Hi Mulki Surf Brothers!')}>WhatsApp {PHONE_LABEL}</a></li>
-                <li><a href={`tel:+${PHONE}`}>Call {PHONE_LABEL}</a></li>
+                {PHONES.map(([n, l]) => <li key={n}><a href={`tel:+${n}`}>Call {l}</a></li>)}
                 {/* placeholder: confirm this inbox exists */}
                 <li><a href={`mailto:${EMAIL.value}`}>{EMAIL.value}</a></li>
-                <li><a href={INSTAGRAM}>Instagram</a></li>
+                <li><a href={INSTAGRAM}>Instagram {INSTAGRAM_HANDLE}</a></li>
               </ul>
             </div>
             <div>
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} Mulki Surf Brothers</span>
-            <span>Surf. Stay. Connect.</span>
+            <span>{TAGLINE}</span>
           </div>
         </div>
       </footer>

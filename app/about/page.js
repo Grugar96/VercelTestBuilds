@@ -1,4 +1,5 @@
 import { PageHero, WaveSection, CrewGrid, Testimonials, BookingBand } from '@/components/Sections';
+import HandLine from '@/components/HandLine';
 
 export const metadata = { title: 'About', description: 'Mulki Surf Brothers is a surf school and riverside hostel in Mulki, Karnataka, run by a crew that feels like family.' };
 
@@ -14,7 +15,7 @@ export default function About() {
           <div className="reveal">
             <p className="lead">It started in 2023 with a couple of foam boards and a rack on the sand. Today it's a riverside home where beginners learn without fear and nobody gets shouted at for falling off.</p>
             <p className="muted">Everybody falls off. That's the fun part.</p>
-            <span className="hand">Find your flow</span>
+            <HandLine text="Find your flow" />
           </div>
         </div>
       </WaveSection>

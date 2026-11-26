@@ -1,6 +1,6 @@
 import Doodle from '@/components/Doodle';
 import { PageHero, WaveSection, Faq, BookingBand } from '@/components/Sections';
-import { ADDRESS, EMAIL, INSTAGRAM, MAPS, PHONE, PHONE_LABEL, wa } from '@/lib/site';
+import { ADDRESS, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, PHONES, PHONE_LABEL, wa } from '@/lib/site';
 
 export const metadata = { title: 'Contact', description: 'How to reach Mulki Surf Brothers in Mulki, Karnataka: WhatsApp, phone, email, and getting here by train, bus or plane.' };
 
@@ -8,7 +8,7 @@ const FAQ = [
   ['What are the check-in and check-out times?', 'Check-in from 1:00 PM, check-out by 11:00 AM. Arriving early? Tell us and we’ll keep your bags safe.'],
   ['Can I work remotely from here?', 'Yes. There’s high-speed fiber Wi-Fi across the hostel and riverside deck, and afternoons are quiet once the morning session is done.'],
   ['When is the surf season?', 'September to May. June to August is monsoon, when the sea is too rough for lessons.'],
-  ['Do I pay online?', 'No. You send a booking request, and we confirm availability and the final price with you on WhatsApp. No advance payment, free cancellation.'],
+  ['How do I pay?', 'Send a booking request and we confirm availability on WhatsApp. Surf Only needs full payment to confirm (no refund after booking). Stay & Surf needs a \u20b92,000 advance per person (non-refundable), and the rest is paid at check-in.'],
   ['Can you arrange an airport or station pickup?', 'Yes, on request. Tell us your arrival time and we’ll arrange a cab from Mangaluru airport or the station.'],
 ];
 
@@ -24,10 +24,10 @@ export default function Contact() {
             <p className="label">Talk to us</p>
             <ul className="contact-list">
               <li><Doodle name="smile" /><div><b>WhatsApp</b><a href={wa('Hi Mulki Surf Brothers!')}>{PHONE_LABEL}</a></div></li>
-              <li><Doodle name="arrow" /><div><b>Call</b><a href={`tel:+${PHONE}`}>{PHONE_LABEL}</a></div></li>
+              <li><Doodle name="arrow" /><div><b>Call</b>{PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</div></li>
               <li><Doodle name="wave" /><div><b>Email</b><a href={`mailto:${EMAIL.value}`}>{EMAIL.value}</a></div></li>
               <li><Doodle name="pin" /><div><b>Address</b>{ADDRESS.join(', ')}<br /><a href={MAPS}>Open in Google Maps</a></div></li>
-              <li><Doodle name="sun" /><div><b>Instagram</b><a href={INSTAGRAM}>@surfbrothersmulki</a></div></li>
+              <li><Doodle name="sun" /><div><b>Instagram</b><a href={INSTAGRAM}>{INSTAGRAM_HANDLE}</a></div></li>
             </ul>
           </div>
           <div className="reveal">

@@ -12,7 +12,7 @@ export const metadata = {
   metadataBase: new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'),
   title: { default: 'Mulki Surf Brothers — Surf school & riverside stay in Mulki', template: '%s — Mulki Surf Brothers' },
   description: 'Learn to surf in Mulki, Karnataka. Beginner surf lessons, riverside camping and dorms by the Shambhavi river, kayaking and a crew that feels like family.',
-  openGraph: { title: 'Mulki Surf Brothers — Surf. Stay. Connect.', description: 'Surf lessons, riverside stays and good people in Mulki, Karnataka.', images: ['/img/sunset-board.jpg'], type: 'website' },
+  openGraph: { title: 'Mulki Surf Brothers — Stay • Surf • Belong', description: 'Surf lessons, riverside stays and good people in Mulki, Karnataka.', images: ['/img/sunset-board.jpg'], type: 'website' },
 };
 
 export const viewport = { themeColor: '#3B96B5' };

@@ -26,21 +26,30 @@ public/img, public/video  real photos and clips from the Surf Brothers shoots (w
 
 To change a price, a crew line or a testimonial, edit `lib/site.js`. Every page and the booking flow read from it.
 
+## Real data (from the owner's price list, Nov 2026)
+
+Prices, packages (3/5/7/10 days, camping or AC hostel), what's included, meals, the Mon–Thu ₹1,000 offer, payment rules, both phone numbers, Instagram and the Maps link all live in `lib/site.js`. There is no non-AC room any more.
+
 ## Placeholders to confirm before launch
 
-Content carried over from the draft site is kept as placeholder. Search the code for `placeholder` to find it.
+Search the code for `placeholder` to find them all.
 
-- [ ] Proof strip: **4.9★ Google rating, 1000+ students, ISA-certified coaches, 4:1 ratio** (`PROOF` in `lib/site.js`)
+- [ ] Proof strip: **4.9★ Google rating, 1000+ students, ISA-certified coaches, 4:1 ratio** (`PROOF`)
 - [ ] **Testimonials** (Tom H., Ananya R., Priya S.): replace with real Google reviews
-- [ ] Safety section on /surf-lessons (**4:1, ISA, CPR**) and "one of the safest places in India to learn"
-- [ ] **Email** `hello@surfbrothersmulki.com`, **free cancellation / no advance payment**, "replies within 15 minutes"
-- [ ] Bed counts (12 camping spots, 6 non-AC, 11 AC), amenities, **2023** origin story, video analysis, rentals from ₹500/hr
+- [ ] Safety section on /surf-lessons (4:1, ISA, CPR)
+- [ ] **Email** `hello@surfbrothersmulki.com`, "replies within 15 minutes", 2023 origin story, rentals from ₹500/hr
+- [ ] **Kayaking prices** (₹600 day / ₹700 night) — not on the owner's price list
+- [ ] Check-in 1 PM / check-out 11 AM, quiet hours, Sep–May season
+- [ ] Is the ₹1,000 weekday offer per person or per booking? (built as per person)
 - [ ] Travel times and taxi fares on /contact
-- [ ] All prices in `PRICES`, the Sep–May season, check-in 1 PM / check-out 11 AM
-- [ ] Crew one-liners and portraits (initials are shown until photos are added)
+- [ ] Crew one-liners and portraits (initials show until photos are added)
 - [ ] Guest consent for every recognisable person in the photos
-- [ ] Brilanys Signature phrases as SVG (Caveat stands in), and the illustrator's doodle/line SVGs (`components/Doodle.js`, wave paths in `components/Wave.js`)
+- [ ] Brilanys Signature phrases as SVG (Caveat stands in), and the illustrator's doodle SVGs
+
+## Hero ride line
+
+The lime line on the hero video follows the surfer using hand-annotated positions in `HERO_RIDE` (`lib/site.js`). If the hero clip changes, re-annotate those keyframes.
 
 ## Booking flow
 
-`components/BookingFlow.js`: what → lessons → guests → dates → stay → extras → send. Nothing is charged online. The last step builds a WhatsApp message to +91 99721 58288 with every choice and the estimated total. Choices are kept in the URL (`/book?type=package&pkg=5&guests=2&in=2026-12-04&room=camp`), so any button can pre-fill it.
+`components/BookingFlow.js`. Stay & Surf: days → guests → check-in date → room → meals/extras → send. Surf only: group or private → guests → pick any number of surf days (any dates) → extras → send. Group sessions use the cheapest bundle mix (e.g. 4 days = 3-day bundle + 1 session). Nothing is charged online. The last step builds a WhatsApp message to +91 99721 58288 with every choice and the estimated total. Choices are kept in the URL (`/book?type=package&days=5&room=camp&in=2026-12-01&guests=2`, `/book?type=surf&program=group&dates=2026-12-01,2026-12-04`), so any button can pre-fill it.

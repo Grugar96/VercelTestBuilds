@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Wave from './Wave';
 import Doodle from './Doodle';
-import { PACKAGES, PROOF, TESTIMONIALS, CREW, PHONE, PHONE_LABEL, wa } from '@/lib/site';
+import WaveAnim from './WaveAnim';
+import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
 
 export function Ticks({ items }) {
   return <ul className="ticks">{items.map((t) => <li key={t}>{t}</li>)}</ul>;
@@ -22,11 +23,29 @@ export function Card({ label, title, price, unit = '/ guest', ticks, href, btn, 
 
 export function PackageCards() {
   return (
-    <div className="cards-3">
+    <div className="cards-4">
       {PACKAGES.map((p) => (
-        <Card key={p.pkg} label={p.label} title={p.title} price={p.price} ticks={p.ticks} tag={p.tag} primary={p.primary}
-          href={`/book?type=package&pkg=${p.pkg}`} btn={`Choose ${p.pkg} days`} />
+        <article className="card reveal" key={p.days}>
+          {p.tag && <span className="tag">{p.tag}</span>}
+          <p className="label">{p.label}</p>
+          <h3>{p.title}</h3>
+          <div className="price-pair">
+            <div><span>Camping</span><b>{p.camp}</b></div>
+            <div><span>AC hostel</span><b>{p.ac}</b></div>
+          </div>
+          <p className="small muted" style={{ margin: '0 0 1.25rem' }}>Per person · stay + daily surf lessons</p>
+          <Link className={`btn ${p.primary ? 'btn-primary' : 'btn-secondary'}`} href={`/book?type=package&days=${p.days}`}>Choose {p.days} days</Link>
+        </article>
       ))}
+    </div>
+  );
+}
+
+export function PackageIncludes() {
+  return (
+    <div className="includes">
+      <p className="label">Every Stay &amp; Surf package includes</p>
+      <Ticks items={PACKAGE_INCLUDES} />
     </div>
   );
 }
@@ -73,6 +92,12 @@ export function CrewGrid({ link = true }) {
           <div><p className="label">The crew</p><h2 id="crew-title">Who'll be in the water with you</h2></div>
           {link && <Link className="link-arrow" href="/about">Meet everyone</Link>}
         </div>
+        <div className="people-strip">
+          <figure className="reveal"><img src="/img/crew-beach.jpg" alt="Instructors on the beach before a session" loading="lazy" /><figcaption>before the session</figcaption></figure>
+          <figure className="reveal"><img src="/img/falls-sit.jpg" alt="The crew sitting on rocks at a waterfall" loading="lazy" /><figcaption>crew day out</figcaption></figure>
+          <figure className="reveal"><img src="/img/celebration.jpg" alt="The team celebrating with cake" loading="lazy" /><figcaption>birthday chaos</figcaption></figure>
+          <figure className="reveal"><img src="/img/jeep-crew.jpg" alt="The crew in the jeep among coconut palms" loading="lazy" /><figcaption>road trip</figcaption></figure>
+        </div>
         <div className="crew-grid">
           {CREW.map((c) => (
             <article className="crew reveal" key={c.name}>
@@ -114,9 +139,10 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
           <Link className="btn btn-primary" href={href}>{btn}</Link>
           <a className="btn btn-ghost" href={wa("Hi Mulki Surf Brothers! I'd like to book.")}>Chat on WhatsApp</a>
         </div>
-        <p className="phone">Call or WhatsApp <a href={`tel:+${PHONE}`}>{PHONE_LABEL}</a></p>
-        <p className="small" style={{ marginTop: '1rem', opacity: 0.8 }}>Free cancellation · No advance payment</p>
+        <p className="phone">Call or WhatsApp {PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</p>
+        <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off per person on Stay &amp; Surf</p>
       </div>
+      <WaveAnim back="var(--sb-ocean)" mid="var(--sb-lime)" front="var(--sb-charcoal)" />
     </section>
   );
 }

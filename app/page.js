@@ -3,8 +3,10 @@ import Wave from '@/components/Wave';
 import Doodle from '@/components/Doodle';
 import AutoVideo from '@/components/AutoVideo';
 import MulkiMap from '@/components/MulkiMap';
+import HandLine from '@/components/HandLine';
+import WaveAnim from '@/components/WaveAnim';
 import { PackageCards, ProofStrip, Testimonials, CrewGrid, Faq, BookingBand } from '@/components/Sections';
-import { HOME_FAQ, wa } from '@/lib/site';
+import { HOME_FAQ, HERO_RIDE, wa } from "@/lib/site";
 
 function Band({ cls, wave, n, icon, label, id, title, lead, price, priceNote, actions, media, flip }) {
   return (
@@ -44,8 +46,8 @@ export default function Home() {
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <p className="label">Mulki, Karnataka · surf school &amp; riverside stay</p>
-            <h1 className="poster" id="hero-title"><span>Surf.</span><span>Stay.</span><span className="out">Connect.</span></h1>
-            <p className="lead">Learn to surf on a beginner-friendly beach, sleep by the Shambhavi river, and leave with a crew of new friends.</p>
+            <h1 className="poster" id="hero-title"><span><i>Stay.</i></span><span><i>Surf.</i></span><span className="out"><i>Belong.</i></span></h1>
+            <p className="lead">Your laid-back surf stay by the backwaters, with waves, music, good people and unforgettable experiences.</p>
             <div className="hero-actions">
               <Link className="btn btn-primary" href="/book">Plan your stay</Link>
               <a className="btn btn-secondary" href="#packages">See packages</a>
@@ -53,7 +55,7 @@ export default function Home() {
           </div>
           <div className="hero-media">
             <div className="video-frame">
-              <AutoVideo src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="A Surf Brothers student riding a wave in Mulki" ride preload="metadata">
+              <AutoVideo src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="A Surf Brothers student riding a wave in Mulki" ride={HERO_RIDE} preload="metadata">
                 <div className="hero-stats">
                   <div className="stat"><b>8–11 AM</b><span>morning sessions</span></div>
                   <div className="stat"><b>SEP–MAY</b><span>surf season</span></div>
@@ -63,6 +65,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <WaveAnim back="var(--sb-ocean-deep)" mid="var(--sb-lime)" front="var(--sb-charcoal)" />
       </section>
       <ProofStrip />
 
@@ -75,7 +78,11 @@ export default function Home() {
           <div className="intro-side reveal">
             <p className="lead">Mulki sits where the Shambhavi river meets the Arabian Sea. Mornings are for the ocean, afternoons for hammocks and the river, evenings for sunsets and long dinners.</p>
             <p className="muted">Beginner? Perfect. Everyone starts somewhere.</p>
-            <span className="hand">Find your flow</span>
+            <HandLine text="Find your flow" />
+            <div className="intro-photos">
+              <figure><img src="/img/board-portrait.jpg" alt="A guest standing with her surfboard on Mulki beach" loading="lazy" /></figure>
+              <figure><img src="/img/crew-beach.jpg" alt="Two Surf Brothers instructors chatting on the beach" loading="lazy" /></figure>
+            </div>
           </div>
         </div>
       </section>
@@ -89,7 +96,7 @@ export default function Home() {
       {/* 4 BANDS */}
       <Band cls="band-ocean" wave="var(--sb-ocean)" n={2} icon="board" label="Surf lessons" id="b-surf"
         title={<>First wave,<br />sorted.</>}
-        lead="Theory on the sand, pop-ups on the beach, then into gentle whitewash with an ISA-certified coach beside you. Group sessions, private lessons and 3 to 10-day programs."
+        lead="Two-hour sessions: theory on the sand, pop-ups on the beach, then into gentle whitewash with an instructor beside you. Book one day or as many as you like."
         price="From ₹2,000" priceNote="per session"
         actions={<><Link className="btn btn-primary" href="/book?type=surf">Book a lesson</Link><Link className="link-arrow" href="/surf-lessons">How lessons work</Link></>}
         media={<><div className="video-frame" style={{ transform: 'rotate(-2.5deg)', maxWidth: 380, marginInline: 'auto' }}>
@@ -98,21 +105,21 @@ export default function Home() {
 
       <Band cls="band-deep" flip wave="var(--sb-ocean-deep)" n={0} icon="palm" label="Riverside stay" id="b-stay"
         title={<>Sleep by<br />the river.</>}
-        lead="Camping under the palms, a fan-cooled dorm or an AC dorm, all a few steps from the Shambhavi. Fiber Wi-Fi for the ones still answering emails."
-        price="From ₹800" priceNote="per guest / night"
-        actions={<><Link className="btn btn-primary" href="/book?type=stay">Choose your bed</Link><Link className="link-arrow" href="/stay">See the rooms</Link></>}
+        lead="Camping under the palms or an AC hostel room by the backwaters. Daily surf lessons, ice baths, bonfires, karaoke and movie nights included."
+        price="From ₹8,000" priceNote="per person · 3 days with surfing"
+        actions={<><Link className="btn btn-primary" href="/book?type=package">Plan your stay</Link><Link className="link-arrow" href="/stay">See the rooms</Link></>}
         media={<img className="tall tilt-r" src="/img/board-hostel.jpg" alt="A hand-painted surfboard leaning in the hostel doorway" loading="lazy" width="1050" height="1400" />} />
 
       <Band cls="band-charcoal" wave="var(--sb-charcoal)" n={1} icon="kayak" label="River & night kayaking" id="b-river"
         title={<>Paddle into<br />the glow.</>}
         lead="Drift through the mangroves by day. In season, head out after dark when the river lights up with bioluminescence."
-        price="Day ₹600 · Night ₹700" priceNote="per guest"
-        actions={<Link className="btn btn-primary" href="/book?type=stay&addon=kayak-night">Add a kayak trip</Link>}
+        price="Day ₹600 · Night ₹700" priceNote="per person"
+        actions={<Link className="btn btn-primary" href="/book?type=package&addon=kayak-night">Add a kayak trip</Link>}
         media={<img className="wide tilt-l" src="/img/kayak-river.jpg" alt="Guests kayaking on the Shambhavi river" loading="lazy" width="1152" height="746" />} />
 
       <Band cls="band-lime" flip wave="var(--sb-lime)" n={2} icon="sun" label="Life around Mulki" id="b-life"
         title={<>The only meeting<br />is with the ocean.</>}
-        lead="Sunset volleyball, waterfall days with the crew, campfires, long dinners and slow mornings. Two-thirds of a stay here happens out of the water."
+        lead="Sunset volleyball, cycling, waterfall days with the crew, bonfires, music and karaoke. Two-thirds of a stay here happens out of the water."
         actions={<Link className="link-arrow" href="/gallery">See more of Mulki</Link>}
         media={<img className="wide tilt-r" src="/img/jeep-crew.jpg" alt="The crew heading out in the jeep through the coconut groves" loading="lazy" width="864" height="524" />} />
 
@@ -120,20 +127,20 @@ export default function Home() {
       <section className="video-break has-wave-top" aria-label="Video: a day out with the crew">
         <Wave color="var(--sb-charcoal)" n={0} />
         <AutoVideo src="/video/waterfall-crew.mp4" poster="/img/waterfall-poster.jpg" label="The crew at a waterfall on a team day out">
-          <p className="caption">Come for the surf.<br />Stay for the people.</p>
+          <p className="caption">Come for the waves.<br />Stay for the people.</p>
         </AutoVideo>
-        <Wave color="var(--sb-offwhite)" n={1} bottom />
+        <WaveAnim back="var(--sb-ocean)" mid="var(--sb-lime)" front="var(--sb-offwhite)" />
       </section>
 
       {/* 6 PACKAGES */}
       <section className="section" id="packages" aria-labelledby="pk-title">
         <div className="wrap">
           <div className="section-head">
-            <div><p className="label">Surf + stay packages</p><h2 id="pk-title">Pick your number of days</h2></div>
+            <div><p className="label">Stay &amp; Surf packages · per person</p><h2 id="pk-title">Pick your number of days</h2></div>
             <Link className="link-arrow" href="/packages">Compare all options</Link>
           </div>
           <PackageCards />
-          <p className="fineprint">Packages run in surf season (September to May). Add meals or kayaking when you book. Longer stays and groups: <a href={wa("Hi! I'd like to plan a longer stay / group trip.")}>message us on WhatsApp</a>.</p>
+          <p className="fineprint">Mon–Thu check-ins get ₹1,000 off per person, subject to availability. Add daily meals (veg ₹300 / non-veg ₹400) when you book. Groups: <a href={wa("Hi! I'd like to plan a group trip.")}>message us on WhatsApp</a>.</p>
         </div>
       </section>
 

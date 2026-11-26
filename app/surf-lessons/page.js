@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import Wave from '@/components/Wave';
 import Doodle from '@/components/Doodle';
-import { PageHero, WaveSection, Card, BookingBand } from '@/components/Sections';
-import { wa } from '@/lib/site';
+import { PageHero, WaveSection, Ticks, BookingBand } from '@/components/Sections';
+import { wa, SURF_BUNDLES, PRIVATE_SESSION, SURF_INCLUDES, POLICY } from '@/lib/site';
 
-export const metadata = { title: 'Surf lessons', description: 'Beginner surf lessons in Mulki, Karnataka with ISA-certified coaches: group sessions, private lessons and 3 to 10-day programs.' };
+export const metadata = { title: 'Surf lessons', description: 'Beginner surf lessons in Mulki, Karnataka: 2-hour group sessions from ₹2,000, 3 to 10-day bundles and private 1:1 training.' };
 
 export default function SurfLessons() {
   return (
     <>
       <PageHero band="band-ocean" label="Surf lessons" lines={['First wave,', 'sorted.']} doodle="board"
-        lead="Morning sessions on a gentle, sandy beach with an ISA-certified coach beside you. Everything you need is included."
+        lead="Two-hour sessions on a gentle, sandy beach with an instructor beside you. Board and basic surf equipment included."
         img="/img/beach-theory.jpg" alt="Students learning surf theory on the sand" />
       <WaveSection bg="--sb-offwhite" n={0}>
         <p className="label" style={{ marginTop: '3rem' }}>How a lesson works</p>
@@ -40,16 +40,33 @@ export default function SurfLessons() {
 
       <section className="section" aria-labelledby="sl-courses">
         <div className="wrap">
-          <div className="section-head"><div><p className="label">Choose your course</p><h2 id="sl-courses">Sessions &amp; programs</h2></div></div>
-          <div className="cards-3">
-            <Card label="Single session" title="Group session" price="₹2,000" unit="/ session / guest" href="/book?type=surf&program=group" btn="Book a session"
-              ticks={['Small group with an ISA-certified coach', 'Soft-top surfboard and rash guard', 'Theory and beach drills', 'Private 1:1 is ₹3,000 a session']} />
-            <Card label="3 mornings in a row" title="3-day program" price="₹6,000" href="/book?type=surf&program=p3" btn="Book 3 days" primary tag="Most popular"
-              ticks={['Three consecutive mornings', 'Paddling, pop-ups and wave basics', 'Video analysis of your sessions', 'Add a bed by the river when you book']} />
-            <Card label="5 mornings or more" title="5-day program" price="₹9,000" href="/book?type=surf&program=p5" btn="Book 5 days"
-              ticks={['Five consecutive mornings', 'Positioning, wave reading and turns', '7-day ₹11,000 · 10-day ₹15,000', '11+ days on request']} />
+          <div className="section-head"><div><p className="label">Surf only · per person</p><h2 id="sl-courses">Pick your number of sessions</h2></div></div>
+          <div className="two-col">
+            <div className="reveal">
+              <table className="price-table">
+                <thead><tr><th scope="col">Group sessions</th><th scope="col" className="num">Price</th></tr></thead>
+                <tbody>
+                  {Object.entries(SURF_BUNDLES).map(([n, price]) => (
+                    <tr key={n}><td>{n === '1' ? '1 day / 1 session' : `${n} days / ${n} sessions`}</td><td className="num">₹{price.toLocaleString('en-IN')}</td></tr>
+                  ))}
+                  <tr><td>Private 1:1 training, per session</td><td className="num">₹{PRIVATE_SESSION.toLocaleString('en-IN')}</td></tr>
+                </tbody>
+              </table>
+              <div className="band-actions" style={{ marginTop: '1.5rem' }}>
+                <Link className="btn btn-primary" href="/book?type=surf&program=group">Pick your surf days</Link>
+                <Link className="btn btn-secondary" href="/book?type=surf&program=private">Book private 1:1</Link>
+              </div>
+            </div>
+            <div className="reveal">
+              <div className="includes" style={{ marginTop: 0 }}>
+                <p className="label">Surf only includes</p>
+                <Ticks items={SURF_INCLUDES} />
+              </div>
+              <p className="label" style={{ marginTop: '1.75rem' }}>Good to know</p>
+              <ul className="policy">{POLICY.surf.map((x) => <li key={x}>{x}</li>)}<li>{POLICY.general}</li></ul>
+            </div>
           </div>
-          <p className="fineprint">Want lessons with a bed and breakfast included? <Link href="/packages">See Surf + Stay packages</Link>.</p>
+          <p className="fineprint">Want a bed by the backwaters with daily lessons, bonfires and ice baths? <Link href="/packages">See Stay &amp; Surf packages</Link>.</p>
         </div>
       </section>
 
@@ -60,13 +77,13 @@ export default function SurfLessons() {
             <div className="band-head"><span className="badge-icon"><Doodle name="kayak" /></span><p className="label" style={{ margin: 0 }}>Beyond the lesson</p></div>
             <h2 id="sl-extra">More time<br />on the water.</h2>
             <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the river by day or under the stars, or dial in your technique on a surfskate.</p>
-            <p className="price-from">Rentals from ₹500/hr · Kayaking ₹600 / ₹700 <small>per guest</small></p>
+            <p className="price-from">Rentals from ₹500/hr · Kayaking ₹600 / ₹700 <small>per person</small></p>
             <div className="band-actions"><a className="btn btn-primary" href={wa("Hi! I'd like to ask about board rentals / kayaking.")}>Ask on WhatsApp</a></div>
           </div>
           <div className="band-media reveal"><img className="wide tilt-l" src="/img/sunset-surfers.jpg" alt="Surfers waiting for waves at sunset" loading="lazy" width="1050" height="1400" /></div>
         </div>
       </section>
-      <BookingBand href="/book?type=surf" btn="Book a lesson" />
+      <BookingBand href="/book?type=surf" btn="Pick your surf days" />
     </>
   );
 }
