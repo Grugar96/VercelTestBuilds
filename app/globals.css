@@ -696,7 +696,7 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .warli .w-fronds { transform-box: view-box; transform-origin: 100px 62px; animation: kitSway 4s ease-in-out infinite; }
 .warli .w-ring { transform-box: view-box; transform-origin: 120px 120px; animation: wRing 40s linear infinite; }
 @keyframes wRing { to { transform: rotate(360deg); } }
-.warli .w-fire { transform-box: view-box; transform-origin: 120px 140px; animation: wFire 1.2s ease-in-out infinite; }
+.warli .w-fire { transform-box: view-box; transform-origin: 120px 140px; animation: wFire 1s ease-in-out infinite; }
 @keyframes wFire { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.12) skewX(-3deg); } }
 .warli-frieze .w-vig { animation: wVig 3s ease-in-out infinite; }
 .warli-frieze .w-vig:nth-child(2n) { animation-delay: -1.5s; }
