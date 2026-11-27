@@ -65,24 +65,31 @@ export function ProofStrip() {
 }
 
 // placeholder: testimonials carried over from the draft site; replace with real Google reviews
+function Voice({ t, i, hidden }) {
+  return (
+    <figure className={`voice v${(i % 3) + 1}`} aria-hidden={hidden || undefined}>
+      <div className="voice-photo"><img src={t.img} alt="" loading="lazy" /></div>
+      <blockquote>“{t.quote}”</blockquote>
+      <figcaption><cite>{t.name}</cite><span>{t.place}</span></figcaption>
+      <span className="stars" aria-label={hidden ? undefined : '5 out of 5 stars'}>★★★★★</span>
+    </figure>
+  );
+}
+
+// Desktop: a slow, endless sideways drift (pauses on hover). Phones: a plain vertical stack.
 export function Testimonials() {
   return (
-    <section className="voices" aria-labelledby="rev-title">
-      <div className="voices-bg" aria-hidden="true"><img src="/img/sunset-surfers.jpg" alt="" loading="lazy" /></div>
-      <div className="wrap voices-grid">
-        <div className="voices-label">
-          <svg className="hand-arrow" viewBox="0 0 130 30" aria-hidden="true"><path d="M3 17c30-4 70-6 118-3M106 4c7 4 12 7 16 10-5 3-10 7-15 12" /></svg>
-          <h2 id="rev-title" className="hand">What our surfers<br />are saying</h2>
+    <section className="voices has-wave-top" aria-labelledby="rev-title">
+      <Wave color="var(--sb-ocean-deep)" n={2} />
+      <div className="wrap voices-head">
+        <svg className="hand-arrow" viewBox="0 0 130 30" aria-hidden="true"><path d="M3 17c30-4 70-6 118-3M106 4c7 4 12 7 16 10-5 3-10 7-15 12" /></svg>
+        <h2 id="rev-title" className="hand">What our surfers<br />are saying</h2>
+      </div>
+      <div className="voices-rail">
+        <div className="voices-track">
+          {TESTIMONIALS.map((t, i) => <Voice key={t.name} t={t} i={i} />)}
+          {TESTIMONIALS.map((t, i) => <Voice key={t.name + '-2'} t={t} i={i} hidden />)}
         </div>
-        <figure className="voice-photo vp1" aria-hidden="true"><img src="/img/sunset-surfers.jpg" alt="" loading="lazy" /></figure>
-        <figure className="voice-photo vp2" aria-hidden="true"><img src="/img/carry-board.jpg" alt="" loading="lazy" /></figure>
-        {TESTIMONIALS.map((t, i) => (
-          <figure className={`voice v${i + 1}`} key={t.name}>
-            <blockquote>“{t.quote}”</blockquote>
-            <figcaption><cite>{t.name}</cite><span>{t.place}</span></figcaption>
-            <span className="stars" aria-label="5 out of 5 stars">★★★★★</span>
-          </figure>
-        ))}
       </div>
     </section>
   );

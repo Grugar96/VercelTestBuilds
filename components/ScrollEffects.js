@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 // Text inside these keeps its own motion (heroes) or re-renders often (booking, map, gallery filters).
-const SKIP = '.hero, .page-hero, .booking-flow, form, .mulki-map, .map-section, .gallery-grid, .scatter, .kit, .wa-float, [data-noanim]';
+const SKIP = '.voices-track, .hero, .page-hero, .booking-flow, form, .mulki-map, .map-section, .gallery-grid, .scatter, .kit, .wa-float, [data-noanim]';
 const HEADS = 'h1, h2';
 const TEXT = 'h3, .label, .lead, .section-head p, .band p, .booking-band p, .card p, .card .price, .ticks li, .faq summary, .hand, .stat, .proof div, .price-from, .fineprint, blockquote, .muted';
 
