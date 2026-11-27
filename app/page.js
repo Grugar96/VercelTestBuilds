@@ -8,7 +8,8 @@ import WaveAnim from '@/components/WaveAnim';
 import { Shaka } from '@/components/kit/Kit';
 import { WarliKayaker } from '@/components/kit/Warli';
 import { PackageCards, ProofStrip, Testimonials, CrewGrid, Faq, BookingBand, FriezeBand } from '@/components/Sections';
-import { HOME_FAQ, HERO_RIDE, wa } from "@/lib/site";
+import { HOME_FAQ, wa } from "@/lib/site";
+import { HERO_TRACK } from "@/lib/heroTrack";
 
 function Band({ cls, wave, n, icon, label, id, title, lead, price, priceNote, actions, media, flip }) {
   return (
@@ -49,7 +50,7 @@ export default function Home() {
           <div className="hero-copy">
             <p className="label">Mulki, Karnataka · surf school &amp; riverside stay</p>
             <h1 className="poster" id="hero-title"><span><i>Stay.</i></span><span><i>Surf.</i></span><span className="out"><i>Belong.</i></span></h1>
-            <p className="lead">Your laid-back surf stay by the backwaters, with waves, music, good people and unforgettable experiences.</p>
+            <p className="lead">Surf lessons in the morning, the river in the afternoon, a bonfire at night. Most people who come here have never stood on a board.</p>
             <div className="hero-actions">
               <Link className="btn btn-primary" href="/book">Plan your stay</Link>
               <a className="btn btn-secondary" href="#packages">See packages</a>
@@ -57,7 +58,7 @@ export default function Home() {
           </div>
           <div className="hero-media">
             <div className="video-frame">
-              <AutoVideo src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="A Surf Brothers student riding a wave in Mulki" ride={HERO_RIDE} preload="metadata">
+              <AutoVideo src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="A Surf Brothers student riding a wave in Mulki" track={HERO_TRACK} preload="metadata">
                 <div className="hero-stats">
                   <div className="stat"><b>8–11 AM</b><span>morning sessions</span></div>
                   <div className="stat"><b>SEP–MAY</b><span>surf season</span></div>
@@ -78,7 +79,7 @@ export default function Home() {
           <p className="intro-big reveal">A surf school, a riverside hostel and a crew that feels like{' '}
             <u>family.<svg className="draw" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 14c30-8 70-10 110-6s60 4 84-2" /></svg></u></p>
           <div className="intro-side reveal">
-            <p className="lead">Mulki sits where the Shambhavi river meets the Arabian Sea. Mornings are for the ocean, afternoons for hammocks and the river, evenings for sunsets and long dinners.</p>
+            <p className="lead">Mulki sits where the Shambhavi river meets the Arabian Sea. You surf in the morning, nap or paddle in the afternoon, and watch the sun go down from the beach.</p>
             <p className="muted">Beginner? Perfect. Everyone starts somewhere.</p>
             <HandLine text="Find your flow" />
             <div className="intro-photos">
@@ -107,38 +108,38 @@ export default function Home() {
 
       <Band cls="band-deep" flip wave="var(--sb-ocean-deep)" n={0} icon="palm" label="Riverside stay" id="b-stay"
         title={<>Sleep by<br />the river.</>}
-        lead="Camping under the palms or an AC hostel room by the backwaters. Daily surf lessons, ice baths, bonfires, karaoke and movie nights included."
+        lead="A tent under the palms or an AC room in the hostel. A surf lesson every day comes with it, and so do the ice bath, the bonfire and whoever grabs the karaoke mic."
         price="From ₹8,000" priceNote="per person · 3 days with surfing"
         actions={<><Link className="btn btn-primary" href="/book?type=package">Plan your stay</Link><Link className="link-arrow" href="/stay">See the rooms</Link></>}
         media={<img className="tall tilt-r" src="/img/board-hostel.jpg" alt="A hand-painted surfboard leaning in the hostel doorway" loading="lazy" width="1050" height="1400" />} />
 
       <Band cls="band-charcoal" wave="var(--sb-charcoal)" n={1} icon="kayak" label="River & night kayaking" id="b-river"
         title={<>Paddle into<br />the glow.</>}
-        lead="Drift through the mangroves by day. In season, head out after dark when the river lights up with bioluminescence."
+        lead="Paddle through the mangroves in the day. In season, go out after dark, when every stroke lights the river up blue."
         price="Day ₹600 · Night ₹700" priceNote="per person"
         actions={<><Link className="btn btn-primary" href="/book?type=package&addon=kayak-night">Add a kayak trip</Link><WarliKayaker tone="dark" size={160} className="band-kayaker" title="" /></>}
         media={<img className="wide tilt-l" src="/img/kayak-river.jpg" alt="Guests kayaking on the Shambhavi river" loading="lazy" width="1152" height="746" />} />
 
       <Band cls="band-lime" flip wave="var(--sb-lime)" n={2} icon="sun" label="Life around Mulki" id="b-life"
         title={<>The only meeting<br />is with the ocean.</>}
-        lead="Sunset volleyball, cycling, waterfall days with the crew, bonfires, music and karaoke. Two-thirds of a stay here happens out of the water."
+        lead="Most of a stay here happens out of the water: volleyball at sunset, cycling into town, a waterfall trip when the crew gets a free day."
         actions={<Link className="link-arrow" href="/gallery">See more of Mulki</Link>}
         media={<img className="wide tilt-r" src="/img/jeep-crew.jpg" alt="The crew heading out in the jeep through the coconut groves" loading="lazy" width="864" height="524" />} />
 
       {/* 5 VIDEO BREAK */}
-      <section className="video-break has-wave-top" aria-label="Video: a day out with the crew">
-        <Wave color="var(--sb-charcoal)" n={0} />
+      <section className="video-break" aria-label="Video: a day out with the crew">
+        <div className="vb-clip">
         <AutoVideo src="/video/waterfall-crew.mp4" poster="/img/waterfall-poster.jpg" label="The crew at a waterfall on a team day out">
           <p className="caption">Come for the waves.<br />Stay for the people.</p>
         </AutoVideo>
-        <WaveAnim back="var(--sb-ocean)" mid="var(--sb-lime)" front="var(--sb-offwhite)" />
+        </div>
       </section>
 
       {/* 6 PACKAGES */}
       <section className="section" id="packages" aria-labelledby="pk-title">
         <div className="wrap">
           <div className="section-head">
-            <div><p className="label">Stay &amp; Surf packages · per person</p><h2 id="pk-title">Pick your number of days</h2></div>
+            <div><p className="label">Stay &amp; Surf, per person</p><h2 id="pk-title">How many days have you got?</h2></div>
             <Link className="link-arrow" href="/packages">Compare all options</Link>
           </div>
           <PackageCards />
@@ -151,7 +152,7 @@ export default function Home() {
 
       <section className="section scatter-section" aria-labelledby="sc-title" style={{ paddingTop: '2rem' }}>
         <div className="wrap">
-          <p className="label">Freedom, humour, friendship</p>
+          <p className="label">the best part</p>
           <h2 id="sc-title" style={{ fontSize: 'var(--fs-h2)' }}>The people make the place</h2>
         </div>
         <div className="wrap scatter">
@@ -160,8 +161,8 @@ export default function Home() {
             <figure key={f} className={`print ${size}`} style={style}><img src={`/img/${f}`} alt={alt} loading="lazy" /><figcaption>{cap}</figcaption></figure>
           ))}
           <div className="scatter-copy reveal">
-            <p className="lead" style={{ marginBottom: '.5rem' }}>The people who come here are curious, easy-going and up for anything.</p>
-            <p className="muted" style={{ margin: 0 }}>Somewhere between the first wipeout and the last sunset, strangers turn into friends.</p>
+            <p className="lead" style={{ marginBottom: '.5rem' }}>People turn up on their own and leave with a group chat.</p>
+            <p className="muted" style={{ margin: 0 }}>It usually happens somewhere between the first wipeout and the third bonfire.</p>
           </div>
           <span className="scatter-doodle" style={{ left: '45%', top: '27%', transform: 'rotate(-10deg)' }}><Shaka size={96} title="" /></span>
           <Doodle name="fire" className="scatter-doodle" style={{ left: '30%', bottom: '34%' }} />

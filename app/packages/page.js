@@ -17,7 +17,7 @@ export default function Packages() {
   return (
     <>
       <PageHero band="band-lime" label="Stay & Surf packages" lines={['Stay. Surf.', 'Belong.']} doodle="sun"
-        lead="Accommodation and daily surf lessons in one price per person, with ice baths, cycling, bonfires and good people."
+        lead="One price per person covers your bed and a surf lesson every day. Ice baths, cycles and bonfire nights come with it."
         img="/img/sunset-walk.jpg" alt="A surfer walking into the sea at sunset" />
       <WaveSection bg="--sb-offwhite" n={1}>
         <div style={{ marginTop: '3.5rem' }}><PackageCards /></div>
@@ -45,7 +45,7 @@ export default function Packages() {
         <div className="wrap two-col">
           <div className="reveal">
             <p className="label">A day at Surf Brothers</p>
-            <h2 id="day-title" style={{ fontSize: 'var(--fs-h2)' }}>Roughly how it goes</h2>
+            <h2 id="day-title" style={{ fontSize: 'var(--fs-h2)' }}>How a day usually goes</h2>
             <p className="muted">The ocean sets the timetable, so times move with the tide.</p>
             <span className="hand">The only meeting is with the ocean.</span>
           </div>
@@ -54,7 +54,7 @@ export default function Packages() {
           </div>
         </div>
       </section>
-      <BookingBand surfer="woman" title={<>Lock in your<br />surf escape.</>} href="/book?type=package&days=5" btn="Plan your package" />
+      <BookingBand surfer="woman" title={<>Five days is<br />the sweet spot.</>} href="/book?type=package&days=5" btn="Plan your package" />
     </>
   );
 }

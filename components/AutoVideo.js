@@ -4,12 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 const PAUSE = <svg viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>;
 const PLAY = <svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" /></svg>;
 
-// Muted looping video with a pause button and an optional "ride line" that draws in step with the clip.
-export default function AutoVideo({ src, poster, label, ride = false, preload = 'none', children }) {
+// Muted looping video with a pause button and an optional ride line that follows the tracked surfer (like a GPS trail on the wave).
+export default function AutoVideo({ src, poster, label, track = null, preload = 'none', children }) {
   const ref = useRef(null);
   const pathRef = useRef(null);
-  const dotRef = useRef(null);
-  const ringRef = useRef(null);
   const gRef = useRef(null);
   const [paused, setPaused] = useState(true);
 
@@ -22,55 +20,46 @@ export default function AutoVideo({ src, poster, label, ride = false, preload = 
     if (!reduce && !saveData) { v.muted = true; v.play().catch(() => {}); }
 
     let raf;
-    if (ride && pathRef.current) {
-      const path = pathRef.current; const dot = dotRef.current; const ring = ringRef.current; const g = gRef.current;
-      const lerpKeys = (keys, t) => {
-        if (t <= keys[0][0]) return [keys[0][1], keys[0][2]];
-        for (let k = 1; k < keys.length; k++) if (t <= keys[k][0]) {
-          const [t0, x0, y0] = keys[k - 1]; const [t1, x1, y1] = keys[k]; const f = (t - t0) / (t1 - t0);
-          return [x0 + (x1 - x0) * f, y0 + (y1 - y0) * f];
+    if (track && pathRef.current) {
+      const path = pathRef.current; const g = gRef.current;
+      const chaikin = (pts, n = 3) => {
+        let p = pts;
+        for (let k = 0; k < n; k++) {
+          const q = [p[0]];
+          for (let i = 0; i < p.length - 1; i++) {
+            const [x0, y0] = p[i]; const [x1, y1] = p[i + 1];
+            q.push([x0 * 0.75 + x1 * 0.25, y0 * 0.75 + y1 * 0.25], [x0 * 0.25 + x1 * 0.75, y0 * 0.25 + y1 * 0.75]);
+          }
+          q.push(p[p.length - 1]); p = q;
         }
-        const l = keys[keys.length - 1]; return [l[1], l[2]];
+        return p;
       };
-      const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
       const draw = (t) => {
-        const seg = ride.find((s) => t >= s.start && t <= s.end);
-        if (!seg) { g.style.opacity = '0'; return; }
-        const [hx, hy] = lerpKeys(seg.keys, t);
-        const [fx, fy] = seg.from; const [c1x, c1y] = seg.c1; const [c2x, c2y] = seg.c2;
-        path.setAttribute('d', `M${fx} ${fy} C${c1x} ${c1y} ${c2x} ${c2y} ${hx} ${hy}`);
-        const p = reduce ? 1 : ease((t - seg.start) / 1.1);
-        path.style.strokeDashoffset = String(1 - p);
-        const len = path.getTotalLength(); const pt = path.getPointAtLength(len * p);
-        dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y); ring.setAttribute('cx', pt.x); ring.setAttribute('cy', pt.y);
-        const fadeIn = Math.min(1, (t - seg.start) / 0.25); const fadeOut = Math.min(1, (seg.end - t) / 0.35);
+        const f = Math.round(t * track.fps);
+        const r = track.rides.find((x) => f >= x.start && f < x.start + x.world.length);
+        if (!r) { g.style.opacity = '0'; return; }
+        const k = f - r.start; const [cx, cy] = r.cam[k];
+        const upto = Math.min(r.world.length, k + track.lead + 1);
+        const pts = [...r.pre, ...r.world.slice(0, upto)].filter((_, i, a) => i % 2 === 0 || i === a.length - 1).map(([x, y]) => [x - cx, y - cy]);
+        const sm = chaikin(pts);
+        path.setAttribute('d', 'M' + sm.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(' L'));
+        const fadeIn = Math.min(1, k / 8); const fadeOut = Math.min(1, (r.world.length - 1 - k) / 10);
         g.style.opacity = String(Math.max(0, Math.min(fadeIn, fadeOut)));
       };
       const tick = () => { draw(v.currentTime || 0); raf = requestAnimationFrame(tick); };
       raf = requestAnimationFrame(tick);
     }
     return () => { v.removeEventListener('play', onPlay); v.removeEventListener('pause', onPause); if (raf) cancelAnimationFrame(raf); };
-  }, [ride]);
+  }, [track]);
 
   return (
     <>
       <video ref={ref} muted loop playsInline preload={preload} poster={poster} aria-label={label}>
         <source src={src} type="video/mp4" />
       </video>
-      {ride && (
+      {track && (
         <svg className="ride-line" viewBox="0 0 720 1280" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs>
-            <linearGradient id="rideFade" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stopColor="#CFDE58" stopOpacity="0" />
-              <stop offset=".45" stopColor="#CFDE58" stopOpacity=".55" />
-              <stop offset="1" stopColor="#CFDE58" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <g ref={gRef} style={{ opacity: 0 }}>
-            <path ref={pathRef} pathLength="1" d="M0 0" />
-            <circle ref={ringRef} className="ring" r="16" cx="0" cy="0" />
-            <circle ref={dotRef} r="7" cx="0" cy="0" />
-          </g>
+          <g ref={gRef} style={{ opacity: 0 }}><path ref={pathRef} d="M0 0" /></g>
         </svg>
       )}
       {children}

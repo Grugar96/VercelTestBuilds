@@ -1,4 +1,5 @@
 import Doodle from '@/components/Doodle';
+import { SocialIcon } from '@/components/Social';
 import { PageHero, WaveSection, Faq, BookingBand } from '@/components/Sections';
 import { ADDRESS, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, PHONES, PHONE_LABEL, wa } from '@/lib/site';
 
@@ -23,11 +24,11 @@ export default function Contact() {
           <div className="reveal">
             <p className="label">Talk to us</p>
             <ul className="contact-list">
-              <li><Doodle name="smile" /><div><b>WhatsApp</b><a href={wa('Hi Mulki Surf Brothers!')}>{PHONE_LABEL}</a></div></li>
-              <li><Doodle name="arrow" /><div><b>Call</b>{PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</div></li>
+              <li><SocialIcon kind="whatsapp" size={40} /><div><b>WhatsApp</b><a href={wa('Hi Mulki Surf Brothers!')}>{PHONE_LABEL}</a></div></li>
+              <li><SocialIcon kind="call" size={40} /><div><b>Call</b>{PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</div></li>
               <li><Doodle name="wave" /><div><b>Email</b><a href={`mailto:${EMAIL.value}`}>{EMAIL.value}</a></div></li>
-              <li><Doodle name="pin" /><div><b>Address</b>{ADDRESS.join(', ')}<br /><a href={MAPS}>Open in Google Maps</a></div></li>
-              <li><Doodle name="sun" /><div><b>Instagram</b><a href={INSTAGRAM}>{INSTAGRAM_HANDLE}</a></div></li>
+              <li><SocialIcon kind="maps" size={40} /><div><b>Address</b>{ADDRESS.join(', ')}<br /><a href={MAPS}>Open in Google Maps</a></div></li>
+              <li><SocialIcon kind="instagram" size={40} /><div><b>Instagram</b><a href={INSTAGRAM}>{INSTAGRAM_HANDLE}</a></div></li>
             </ul>
           </div>
           <div className="reveal">

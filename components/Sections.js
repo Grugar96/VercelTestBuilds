@@ -2,8 +2,10 @@ import Link from 'next/link';
 import Wave from './Wave';
 import Doodle from './Doodle';
 import WaveAnim from './WaveAnim';
+import { ContactNumbers } from './Social';
 import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
-import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
+import TeamClip from './TeamClip';
+import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, OWNERS, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
 
 export function Ticks({ items }) {
   return <ul className="ticks">{items.map((t) => <li key={t}>{t}</li>)}</ul>;
@@ -65,21 +67,20 @@ export function ProofStrip() {
 // placeholder: testimonials carried over from the draft site; replace with real Google reviews
 export function Testimonials() {
   return (
-    <section className="section" style={{ background: 'var(--sb-offwhite)' }} aria-labelledby="rev-title">
-      <div className="wrap">
-        <div className="section-head"><div><p className="label">What our surfers say</p><h2 id="rev-title">Real stories, salty hair</h2></div></div>
-        <div className="reviews">
-          {TESTIMONIALS.map((t) => (
-            <figure className="review reveal" key={t.name} style={{ margin: 0 }}>
-              <img src={t.img} alt="" loading="lazy" />
-              <div className="body">
-                <span className="stars" aria-label="5 out of 5 stars">★★★★★</span>
-                <blockquote>“{t.quote}”</blockquote>
-                <figcaption><cite>{t.name}<span>{t.place}</span></cite></figcaption>
-              </div>
-            </figure>
-          ))}
+    <section className="voices" aria-labelledby="rev-title">
+      <div className="voices-bg" aria-hidden="true"><img src="/img/sunset-surfers.jpg" alt="" loading="lazy" /></div>
+      <div className="wrap voices-grid">
+        <div className="voices-label">
+          <svg className="hand-arrow" viewBox="0 0 130 30" aria-hidden="true"><path d="M3 17c30-4 70-6 118-3M106 4c7 4 12 7 16 10-5 3-10 7-15 12" /></svg>
+          <h2 id="rev-title" className="hand">What our surfers<br />are saying</h2>
         </div>
+        {TESTIMONIALS.map((t, i) => (
+          <figure className={`voice v${i + 1}`} key={t.name}>
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption><cite>{t.name}</cite><span>{t.place}</span></figcaption>
+            <span className="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          </figure>
+        ))}
       </div>
     </section>
   );
@@ -102,11 +103,16 @@ export function CrewGrid({ link = true }) {
         <div className="crew-grid">
           {CREW.map((c) => (
             <article className="crew reveal" key={c.name}>
-              <div className="avatar" aria-hidden="true">{c.initial}</div>
-              <h3>{c.name}</h3><p className="role">{c.role}</p><p>{c.bio}</p>
+              <div className="crew-clip"><TeamClip clip={c.clip} label={`${c.name} at Mulki Surf Brothers`} /></div>
+              <div className="crew-body">
+                <h3>{c.name}</h3>
+                <p className="role">{c.role}{c.from ? ` · ${c.from}` : ''}</p>
+                <p>{c.bio}</p>
+              </div>
             </article>
           ))}
         </div>
+        <p className="owners">{OWNERS.map((o, i) => <span key={o.name}>{i > 0 && ' and '}<b>{o.name}</b></span>)} run the place: bookings, plans, and most of the decisions about what's for dinner.</p>
       </div>
     </section>
   );
@@ -141,7 +147,7 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
           <Link className="btn btn-primary" href={href}>{btn}</Link>
           <a className="btn btn-ghost" href={wa("Hi Mulki Surf Brothers! I'd like to book.")}>Chat on WhatsApp</a>
         </div>
-        <p className="phone">Call or WhatsApp {PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</p>
+        <ContactNumbers />
         <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off per person on Stay &amp; Surf</p>
       </div>
       {f === 'palm' ? <WarliPalm tone="dark" size={170} className="band-surfer band-palm" title="" />

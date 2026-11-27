@@ -8,11 +8,11 @@ export default function About() {
   return (
     <>
       <PageHero band="band-charcoal" label="About us" lines={['A community,', 'not a holiday ad.']} doodle="smile"
-        lead="Mulki Surf Brothers is a surf school and riverside hostel where the river meets the ocean. Come for a session, stay a little longer, leave with stories."
+        lead="We're a surf school and a riverside hostel in Mulki, on the strip of sand between the Shambhavi river and the sea."
         img="/img/falls-crew.jpg" alt="The Surf Brothers crew sitting together at a waterfall" />
       <WaveSection bg="--sb-offwhite" n={2}>
         <div className="two-col" style={{ marginTop: '3rem' }}>
-          <div className="reveal"><p className="intro-big">Learn to surf. Stay a little longer. Make friends. Explore Mulki. Leave with stories.</p><WarliCircle size={220} className="about-circle" title="Friends dancing around the bonfire" /></div>
+          <div className="reveal"><p className="intro-big">Most people come for one lesson. A lot of them end up staying the week.</p><WarliCircle size={220} className="about-circle" title="Friends dancing around the bonfire" /></div>
           <div className="reveal">
             <p className="lead">It started in 2023 with a couple of foam boards and a rack on the sand. Today it's a riverside home where beginners learn without fear and nobody gets shouted at for falling off.</p>
             <p className="muted">Everybody falls off. That's the fun part.</p>

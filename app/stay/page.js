@@ -11,7 +11,7 @@ export default function Stay() {
   return (
     <>
       <PageHero band="band-deep" label="Stay by the backwaters" lines={['Sleep by', 'the river.']} doodle="palm"
-        lead="Your laid-back surf stay by the backwaters: camping under the palms or an AC hostel room, with waves, music and good people."
+        lead="Two ways to stay: a tent under the palms or an AC room in the hostel. Both come with a surf lesson every day."
         img="/img/board-hostel.jpg" alt="A painted surfboard at the hostel entrance" />
       <WaveSection bg="--sb-offwhite" n={0}>
         <div className="section-head" style={{ marginTop: '3rem' }}><div><p className="label">Two ways to stay</p><h2>Pick your room</h2></div></div>
@@ -46,7 +46,7 @@ export default function Stay() {
           <div className="reveal"><img src="/img/morning-tea.jpg" alt="Morning tea on the beach" style={{ borderRadius: 20, transform: 'rotate(2deg)', aspectRatio: '4/5', objectFit: 'cover', width: '100%', height: 'auto' }} loading="lazy" width="1050" height="1400" /></div>
         </div>
       </section>
-      <BookingBand title={<>Claim your spot<br />by the river.</>} href="/book?type=package" btn="Plan your stay" figure="palm" />
+      <BookingBand title={<>Book a bed<br />by the river.</>} href="/book?type=package" btn="Plan your stay" figure="palm" />
     </>
   );
 }

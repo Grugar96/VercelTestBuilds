@@ -11,7 +11,7 @@ export default function SurfLessons() {
   return (
     <>
       <PageHero band="band-ocean" label="Surf lessons" lines={['First wave,', 'sorted.']} doodle="board"
-        lead="Two-hour sessions on a gentle, sandy beach with an instructor beside you. Board and basic surf equipment included."
+        lead="Two hours on a gentle, sandy beach with an instructor next to you. We bring the board."
         img="/img/beach-theory.jpg" alt="Students learning surf theory on the sand" />
       <WaveSection bg="--sb-offwhite" n={0}>
         <p className="label" style={{ marginTop: '3rem' }}>How a lesson works</p>
@@ -28,7 +28,7 @@ export default function SurfLessons() {
       {/* placeholder: safety figures carried over from the draft site */}
       <section className="section" style={{ background: 'var(--sb-white)' }} aria-labelledby="safe-title">
         <div className="wrap">
-          <p className="label">Your safety comes first</p>
+          <p className="label">Safety</p>
           <h2 id="safe-title" style={{ fontSize: 'var(--fs-h2)' }}>One of the safest places in India to learn</h2>
           <p className="lead">Mulki has gentle, sandy-bottom breaks. Our coaches are trained in surf rescue and CPR, and we keep groups small so you're always watched.</p>
           <div className="safety">
@@ -77,7 +77,7 @@ export default function SurfLessons() {
           <div className="reveal">
             <div className="band-head"><span className="badge-icon"><Doodle name="kayak" /></span><p className="label" style={{ margin: 0 }}>Beyond the lesson</p></div>
             <h2 id="sl-extra">More time<br />on the water.</h2>
-            <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the river by day or under the stars, or dial in your technique on a surfskate.</p>
+            <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the river by day or under the stars, or work on your turns on a surfskate.</p>
             <p className="price-from">Rentals from ₹500/hr · Kayaking ₹600 / ₹700 <small>per person</small></p>
             <div className="band-actions"><a className="btn btn-primary" href={wa("Hi! I'd like to ask about board rentals / kayaking.")}>Ask on WhatsApp</a><WarliSkater tone="light" size={160} className="band-kayaker" title="" /></div>
           </div>
