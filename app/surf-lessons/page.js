@@ -1,3 +1,4 @@
+import Wavy from '@/components/Wavy';
 import Link from 'next/link';
 import Wave from '@/components/Wave';
 import { WarliSkater } from '@/components/kit/Warli';
@@ -14,7 +15,7 @@ export default function SurfLessons() {
         lead="Two hours on a gentle, sandy beach with an instructor next to you. We bring the board."
         img="/img/beach-theory.jpg" alt="Students learning surf theory on the sand" />
       <WaveSection bg="--sb-offwhite" n={0}>
-        <p className="label" style={{ marginTop: '3rem' }}>How a lesson works</p>
+        <Wavy as="p" className="label eyebrow" style={{ marginTop: '3rem' }}>{"How a lesson works"}</Wavy>
         <h2 style={{ fontSize: 'var(--fs-h2)' }}>From the sand to standing up</h2>
         <ol className="steps" style={{ marginTop: '2rem' }}>
           <li className="reveal"><h3>Theory on the sand</h3><p>Waves, safety and where to sit, drawn right there in the sand.</p></li>
@@ -28,7 +29,7 @@ export default function SurfLessons() {
       {/* placeholder: safety figures carried over from the draft site */}
       <section className="section" style={{ background: 'var(--sb-white)' }} aria-labelledby="safe-title">
         <div className="wrap">
-          <p className="label">Safety</p>
+          <Wavy as="p" className="label eyebrow">{"Safety"}</Wavy>
           <h2 id="safe-title" style={{ fontSize: 'var(--fs-h2)' }}>One of the safest places in India to learn</h2>
           <p className="lead">Mulki has gentle, sandy-bottom breaks. Our coaches are trained in surf rescue and CPR, and we keep groups small so you're always watched.</p>
           <div className="safety">
@@ -41,7 +42,7 @@ export default function SurfLessons() {
 
       <section className="section" aria-labelledby="sl-courses">
         <div className="wrap">
-          <div className="section-head"><div><p className="label">Surf only · per person</p><h2 id="sl-courses">Pick your number of sessions</h2></div></div>
+          <div className="section-head"><div><Wavy as="p" className="label eyebrow">{"Surf only · per person"}</Wavy><h2 id="sl-courses">Pick your number of sessions</h2></div></div>
           <div className="two-col">
             <div className="reveal">
               <table className="price-table">
@@ -75,7 +76,7 @@ export default function SurfLessons() {
         <Wave color="var(--sb-ocean)" n={2} />
         <div className="wrap band-grid">
           <div className="reveal">
-            <div className="band-head"><span className="badge-icon"><Doodle name="kayak" /></span><p className="label" style={{ margin: 0 }}>Beyond the lesson</p></div>
+            <div className="band-head"><span className="badge-icon"><Doodle name="kayak" /></span><Wavy as="p" className="label eyebrow" style={{ margin: 0 }}>{"Beyond the lesson"}</Wavy></div>
             <h2 id="sl-extra">More time<br />on the water.</h2>
             <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the river by day or under the stars, or work on your turns on a surfskate.</p>
             <p className="price-from">Rentals from ₹500/hr · Kayaking ₹600 / ₹700 <small>per person</small></p>

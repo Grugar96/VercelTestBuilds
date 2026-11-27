@@ -1,4 +1,5 @@
 'use client';
+import Wavy from './Wavy';
 import { useState } from 'react';
 import { MAP_SPOTS } from '@/lib/site';
 import { DOODLE_PATHS } from './Doodle';
@@ -10,7 +11,7 @@ export default function MulkiMap() {
   return (
     <div className="wrap map-grid">
       <div className="reveal">
-        <p className="label">where everything is</p>
+        <Wavy as="p" className="label eyebrow">{"where everything is"}</Wavy>
         <h2 style={{ fontSize: 'var(--fs-h2)' }}>Everything is a short walk, paddle or auto ride away</h2>
         <p className="muted">Tap a pin to see what happens there.</p>
         <div className="map-chips" role="group" aria-label="Places">

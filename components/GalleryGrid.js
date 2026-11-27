@@ -1,4 +1,5 @@
 'use client';
+import Wavy from './Wavy';
 import { useState } from 'react';
 import { GALLERY } from '@/lib/site';
 
@@ -15,7 +16,7 @@ export default function GalleryGrid() {
         {GALLERY.map((g) => (
           <figure key={g.src} hidden={f !== 'all' && g.cat !== f}>
             <img src={g.src} alt={g.alt} loading="lazy" />
-            <figcaption>{g.caption}</figcaption>
+            <Wavy as="figcaption">{g.caption}</Wavy>
           </figure>
         ))}
       </div>

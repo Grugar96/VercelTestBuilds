@@ -1,3 +1,4 @@
+import Wavy from '@/components/Wavy';
 import { PageHero, WaveSection, PackageCards, PackageIncludes, BookingBand } from '@/components/Sections';
 import { PACKAGE_DAYS, PACKAGE_PRICE, MEALS, POLICY, wa } from '@/lib/site';
 import Doodle from '@/components/Doodle';
@@ -44,10 +45,10 @@ export default function Packages() {
       <section className="section" style={{ background: 'var(--sb-white)' }} aria-labelledby="day-title">
         <div className="wrap two-col">
           <div className="reveal">
-            <p className="label">A day at Surf Brothers</p>
+            <Wavy as="p" className="label eyebrow">{"A day at Surf Brothers"}</Wavy>
             <h2 id="day-title" style={{ fontSize: 'var(--fs-h2)' }}>How a day usually goes</h2>
             <p className="muted">The ocean sets the timetable, so times move with the tide.</p>
-            <span className="hand">The only meeting is with the ocean.</span>
+            <Wavy className="hand">The only meeting is with the ocean.</Wavy>
           </div>
           <div className="schedule">
             {DAY.map(([t, h, p]) => <div className="reveal" key={t}><time>{t}</time><div><h3>{h}</h3><p>{p}</p></div></div>)}

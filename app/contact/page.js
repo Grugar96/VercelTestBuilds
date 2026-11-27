@@ -1,3 +1,4 @@
+import Wavy from '@/components/Wavy';
 import Doodle from '@/components/Doodle';
 import { SocialIcon } from '@/components/Social';
 import { PageHero, WaveSection, Faq, BookingBand } from '@/components/Sections';
@@ -22,7 +23,7 @@ export default function Contact() {
       <WaveSection bg="--sb-offwhite" n={1}>
         <div className="two-col" style={{ marginTop: '3rem' }}>
           <div className="reveal">
-            <p className="label">Talk to us</p>
+            <Wavy as="p" className="label eyebrow">{"Talk to us"}</Wavy>
             <ul className="contact-list">
               <li><SocialIcon kind="whatsapp" size={40} /><div><b>WhatsApp</b><a href={wa('Hi Mulki Surf Brothers!')}>{PHONE_LABEL}</a></div></li>
               <li><SocialIcon kind="call" size={40} /><div><b>Call</b>{PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</div></li>
@@ -32,7 +33,7 @@ export default function Contact() {
             </ul>
           </div>
           <div className="reveal">
-            <p className="label">Getting here</p>
+            <Wavy as="p" className="label eyebrow">{"Getting here"}</Wavy>
             <div className="schedule">
               <div><time>By air</time><div><h3>Mangaluru airport (IXE)</h3><p>About 25 minutes north by road on NH66. Take a prepaid taxi (around ₹800–1,100) or ask us to arrange a pickup.</p></div></div>
               <div><time>By train</time><div><h3>Mulki or Surathkal station</h3><p>5–15 minutes away. Trains from Goa, Mumbai, Bengaluru and Kerala stop here. Autos wait outside.</p></div></div>

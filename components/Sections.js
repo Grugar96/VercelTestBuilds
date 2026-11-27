@@ -1,3 +1,4 @@
+import Wavy from './Wavy';
 import Link from 'next/link';
 import Wave from './Wave';
 import Doodle from './Doodle';
@@ -14,7 +15,7 @@ export function Ticks({ items }) {
 export function Card({ label, title, price, unit = '/ guest', ticks, href, btn, primary = false, tag }) {
   return (
     <article className="card reveal">
-      {tag && <span className="tag">{tag}</span>}
+      {tag && <Wavy className="tag">{tag}</Wavy>}
       <p className="label">{label}</p>
       <h3>{title}</h3>
       <p className="price">{price}<small>{unit}</small></p>
@@ -29,7 +30,7 @@ export function PackageCards() {
     <div className="cards-4">
       {PACKAGES.map((p) => (
         <article className="card reveal" key={p.days}>
-          {p.tag && <span className="tag">{p.tag}</span>}
+          {p.tag && <Wavy className="tag">{p.tag}</Wavy>}
           <p className="label">{p.label}</p>
           <h3>{p.title}</h3>
           <div className="price-pair">
@@ -47,7 +48,7 @@ export function PackageCards() {
 export function PackageIncludes() {
   return (
     <div className="includes">
-      <p className="label">Every Stay &amp; Surf package includes</p>
+      <Wavy as="p" className="label eyebrow">{"Every Stay & Surf package includes"}</Wavy>
       <Ticks items={PACKAGE_INCLUDES} />
     </div>
   );
@@ -83,7 +84,7 @@ export function Testimonials() {
       <Wave color="var(--sb-ocean-deep)" n={2} />
       <div className="wrap voices-head">
         <svg className="hand-arrow" viewBox="0 0 130 30" aria-hidden="true"><path d="M3 17c30-4 70-6 118-3M106 4c7 4 12 7 16 10-5 3-10 7-15 12" /></svg>
-        <h2 id="rev-title" className="hand">What our surfers<br />are saying</h2>
+        <h2 id="rev-title" className="hand" aria-label="What our surfers are saying"><Wavy>What our surfers</Wavy><br /><Wavy>are saying</Wavy></h2>
       </div>
       <div className="voices-rail">
         <div className="voices-track">
@@ -100,14 +101,8 @@ export function CrewGrid({ link = true }) {
     <section className="section" style={{ background: 'var(--sb-white)' }} aria-labelledby="crew-title">
       <div className="wrap">
         <div className="section-head">
-          <div><p className="label">The crew</p><h2 id="crew-title">Who'll be in the water with you</h2></div>
+          <div><Wavy as="p" className="label eyebrow">{"The crew"}</Wavy><h2 id="crew-title">Who'll be in the water with you</h2></div>
           {link && <Link className="link-arrow" href="/about">Meet everyone</Link>}
-        </div>
-        <div className="people-strip">
-          <figure className="reveal"><img src="/img/crew-beach.jpg" alt="Instructors on the beach before a session" loading="lazy" /><figcaption>before the session</figcaption></figure>
-          <figure className="reveal"><img src="/img/falls-sit.jpg" alt="The crew sitting on rocks at a waterfall" loading="lazy" /><figcaption>crew day out</figcaption></figure>
-          <figure className="reveal"><img src="/img/celebration.jpg" alt="The team celebrating with cake" loading="lazy" /><figcaption>birthday chaos</figcaption></figure>
-          <figure className="reveal"><img src="/img/jeep-crew.jpg" alt="The crew in the jeep among coconut palms" loading="lazy" /><figcaption>road trip</figcaption></figure>
         </div>
         <div className="crew-grid">
           {CREW.map((c) => (
@@ -115,7 +110,7 @@ export function CrewGrid({ link = true }) {
               <div className="crew-clip"><TeamClip clip={c.clip} label={`${c.name} at Mulki Surf Brothers`} /></div>
               <div className="crew-body">
                 <h3>{c.name}</h3>
-                <p className="role">{c.role}{c.from ? ` · ${c.from}` : ''}</p>
+                <Wavy as="p" className="role">{c.role + (c.from ? ` · ${c.from}` : '')}</Wavy>
                 <p>{c.bio}</p>
               </div>
             </article>
@@ -132,7 +127,7 @@ export function Faq({ items, title = 'Questions we get a lot', label = 'Before y
     <section className="section" style={{ background: bg }} aria-labelledby="faq-title">
       <div className="wrap two-col">
         <div>
-          <p className="label">{label}</p>
+          <Wavy as="p" className="label eyebrow">{label}</Wavy>
           <h2 id="faq-title" style={{ fontSize: 'var(--fs-h2)' }}>{title}</h2>
           <p className="muted">Anything else? <a href={wa('Hi! I have a question before booking.')}>Ask us on WhatsApp</a>.</p>
         </div>
@@ -173,7 +168,7 @@ export function PageHero({ band, label, lines, lead, img, alt, doodle }) {
     <section className={`page-hero ${band}`}>
       <div className="wrap page-hero-grid">
         <div>
-          <div className="band-head"><span className="badge-icon"><Doodle name={doodle} /></span><p className="label" style={{ margin: 0 }}>{label}</p></div>
+          <div className="band-head"><span className="badge-icon"><Doodle name={doodle} /></span><Wavy as="p" className="label eyebrow" style={{ margin: 0 }}>{label}</Wavy></div>
           <h1 className="poster">{lines.map((l) => <span key={l}><i>{l}</i></span>)}</h1>
           <p className="lead">{lead}</p>
         </div>

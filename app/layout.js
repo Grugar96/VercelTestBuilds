@@ -21,6 +21,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${oswald.variable} ${roboto.variable} ${caveat.variable}`}>
       <body>
+        {/* Shared paint-grain filter for the painted icons (components/Doodle.js) */}
+        <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
+          <filter id="sb-paint" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="1" seed="9" result="n" />
+            <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -24 18.6" result="speck" />
+            <feComposite in="SourceGraphic" in2="speck" operator="in" />
+          </filter>
+        </svg>
         <Header />
         <main id="main">{children}</main>
         <Footer />

@@ -1,4 +1,5 @@
 'use client';
+import Wavy from './Wavy';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   BOOKING_TYPES as TYPES, ROOMS, PACKAGE_DAYS, PACKAGE_PRICE, PACKAGES, PRIVATE_SESSION, MEALS, KAYAK,
@@ -202,7 +203,7 @@ export default function BookingFlow() {
       <div className="option-list" role="radiogroup" aria-label="Package length">
         {PACKAGES.map((p) => (
           <button key={p.days} type="button" className="option-row noimg" role="radio" aria-checked={S.days === p.days} onClick={() => set({ days: p.days })}>
-            <div><h3>{p.days} days / {p.days - 1} nights{p.tag ? <span className="mini-tag">{p.tag}</span> : null}</h3><p>Daily surf lessons, stay, bonfires and ice baths. Camping {p.camp} · AC hostel {p.ac}.</p></div>
+            <div><h3>{p.days} days / {p.days - 1} nights{p.tag ? <Wavy className="mini-tag">{p.tag}</Wavy> : null}</h3><p>Daily surf lessons, stay, bonfires and ice baths. Camping {p.camp} · AC hostel {p.ac}.</p></div>
             <div className="opt-price">{p.camp}<small>from / person</small></div>
           </button>))}
       </div>

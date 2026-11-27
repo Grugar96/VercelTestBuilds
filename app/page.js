@@ -1,11 +1,13 @@
+import Wavy from '@/components/Wavy';
 import Link from 'next/link';
 import Wave from '@/components/Wave';
 import Doodle from '@/components/Doodle';
 import AutoVideo from '@/components/AutoVideo';
+import StatCards from '@/components/StatCards';
+import Happenings from '@/components/Happenings';
 import MulkiMap from '@/components/MulkiMap';
 import HandLine from '@/components/HandLine';
 import WaveAnim from '@/components/WaveAnim';
-import { Shaka } from '@/components/kit/Kit';
 import { WarliKayaker } from '@/components/kit/Warli';
 import { PackageCards, ProofStrip, Testimonials, CrewGrid, Faq, BookingBand, FriezeBand } from '@/components/Sections';
 import { HOME_FAQ, wa } from "@/lib/site";
@@ -18,7 +20,7 @@ function Band({ cls, wave, n, icon, label, id, title, lead, price, priceNote, ac
       {cls === 'band-charcoal' && <div className="gold-sun" aria-hidden="true" />}
       <div className="wrap band-grid">
         <div className="reveal">
-          <div className="band-head"><span className="badge-icon"><Doodle name={icon} /></span><p className="label" style={{ margin: 0 }}>{label}</p></div>
+          <div className="band-head"><span className="badge-icon"><Doodle name={icon} /></span><Wavy as="p" className="label eyebrow" style={{ margin: 0 }}>{label}</Wavy></div>
           <h2 id={id}>{title}</h2>
           <p className="lead">{lead}</p>
           {price && <p className="price-from">{price} <small>{priceNote}</small></p>}
@@ -30,16 +32,6 @@ function Band({ cls, wave, n, icon, label, id, title, lead, price, priceNote, ac
   );
 }
 
-const SCATTER = [
-  ['m', 'boards-friends.jpg', 'Two guests posing with surfboards on the beach', 'day one smiles', { left: 0, top: '4%', transform: 'rotate(-5deg)' }],
-  ['l', 'falls-crew.jpg', 'The crew sitting together at a waterfall', 'crew day out', { left: '22%', top: 0, transform: 'rotate(3deg)' }],
-  ['s', 'morning-tea.jpg', 'Morning tea being poured on the beach', 'chai first', { left: '56%', top: '3%', transform: 'rotate(-3deg)' }],
-  ['m', 'sunset-board.jpg', 'A surfer holding a board at sunset', 'golden hour', { right: 0, top: 0, transform: 'rotate(5deg)' }],
-  ['l', 'night-volley.jpg', 'Night volleyball under string lights', "volleyball o'clock", { left: '3%', bottom: '4%', transform: 'rotate(2deg)' }],
-  ['s', 'sunset-dog.jpg', 'A beach dog against the setting sun', 'beach security', { left: '36%', bottom: 0, transform: 'rotate(-4deg)' }],
-  ['m', 'falls-fun.jpg', 'Friends pulling faces at the waterfall', 'no filter needed', { left: '60%', bottom: '-3%', transform: 'rotate(4deg)' }],
-  ['s', 'celebration.jpg', 'The team celebrating with a cake', 'any excuse for cake', { right: '2%', bottom: '12%', transform: 'rotate(-6deg)' }],
-];
 
 export default function Home() {
   return (
@@ -68,24 +60,25 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <WaveAnim back="var(--sb-ocean-deep)" mid="var(--sb-lime)" front="var(--sb-charcoal)" />
+        <WaveAnim back="var(--sb-ocean-deep)" mid="var(--sb-lime)" front="var(--sb-offwhite)" />
       </section>
-      <ProofStrip />
+      <StatCards />
 
       {/* 2 INTRO */}
       <section className="section has-wave-top" style={{ background: 'var(--sb-offwhite)' }}>
         <Wave color="var(--sb-offwhite)" n={0} />
         <div className="wrap intro-grid">
-          <p className="intro-big reveal">A surf school, a riverside hostel and a crew that feels like{' '}
+          <div className="intro-main reveal"><p className="intro-big">A surf school, a riverside hostel and a crew that feels like{' '}
             <u>family.<svg className="draw" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 14c30-8 70-10 110-6s60 4 84-2" /></svg></u></p>
+              <div className="intro-photos">
+              <figure><img src="/img/board-portrait.jpg" alt="A guest standing with her surfboard on Mulki beach" loading="lazy" /></figure>
+              <figure><img src="/img/crew-beach.jpg" alt="Two Surf Brothers instructors chatting on the beach" loading="lazy" /></figure>
+            </div>
+          </div>
           <div className="intro-side reveal">
             <p className="lead">Mulki sits where the Shambhavi river meets the Arabian Sea. You surf in the morning, nap or paddle in the afternoon, and watch the sun go down from the beach.</p>
             <p className="muted">Beginner? Perfect. Everyone starts somewhere.</p>
             <HandLine text="Find your flow" />
-            <div className="intro-photos">
-              <figure><img src="/img/board-portrait.jpg" alt="A guest standing with her surfboard on Mulki beach" loading="lazy" /></figure>
-              <figure><img src="/img/crew-beach.jpg" alt="Two Surf Brothers instructors chatting on the beach" loading="lazy" /></figure>
-            </div>
           </div>
         </div>
       </section>
@@ -104,7 +97,7 @@ export default function Home() {
         actions={<><Link className="btn btn-primary" href="/book?type=surf">Book a lesson</Link><Link className="link-arrow" href="/surf-lessons">How lessons work</Link></>}
         media={<><div className="video-frame" style={{ transform: 'rotate(-2.5deg)', maxWidth: 380, marginInline: 'auto' }}>
           <AutoVideo src="/video/beach-drill.mp4" poster="/img/drill-poster.jpg" label="An instructor teaching the pop-up on the sand" />
-        </div><span className="sticker">pop-up drills!</span></>} />
+        </div><Wavy className="sticker">pop-up drills!</Wavy></>} />
 
       <Band cls="band-deep" flip wave="var(--sb-ocean-deep)" n={0} icon="palm" label="Riverside stay" id="b-stay"
         title={<>Sleep by<br />the river.</>}
@@ -139,7 +132,7 @@ export default function Home() {
       <section className="section" id="packages" aria-labelledby="pk-title">
         <div className="wrap">
           <div className="section-head">
-            <div><p className="label">Stay &amp; Surf, per person</p><h2 id="pk-title">How many days have you got?</h2></div>
+            <div><Wavy as="p" className="label eyebrow">{"Stay & Surf, per person"}</Wavy><h2 id="pk-title">How many days have you got?</h2></div>
             <Link className="link-arrow" href="/packages">Compare all options</Link>
           </div>
           <PackageCards />
@@ -150,25 +143,7 @@ export default function Home() {
       {/* 7 SCATTER */}
       <FriezeBand />
 
-      <section className="section scatter-section" aria-labelledby="sc-title" style={{ paddingTop: '2rem' }}>
-        <div className="wrap">
-          <p className="label">the best part</p>
-          <h2 id="sc-title" style={{ fontSize: 'var(--fs-h2)' }}>The people make the place</h2>
-        </div>
-        <div className="wrap scatter">
-          <svg className="draw" viewBox="0 0 1000 800" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M40 120c80 40 120-30 200 10s60 120 140 110 90-120 180-100 70 90 150 60 120-90 190-40c40 30-10 90-60 120s-150 60-120 140 140 40 170 120c20 60-60 100-140 80s-140-90-230-60-60 120-160 140-140-60-200-20-80 90-120 60" /></svg>
-          {SCATTER.map(([size, f, alt, cap, style]) => (
-            <figure key={f} className={`print ${size}`} style={style}><img src={`/img/${f}`} alt={alt} loading="lazy" /><figcaption>{cap}</figcaption></figure>
-          ))}
-          <div className="scatter-copy reveal">
-            <p className="lead" style={{ marginBottom: '.5rem' }}>People turn up on their own and leave with a group chat.</p>
-            <p className="muted" style={{ margin: 0 }}>It usually happens somewhere between the first wipeout and the third bonfire.</p>
-          </div>
-          <span className="scatter-doodle" style={{ left: '45%', top: '27%', transform: 'rotate(-10deg)' }}><Shaka size={96} title="" /></span>
-          <Doodle name="fire" className="scatter-doodle" style={{ left: '30%', bottom: '34%' }} />
-          <Doodle name="arrow" className="scatter-doodle" style={{ right: '28%', top: '36%', transform: 'rotate(160deg)' }} />
-        </div>
-      </section>
+      <Happenings />
 
       <CrewGrid />
       <Testimonials />
