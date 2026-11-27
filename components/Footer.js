@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Wave from './Wave';
+import { Shaka } from './kit/Kit';
 import { NAV, ADDRESS, PHONES, PHONE_LABEL, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, TAGLINE, wa } from '@/lib/site';
 
 export default function Footer() {
@@ -34,7 +35,7 @@ export default function Footer() {
           </div>
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} Mulki Surf Brothers</span>
-            <span>{TAGLINE}</span>
+            <span className="footer-tag"><Shaka tone="dark" size={34} title="Shaka" />{TAGLINE}</span>
           </div>
         </div>
       </footer>

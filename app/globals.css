@@ -601,3 +601,58 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .site-header.scrolled .brand { margin-top: 2px; box-shadow: 0 3px 10px rgba(35,31,32,.14); }
 @media (max-width: 900px) { .site-header { --logo: 76px; } .site-header.scrolled { --logo: 56px; } .site-header .brand { margin-top: 6px; } }
 @media (prefers-reduced-motion: reduce) { .site-header .brand { transition: none; } }
+
+/* ---------- Motion kit (components/kit/Kit.js) — figure loops are 4 s, the wave strip 8 s, all seamless ---------- */
+.kit { overflow: visible; display: block; --ink: #231F20; --lime: #CFDE58; --sea: #3B96B5; }
+.kit-dark { --ink: #F5F3EC; }
+.kit .ink, .kit .line, .kit .limb, .kit .paddle { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+.kit .ink { stroke-width: 5; } .kit .ink.thin { stroke-width: 3.5; }
+.kit .line { stroke: var(--sea); stroke-width: 4; } .kit .line.thin { stroke-width: 3; stroke: #8FC3D6; }
+.kit-dark .line { stroke: var(--ink); opacity: .85; } .kit-dark .line.thin { opacity: .5; }
+.kit .accent { fill: none; stroke: var(--lime); stroke-width: 5; stroke-linecap: round; }
+.kit .fill, .kit .fill * { fill: var(--ink); }
+.kit .limb { stroke-width: 12; } .kit .limb.torso { stroke-width: 17; } .kit .limb.arm { stroke-width: 9; } .kit .limb.leg { stroke-width: 12; } .kit .paddle { stroke-width: 5; }
+.kit .crest { fill: var(--sea); } .kit-dark .crest { fill: var(--ink); opacity: .22; }
+.kit .crest-line { fill: none; stroke: #F5F3EC; stroke-width: 3; stroke-linecap: round; opacity: .8; } .kit-dark .crest-line { stroke: var(--ink); opacity: .7; }
+.kit-crest { transform-box: view-box; transform-origin: 40px 176px; animation: kitCrest 4s ease-in-out infinite; }
+@keyframes kitCrest { 0%, 100% { transform: rotate(0) scaleY(1); } 50% { transform: rotate(-2deg) scaleY(1.04); } }
+.kit .board { fill: var(--lime); stroke: var(--ink); stroke-width: 3; }
+.kit-spray circle { fill: var(--sea); } .kit-dark .kit-spray circle { fill: var(--ink); }
+
+.kit-shaka .kit-hand { transform-box: view-box; transform-origin: 97px 186px; animation: kitShaka 4s ease-in-out infinite; }
+.kit-shaka .kit-motion { animation: kitTicks 4s ease-in-out infinite; }
+@keyframes kitShaka { 0%, 100% { transform: rotate(0); } 8% { transform: rotate(-14deg); } 18% { transform: rotate(12deg); } 28% { transform: rotate(-12deg); } 38% { transform: rotate(10deg); } 48% { transform: rotate(0); } 58% { transform: rotate(-14deg); } 68% { transform: rotate(12deg); } 78% { transform: rotate(-6deg); } 88% { transform: rotate(0); } }
+@keyframes kitTicks { 0%, 100% { opacity: 0; } 10%, 40% { opacity: 1; } 50% { opacity: 0; } 60%, 80% { opacity: 1; } 90% { opacity: 0; } }
+
+.kit-waves { animation: kitDrift 4s linear infinite; }
+@keyframes kitDrift { from { transform: translateX(0); } to { transform: translateX(-100px); } }
+.kit-rider { transform-box: view-box; transform-origin: 124px 156px; animation: kitRide 4s ease-in-out infinite; }
+@keyframes kitRide { 0%, 100% { transform: translateY(0) rotate(-2deg); } 25% { transform: translateY(-6px) rotate(2deg); } 50% { transform: translateY(-2px) rotate(-3deg); } 75% { transform: translateY(-8px) rotate(1deg); } }
+.kit-spray circle { animation: kitSpray 1s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+.kit-spray circle:nth-child(2) { animation-delay: .33s; } .kit-spray circle:nth-child(3) { animation-delay: .66s; }
+@keyframes kitSpray { from { opacity: 1; transform: translate(0, 0) scale(1); } to { opacity: 0; transform: translate(14px, -10px) scale(.4); } }
+
+.kit-boat { transform-box: view-box; transform-origin: 120px 140px; animation: kitBob 2s ease-in-out infinite; }
+@keyframes kitBob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-5px) rotate(1.5deg); } }
+.kit-paddle { transform-box: view-box; transform-origin: 120px 118px; animation: kitPaddle 2s ease-in-out infinite; }
+@keyframes kitPaddle { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(22deg); } }
+
+.kit-wavestrip { position: relative; width: 100%; aspect-ratio: 1080 / 220; overflow: hidden; }
+.kit-wavestrip svg { position: absolute; left: 0; bottom: 0; width: 200%; max-width: none; height: 100%; }
+.kit-wavestrip .w1 { animation: kitStrip 8s linear infinite; opacity: .9; }
+.kit-wavestrip .w2 { animation: kitStrip 4s linear infinite reverse; }
+.kit-wavestrip .w3 { animation: kitStrip 4s linear infinite; }
+.kit-wavestrip .w4 { animation: kitStrip 2.667s linear infinite; }
+@keyframes kitStrip { from { transform: translateX(0); } to { transform: translateX(-12.5%); } }
+
+@media (prefers-reduced-motion: reduce) { .kit *, .kit-wavestrip svg { animation: none !important; } }
+.kit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1.25rem; margin-top: 2rem; }
+.kit-card { background: var(--sb-white); border: 1px solid var(--sb-line); border-radius: var(--radius-card); overflow: hidden; }
+.kit-card h3, .kit-card p { padding: 0 1.1rem; } .kit-card h3 { margin-top: 1rem; } .kit-card p { padding-bottom: 1.1rem; margin: 0; }
+.kit-swatch { display: grid; place-items: center; padding: 1rem; } .kit-swatch.light { background: var(--sb-offwhite); } .kit-swatch.dark { background: var(--sb-ocean-deep); }
+.footer-tag { display: inline-flex; align-items: center; gap: .5rem; }
+.footer-tag .kit { margin-bottom: 4px; }
+.band-surfer { position: absolute; left: max(2vw, 8px); bottom: clamp(20px, 3vw, 46px); z-index: 1; pointer-events: none; opacity: .95; }
+@media (max-width: 760px) { .band-surfer { width: 110px; height: auto; left: 6px; bottom: 26px; } }
+.band-kayaker { display: inline-block; margin-left: .5rem; vertical-align: middle; }
+@media (max-width: 560px) { .band-kayaker { width: 120px; height: auto; } }
