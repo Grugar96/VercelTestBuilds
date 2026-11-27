@@ -17,7 +17,7 @@ Warli-inspired figures (two triangles meeting at the waist, round head, thin lin
 - `-light` = charcoal paint, for light backgrounds. `-dark` = off-white paint, for footage and blue / charcoal / laterite backgrounds.
 - `.webm` = transparent (VP9 alpha): web, Premiere, DaVinci, After Effects.
 - `-magenta-key.mp4` = on a magenta background for phone editors (CapCut / VN / InShot): use Chroma Key and pick the magenta.
-- Transparent ProRes 4444 `.mov` files (best quality) are too large for this repo; they're in `SurfBrothers-warli-kit-transparent-mov.zip` shared in chat.
+- Transparent ProRes 4444 `.mov` files (best quality) are too large for this repo; they're in `SurfBrothers-warli-kit-mov-dark.zip` and `SurfBrothers-warli-kit-mov-light.zip` shared in chat.
 - `warli-kit-preview.mp4` shows everything at once.
 
 Website: React components in `components/kit/Warli.js` (`<WarliSurfer variant="man|woman">`, `<WarliKayaker>`, `<WarliSkater>`, `<WarliPalm>`, `<WarliCircle>`, `<WarliFrieze>`, `<Zigzag>`, each figure with `tone="light" | "dark"`) and `components/kit/Kit.js` (`<Shaka>`, `<WaveStrip>`), styled in `app/globals.css`. Preview page: `/kit` (not indexed).
