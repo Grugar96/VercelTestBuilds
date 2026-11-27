@@ -62,9 +62,10 @@ export default function StatCards() {
         <article className={`stat-card sc-count${run ? ' go' : ''}`}>
           <Clip src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="Students riding waves in Mulki" />
           <div className="sc-over">
-            <b><Count to={1000} run={run} suffix="+" /></b><span>{students.label}</span>
+            <b><Count to={1000} run={run} suffix="+" /></b>
+            <div className="sc-ring" aria-hidden="true"><div className="sc-rider"><WarliSurfer tone="dark" variant="woman" size={120} title="" /></div></div>
+            <span>{students.label}</span>
           </div>
-          <div className="sc-rider"><WarliSurfer tone="dark" variant="woman" size={120} title="" /></div>
         </article>
       </div>
     </section>
