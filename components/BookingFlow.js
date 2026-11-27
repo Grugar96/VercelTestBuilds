@@ -4,6 +4,7 @@ import {
   BOOKING_TYPES as TYPES, ROOMS, PACKAGE_DAYS, PACKAGE_PRICE, PACKAGES, PRIVATE_SESSION, MEALS, KAYAK,
   WEEKDAY_OFFER, ADVANCE_PER_PERSON, POLICY, SURF_INCLUDES, PACKAGE_INCLUDES, groupSurfPrice, PHONE_LABEL, wa,
 } from '@/lib/site';
+import { Shaka } from './kit/Kit';
 
 const SEASON_OFF = [5, 6, 7]; // June–August: no surf
 const inr = (n) => (n < 0 ? '−₹' : '₹') + Math.abs(Math.round(n)).toLocaleString('en-IN');
@@ -297,6 +298,7 @@ export default function BookingFlow() {
 
   if (step === 'review') panel = sent ? (
     <div className="sent">
+      <Shaka size={110} title="" />
       <h2>Almost done</h2>
       <p>Your request is ready. Tap below to send it to us on WhatsApp. We'll confirm availability and share payment details.</p>
       <pre>{message()}</pre>

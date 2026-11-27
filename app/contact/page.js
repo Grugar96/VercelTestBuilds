@@ -41,7 +41,7 @@ export default function Contact() {
         </div>
       </WaveSection>
       <Faq items={FAQ} title="Good to know" bg="var(--sb-white)" />
-      <BookingBand title={<>See you<br />in Mulki.</>} />
+      <BookingBand figure="kayaker" title={<>See you<br />in Mulki.</>} />
     </>
   );
 }

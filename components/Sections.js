@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Wave from './Wave';
 import Doodle from './Doodle';
 import WaveAnim from './WaveAnim';
-import { Surfer } from './kit/Kit';
+import { Surfer, Palm, Skater, Kayaker } from './kit/Kit';
 import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
 
 export function Ticks({ items }) {
@@ -129,7 +129,8 @@ export function Faq({ items, title = 'Questions we get a lot', label = 'Before y
   );
 }
 
-export function BookingBand({ title = <>Ready for your<br />first wave?</>, href = '/book', btn = 'Plan your stay', surfer = 'man' }) {
+export function BookingBand({ title = <>Ready for your<br />first wave?</>, href = '/book', btn = 'Plan your stay', surfer = 'man', figure }) {
+  const f = figure || surfer;
   return (
     <section className="booking-band has-wave-top" aria-labelledby="bb-title">
       <Wave color="var(--sb-ocean-deep)" n={1} />
@@ -143,7 +144,10 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
         <p className="phone">Call or WhatsApp {PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</p>
         <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off per person on Stay &amp; Surf</p>
       </div>
-      <Surfer tone="dark" variant={surfer} size={170} className="band-surfer" title="" />
+      {f === 'palm' ? <Palm tone="dark" size={170} className="band-surfer band-palm" title="" />
+        : f === 'skater' ? <Skater tone="dark" size={170} className="band-surfer" title="" />
+        : f === 'kayaker' ? <Kayaker tone="dark" size={170} className="band-surfer" title="" />
+        : <Surfer tone="dark" variant={f} size={170} className="band-surfer" title="" />}
       <WaveAnim back="var(--sb-ocean)" mid="var(--sb-lime)" front="var(--sb-charcoal)" />
     </section>
   );

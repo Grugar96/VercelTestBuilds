@@ -661,3 +661,9 @@ p { margin: 0 0 1em; max-width: 68ch; }
 @media (max-width: 760px) { .band-surfer { width: 110px; height: auto; left: 6px; bottom: 26px; } }
 .band-kayaker { display: inline-block; margin-left: .5rem; vertical-align: middle; }
 @media (max-width: 560px) { .band-kayaker { width: 120px; height: auto; } }
+
+.kit-inline { display: flex; align-items: flex-end; gap: .75rem; margin-top: 1rem; }
+.kit-inline .kit { flex: none; }
+.band-palm { bottom: clamp(30px, 4vw, 60px); }
+.sent .kit { display: block; margin: 0 auto .5rem; }
+.notfound .kit-surfer { display: block; margin: 0 auto .5rem; }

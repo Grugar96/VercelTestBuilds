@@ -14,7 +14,7 @@ export default function Gallery() {
         <GalleryGrid />
         <p className="fineprint">More every week on <a href={INSTAGRAM}>Instagram</a>.</p>
       </WaveSection>
-      <BookingBand title={<>Want to be<br />in the next one?</>} />
+      <BookingBand figure="skater" title={<>Want to be<br />in the next one?</>} />
     </>
   );
 }

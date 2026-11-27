@@ -5,7 +5,7 @@ import AutoVideo from '@/components/AutoVideo';
 import MulkiMap from '@/components/MulkiMap';
 import HandLine from '@/components/HandLine';
 import WaveAnim from '@/components/WaveAnim';
-import { Kayaker } from '@/components/kit/Kit';
+import { Kayaker, Shaka } from '@/components/kit/Kit';
 import { PackageCards, ProofStrip, Testimonials, CrewGrid, Faq, BookingBand } from '@/components/Sections';
 import { HOME_FAQ, HERO_RIDE, wa } from "@/lib/site";
 
@@ -160,7 +160,7 @@ export default function Home() {
             <p className="lead" style={{ marginBottom: '.5rem' }}>The people who come here are curious, easy-going and up for anything.</p>
             <p className="muted" style={{ margin: 0 }}>Somewhere between the first wipeout and the last sunset, strangers turn into friends.</p>
           </div>
-          <Doodle name="smile" className="scatter-doodle" style={{ left: '46%', top: '30%', transform: 'rotate(-12deg)' }} />
+          <span className="scatter-doodle" style={{ left: '45%', top: '27%', transform: 'rotate(-10deg)' }}><Shaka size={96} title="" /></span>
           <Doodle name="fire" className="scatter-doodle" style={{ left: '30%', bottom: '34%' }} />
           <Doodle name="arrow" className="scatter-doodle" style={{ right: '28%', top: '36%', transform: 'rotate(160deg)' }} />
         </div>
