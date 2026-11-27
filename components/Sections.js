@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Wave from './Wave';
 import Doodle, { DoodleSvg } from './Doodle';
 import WaveAnim from './WaveAnim';
-import { ContactNumbers } from './Social';
+import AutoScroll from './AutoScroll';
 import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
 import TeamClip from './TeamClip';
 import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, OWNERS, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
@@ -112,7 +112,42 @@ export function Testimonials({ tone = 'ocean' }) {
   );
 }
 
-export function CrewGrid({ link = true }) {
+// Face slot: add a square photo per person at public/img/crew/<clip>.jpg and set face: true in CREW (lib/site.js).
+function Face({ c, size = 'md' }) {
+  return (
+    <span className={`crew-face ${size}`} aria-hidden="true">
+      {c.face ? <img src={`/img/crew/${c.clip || c.name.toLowerCase()}.jpg`} alt="" loading="lazy" /> : <b>{c.name[0]}</b>}
+    </span>
+  );
+}
+
+function CrewCard({ c }) {
+  return (
+    <article className="crew" key={c.name}>
+      <div className="crew-clip"><TeamClip clip={c.clip} label={`${c.name} at Mulki Surf Brothers`} /></div>
+      <div className="crew-body">
+        <div className="crew-id"><Face c={c} /><div><h3>{c.name}</h3><Wavy as="p" className="role">{c.role + (c.from ? ` · ${c.from}` : '')}</Wavy></div></div>
+        <p>{c.bio}</p>
+      </div>
+    </article>
+  );
+}
+
+export function Founders() {
+  return (
+    <div className="founders">
+      {OWNERS.map((o) => (
+        <article className="founder" key={o.name}>
+          <span className="founder-photo">{o.photo ? <img src={o.photo} alt={o.name} loading="lazy" /> : <><b>{o.initial}</b><small>photo coming</small></>}</span>
+          <div><Wavy as="p" className="role">founder</Wavy><h3>{o.name}</h3><p>{o.role}</p></div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+// row: one sideways row that drifts on its own (homepage). Otherwise the full grid with the founders (About page).
+export function CrewGrid({ link = true, row = false }) {
   return (
     <section className="section" style={{ background: 'var(--sb-white)' }} aria-labelledby="crew-title">
       <div className="wrap">
@@ -120,32 +155,27 @@ export function CrewGrid({ link = true }) {
           <div><Wavy as="p" className="label eyebrow">{"The crew"}</Wavy><h2 id="crew-title">Who'll be in the water with you</h2></div>
           {link && <Link className="link-arrow" href="/about">Meet everyone</Link>}
         </div>
-        <div className="crew-grid">
-          {CREW.map((c) => (
-            <article className="crew reveal" key={c.name}>
-              <div className="crew-clip"><TeamClip clip={c.clip} label={`${c.name} at Mulki Surf Brothers`} /></div>
-              <div className="crew-body">
-                <h3>{c.name}</h3>
-                <Wavy as="p" className="role">{c.role + (c.from ? ` · ${c.from}` : '')}</Wavy>
-                <p>{c.bio}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-        <p className="owners">{OWNERS.map((o, i) => <span key={o.name}>{i > 0 && ' and '}<b>{o.name}</b></span>)} run the place: bookings, plans, and most of the decisions about what's for dinner.</p>
+        {!row && <><h3 className="founders-title">The founders</h3><Founders /><h3 className="founders-title">The crew</h3></>}
       </div>
+      {row ? (
+        <AutoScroll className="crew-row">{CREW.map((c) => <CrewCard c={c} key={c.name} />)}</AutoScroll>
+      ) : (
+        <div className="wrap"><div className="crew-grid">{CREW.map((c) => <CrewCard c={c} key={c.name} />)}</div></div>
+      )}
+      {row && <div className="wrap"><p className="owners">Founded by {OWNERS.map((o, i) => <span key={o.name}>{i > 0 && ' and '}<b>{o.name}</b></span>)}, who run the place: bookings, plans, and most of the decisions about what's for dinner.</p></div>}
     </section>
   );
 }
 
-export function Faq({ items, title = 'Questions we get a lot', label = 'Before you come', bg = 'var(--sb-offwhite)' }) {
+export function Faq({ items, title = 'Questions we get a lot', label = 'Before you come', bg = 'var(--sb-offwhite)', more = false }) {
   return (
-    <section className="section" style={{ background: bg }} aria-labelledby="faq-title">
+    <section className="section" id="faq" style={{ background: bg }} aria-labelledby="faq-title">
       <div className="wrap two-col">
         <div>
           <Wavy as="p" className="label eyebrow">{label}</Wavy>
           <h2 id="faq-title" style={{ fontSize: 'var(--fs-h2)' }}>{title}</h2>
           <p className="muted">Anything else? <a href={wa('Hi! I have a question before booking.')}>Ask us on WhatsApp</a>.</p>
+          {more && <Link className="link-arrow" href="/contact#faq">All questions</Link>}
         </div>
         <div className="faq">
           {items.map(([q, a]) => <details key={q}><summary>{q}</summary><div><p>{a}</p></div></details>)}
@@ -162,13 +192,12 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
       <Wave color="var(--sb-ocean-deep)" n={1} />
       <div className="wrap">
         <h2 id="bb-title">{title}</h2>
-        <p className="lead">Pick your dates and we'll confirm everything on WhatsApp.</p>
+        <p className="lead">Pick a package and your dates, and book online in a couple of minutes.</p>
         <div className="btn-row">
           <Link className="btn btn-primary" href={href}>{btn}</Link>
-          <a className="btn btn-ghost" href={wa("Hi Mulki Surf Brothers! I'd like to book.")}>Chat on WhatsApp</a>
+          <a className="btn btn-ghost" href={wa("Hi Mulki Surf Brothers! I have a question before booking.")}>Ask us a question</a>
         </div>
-        <ContactNumbers />
-        <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off per person on Stay &amp; Surf</p>
+        <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off your Stay &amp; Surf booking</p>
       </div>
       {f === 'palm' ? <WarliPalm tone="dark" size={170} className="band-surfer band-palm" title="" />
         : f === 'skater' ? <WarliSkater tone="dark" size={180} className="band-surfer" title="" />
@@ -208,7 +237,7 @@ export function FriezeBand({ edge = 'var(--sb-offwhite)' }) {
   return (
     <section className="frieze-band" aria-label="Life at Mulki Surf Brothers, painted Warli style">
       <Zigzag color={edge} />
-      <div className="frieze-scroll"><WarliFrieze tone="dark" /></div>
+      <AutoScroll className="frieze-scroll" speed={0.3}><WarliFrieze tone="dark" /></AutoScroll>
       <Zigzag color={edge} flip />
     </section>
   );

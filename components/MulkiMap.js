@@ -76,7 +76,7 @@ export default function MulkiMap() {
           <text x="300" y="44" className="map-hand map-river" transform="rotate(-14 300 44)">Shambhavi</text>
           <text x="232" y="430" className="map-hand map-river" transform="rotate(-80 232 430)">backwater</text>
           <text x="156" y="300" className="map-hand map-sand" transform="rotate(-84 156 300)">Sasihitlu beach</text>
-          <text x="104" y="508" className="map-hand map-note">Yamuna Surf Club</text>
+          <text x="104" y="508" className="map-hand map-note">Surf Bros surf spot</text>
           <g className="map-north" transform="translate(370 488)"><path d="M0 -16l6 14h-12z" /><text y="12" textAnchor="middle">N</text></g>
           {MAP_SPOTS.map((m, k) => (
             <g key={m.name} className={`pin${k === i ? ' active' : ''}`} tabIndex={0} role="button" aria-label={m.name} aria-pressed={k === i}
