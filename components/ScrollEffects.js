@@ -29,6 +29,11 @@ export default function ScrollEffects() {
   const pathname = usePathname();
   useEffect(() => {
     document.documentElement.classList.add('js');
+    // Show focus rings only for keyboard users (mouse clicks and route changes shouldn't leave a blue ring).
+    const root = document.documentElement;
+    const onKey = (e) => { if (e.key === 'Tab') root.classList.add('kbd'); };
+    const onPointer = () => root.classList.remove('kbd');
+    window.addEventListener('keydown', onKey); window.addEventListener('pointerdown', onPointer);
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const main = document.getElementById('main');
     const ok = (el) => !el.closest(SKIP) && !el.classList.contains('ta') && !el.classList.contains('ta-h');
@@ -80,7 +85,7 @@ export default function ScrollEffects() {
         bo.observe(band);
       }
     }
-    return () => { io?.disconnect(); ho?.disconnect(); bo?.disconnect(); };
+    return () => { io?.disconnect(); ho?.disconnect(); bo?.disconnect(); window.removeEventListener('keydown', onKey); window.removeEventListener('pointerdown', onPointer); };
   }, [pathname]);
   return null;
 }

@@ -46,6 +46,62 @@ const D = {
     <path className="s" d="M6 31c10-14 24-18 34-12" />
     <path className="f" d="M41 19l-10-5 3 6-3 6z" />
   </>,
+  tick: <>
+    <path className="f" d="M5 25c3-3 6-3 9 0l6 6C26 20 33 11 41 5c3-2 5 0 3 3C35 17 28 28 23 40c-1 3-4 3-6 1L5 30c-2-2-2-3 0-5z" />
+  </>,
+  cycle: <>
+    <circle className="s" cx="12" cy="33" r="8" /><circle className="s" cx="36" cy="33" r="8" />
+    <path className="s" d="M12 33l8-14h12l4 14M20 19l6 14h-14M30 12h6" />
+    <circle className="f" cx="25" cy="9" r="3.4" /><path className="f" d="M21 13h8l-4 6z" />
+  </>,
+  snow: <>
+    <path className="s" d="M24 4v40M7 14l34 20M41 14L7 34" />
+    <path className="s" d="M19 7l5 5 5-5M19 41l5-5 5 5M6 20l7-2-2-7M42 28l-7 2 2 7M42 20l-7-2 2-7M6 28l7 2-2 7" />
+    <circle className="f" cx="24" cy="24" r="4" />
+  </>,
+  wifi: <>
+    <path className="s" d="M6 19c10-9 26-9 36 0M12 26c7-6 17-6 24 0M18 32c4-3 8-3 12 0" />
+    <circle className="f" cx="24" cy="38" r="3.6" />
+  </>,
+  clock: <>
+    <circle className="f" cx="24" cy="25" r="18" />
+    <path className="cut" style={{ strokeWidth: 3 }} d="M24 14v12l7 5" />
+    <path className="f" d="M18 3h12v4H18z" />
+  </>,
+  group: <>
+    <circle className="f" cx="14" cy="9" r="4" /><path className="f" d="M7 15h14l-7 10zM14 25l-6 9h12z" />
+    <circle className="f" cx="34" cy="9" r="4" /><path className="f" d="M27 15h14l-7 10zM34 25l-6 9h12z" />
+    <path className="s" d="M20 17l7 0M11 34l-2 9M17 34l2 9M31 34l-2 9M37 34l2 9M8 16l-4 7M40 16l4 7" />
+  </>,
+  plane: <>
+    <path className="f" d="M44 6c2 2 0 6-3 9l-7 7 5 20-4 3-9-15-8 8 1 7-3 2-4-8-8-4 2-3 7 1 8-8-15-9 3-4 20 5 7-7c3-3 7-5 9-3z" />
+  </>,
+  train: <>
+    <path className="f" fillRule="evenodd" d="M12 6h24c3 0 5 2 5 5v20c0 3-2 5-5 5H12c-3 0-5-2-5-5V11c0-3 2-5 5-5zm1 6v9h22v-9zm2 15a3 3 0 1 0 0.1 0zm18 0a3 3 0 1 0 0.1 0z" />
+    <path className="s" d="M14 36l-6 9M34 36l6 9M10 43h28" />
+  </>,
+  bus: <>
+    <path className="f" fillRule="evenodd" d="M9 7h30c2 0 4 2 4 4v24c0 2-2 4-4 4H9c-2 0-4-2-4-4V11c0-2 2-4 4-4zm1 5v10h12V12zm16 0v10h12V12zm-14 17a2.5 2.5 0 1 0 .1 0zm24 0a2.5 2.5 0 1 0 .1 0z" />
+    <circle className="f" cx="14" cy="41" r="4" /><circle className="f" cx="34" cy="41" r="4" />
+  </>,
+  pot: <>
+    <path className="f" d="M7 20h34v4c0 10-7 17-17 17S7 34 7 24z" />
+    <path className="f" d="M4 19h40v4H4z" />
+    <path className="s" d="M17 13c-2-3 2-5 0-8M24 13c-2-3 2-5 0-8M31 13c-2-3 2-5 0-8" />
+  </>,
+  lock: <>
+    <path className="s" d="M15 21v-6a9 9 0 0 1 18 0v6" />
+    <path className="f" fillRule="evenodd" d="M9 21h30v22H9zm15 7a3 3 0 0 0-1.5 5.6V37h3v-3.4A3 3 0 0 0 24 28z" />
+  </>,
+  drop: <>
+    <path className="f" d="M24 4C18 14 11 21 11 30a13 13 0 0 0 26 0c0-9-7-16-13-26z" />
+  </>,
+  camera: <>
+    <path className="f" fillRule="evenodd" d="M8 14h8l3-5h10l3 5h8c2 0 4 2 4 4v19c0 2-2 4-4 4H8c-2 0-4-2-4-4V18c0-2 2-4 4-4zm16 6a8 8 0 1 0 .1 0z" />
+  </>,
+  mail: <>
+    <path className="f" fillRule="evenodd" d="M5 11h38v26H5zm4 4v.6l15 11 15-11V15L24 26z" />
+  </>,
   house: <>
     <path className="f" d="M4 24L24 7l20 17z" />
     <path className="f" fillRule="evenodd" d="M10 24h28v18H10zm11 18v-10h6v10z" />

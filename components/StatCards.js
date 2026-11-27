@@ -17,18 +17,6 @@ function useInView(ref) {
   return seen;
 }
 
-function Count({ to, run, suffix = '' }) {
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!run) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setN(to); return; }
-    let raf; const t0 = performance.now(); const dur = 2600;
-    const step = (t) => { const k = Math.min(1, (t - t0) / dur); setN(Math.round(to * (1 - Math.pow(1 - k, 2.2)))); if (k < 1) raf = requestAnimationFrame(step); };
-    raf = requestAnimationFrame(step); return () => cancelAnimationFrame(raf);
-  }, [run, to]);
-  return <>{n.toLocaleString('en-IN')}{suffix}</>;
-}
-
 function Clip({ src, poster, label }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -40,9 +28,15 @@ function Clip({ src, poster, label }) {
   return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />;
 }
 
+const START = 988, END = 1000;
+
 export default function StatCards() {
   const ref = useRef(null);
   const run = useInView(ref);
+  // Like the reference: the number ticks up by one each time the surfer finishes a ride across the ring.
+  const [n, setN] = useState(START);
+  useEffect(() => { if (run && window.matchMedia('(prefers-reduced-motion: reduce)').matches) setN(END); }, [run]);
+  const onRide = (e) => { if (e.target === e.currentTarget) setN((v) => Math.min(END, v + 1)); };
   const [rating, students, ratio] = [PROOF[0], PROOF[1], PROOF[3]];
   return (
     <section className="stat-cards" aria-label="Surf Brothers in numbers" ref={ref}>
@@ -62,8 +56,8 @@ export default function StatCards() {
         <article className={`stat-card sc-count${run ? ' go' : ''}`}>
           <Clip src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="Students riding waves in Mulki" />
           <div className="sc-over">
-            <b><Count to={1000} run={run} suffix="+" /></b>
-            <div className="sc-ring" aria-hidden="true"><div className="sc-rider"><WarliSurfer tone="dark" variant="woman" size={120} title="" /></div></div>
+            <b aria-label={`${END.toLocaleString('en-IN')}+`}>{n.toLocaleString('en-IN')}{n >= END ? '+' : ''}</b>
+            <div className="sc-ring" aria-hidden="true"><div className="sc-rider"><div className="sc-move" onAnimationIteration={onRide}><WarliSurfer tone="dark" variant="woman" size={120} title="" /></div></div></div>
             <span>{students.label}</span>
           </div>
         </article>

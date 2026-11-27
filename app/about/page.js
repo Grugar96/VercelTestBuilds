@@ -21,7 +21,7 @@ export default function About() {
         </div>
       </WaveSection>
       <CrewGrid link={false} />
-      <Testimonials />
+      <Testimonials tone="charcoal" />
       <BookingBand surfer="woman" title={<>Come join<br />the crew.</>} />
     </>
   );

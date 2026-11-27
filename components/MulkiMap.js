@@ -46,6 +46,8 @@ export default function MulkiMap() {
             <path d={SEA} fill="#3B96B5" />
             <path d={SAND} fill="#D8B991" />
             <path d={RIVER} fill="#1F6F8B" />
+            {/* Hejamadi sandspit on the far side of the river mouth */}
+            <path d="M120 0H178C170 22 160 44 146 62C136 74 124 80 112 82C118 56 120 28 120 0Z" fill="#D8B991" />
             {/* Warli water marks: rows of small waves on the sea, ticks on the river */}
             <g className="map-ink-light" fill="none" strokeWidth="2" strokeLinecap="round">
               {[30, 80, 130, 180, 230, 280, 330, 380, 430, 480].map((y, r) => ripples('q8 -7 16 0 t16 0', 3, 8 + (r % 2) * 14, y, 40, 0))}
@@ -73,6 +75,8 @@ export default function MulkiMap() {
           <text x="40" y="300" className="map-hand map-sea" transform="rotate(-84 40 300)">Arabian Sea</text>
           <text x="300" y="44" className="map-hand map-river" transform="rotate(-14 300 44)">Shambhavi</text>
           <text x="232" y="430" className="map-hand map-river" transform="rotate(-80 232 430)">backwater</text>
+          <text x="156" y="300" className="map-hand map-sand" transform="rotate(-84 156 300)">Sasihitlu beach</text>
+          <text x="104" y="508" className="map-hand map-note">Yamuna Surf Club</text>
           <g className="map-north" transform="translate(370 488)"><path d="M0 -16l6 14h-12z" /><text y="12" textAnchor="middle">N</text></g>
           {MAP_SPOTS.map((m, k) => (
             <g key={m.name} className={`pin${k === i ? ' active' : ''}`} tabIndex={0} role="button" aria-label={m.name} aria-pressed={k === i}

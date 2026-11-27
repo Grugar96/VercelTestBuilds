@@ -62,7 +62,7 @@ export default function SurfLessons() {
             <div className="reveal">
               <div className="includes" style={{ marginTop: 0 }}>
                 <p className="label">Surf only includes</p>
-                <Ticks items={SURF_INCLUDES} />
+                <Ticks items={SURF_INCLUDES} icons />
               </div>
               <p className="label" style={{ marginTop: '1.75rem' }}>Good to know</p>
               <ul className="policy">{POLICY.surf.map((x) => <li key={x}>{x}</li>)}<li>{POLICY.general}</li></ul>

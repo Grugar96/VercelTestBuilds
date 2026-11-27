@@ -24,7 +24,7 @@ export default function Stay() {
                 <p className="label">{k === 'ac' ? 'All hostel rooms are AC' : 'Under the palms'}</p>
                 <h3>{r.name}</h3>
                 <p>{r.desc}</p>
-                <Ticks items={r.feats} />
+                <Ticks items={r.feats} icons />
                 <p className="price">From {inr(PACKAGE_PRICE[k][3])}<small>/ person · 3 days with surfing</small></p>
                 <Link className={`btn ${k === 'ac' ? 'btn-primary' : 'btn-secondary'}`} href={`/book?type=package&room=${k}`}>Book {r.short.toLowerCase()}</Link>
               </div>
@@ -39,7 +39,7 @@ export default function Stay() {
           <div className="reveal">
             <Wavy as="p" className="label eyebrow">{"House rules"}</Wavy>
             <h2 style={{ fontSize: 'var(--fs-h2)' }}>Three simple ones</h2>
-            <div style={{ fontSize: '1.15rem' }}><Ticks items={['Respect the ocean.', 'Respect each other.', 'Leave the place better.']} /></div>
+            <div style={{ fontSize: '1.15rem' }}><Ticks icons items={["Respect the ocean.", "Respect each other.", "Leave the place better."]} /></div>
             {/* placeholder: check-in/out times and quiet hours carried over from the draft site */}
             <p className="muted">Check-in from 1:00 PM, check-out by 11:00 AM. Quiet hours after 11 PM, because we're up early for the surf.</p>
             <div className="kit-inline"><WarliPalm size={120} title="" /><Wavy className="hand">Slow down. Stay awhile.</Wavy></div>

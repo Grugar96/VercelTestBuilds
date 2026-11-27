@@ -1,15 +1,31 @@
 import Wavy from './Wavy';
 import Link from 'next/link';
 import Wave from './Wave';
-import Doodle from './Doodle';
+import Doodle, { DoodleSvg } from './Doodle';
 import WaveAnim from './WaveAnim';
 import { ContactNumbers } from './Social';
 import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
 import TeamClip from './TeamClip';
 import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, OWNERS, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
 
-export function Ticks({ items }) {
-  return <ul className="ticks">{items.map((t) => <li key={t}>{t}</li>)}</ul>;
+// Picks a painted icon for a list item from its words; falls back to a painted tick.
+const ICON_RULES = [
+  [/surf lesson|surf session|group surf/i, 'wave'], [/2-hour|hours?\b/i, 'clock'], [/surfboard|board/i, 'board'],
+  [/small-batch|instructor|guidance|coach/i, 'group'], [/ice bath/i, 'snow'], [/cycl/i, 'cycle'],
+  [/bonfire|karaoke|music/i, 'fire'], [/wi-?fi/i, 'wifi'], [/kitchen|meal/i, 'pot'], [/palm/i, 'palm'],
+  [/washroom|shower/i, 'drop'], [/air condition|\bac\b/i, 'snow'], [/locker/i, 'lock'],
+  [/ocean/i, 'wave'], [/each other/i, 'group'], [/leave the place/i, 'palm'],
+];
+export const iconFor = (t) => (ICON_RULES.find(([re]) => re.test(t)) || [0, 'tick'])[1];
+
+export function Ticks({ items, icons = false }) {
+  return (
+    <ul className={`ticks${icons ? ' ticks-icons' : ''}`}>
+      {items.map((t) => (
+        <li key={t}><span className="tick-icon" aria-hidden="true"><DoodleSvg name={icons ? iconFor(t) : 'tick'} /></span><span>{t}</span></li>
+      ))}
+    </ul>
+  );
 }
 
 export function Card({ label, title, price, unit = '/ guest', ticks, href, btn, primary = false, tag }) {
@@ -49,7 +65,7 @@ export function PackageIncludes() {
   return (
     <div className="includes">
       <Wavy as="p" className="label eyebrow">{"Every Stay & Surf package includes"}</Wavy>
-      <Ticks items={PACKAGE_INCLUDES} />
+      <Ticks items={PACKAGE_INCLUDES} icons />
     </div>
   );
 }
@@ -78,10 +94,10 @@ function Voice({ t, i, hidden }) {
 }
 
 // Desktop: a slow, endless sideways drift (pauses on hover). Phones: a plain vertical stack.
-export function Testimonials() {
+export function Testimonials({ tone = 'ocean' }) {
   return (
-    <section className="voices has-wave-top" aria-labelledby="rev-title">
-      <Wave color="var(--sb-ocean-deep)" n={2} />
+    <section className={`voices has-wave-top voices-${tone}`} aria-labelledby="rev-title">
+      <Wave color={tone === 'charcoal' ? 'var(--sb-charcoal)' : 'var(--sb-ocean-deep)'} n={2} />
       <div className="wrap voices-head">
         <svg className="hand-arrow" viewBox="0 0 130 30" aria-hidden="true"><path d="M3 17c30-4 70-6 118-3M106 4c7 4 12 7 16 10-5 3-10 7-15 12" /></svg>
         <h2 id="rev-title" className="hand" aria-label="What our surfers are saying"><Wavy>What our surfers</Wavy><br /><Wavy>are saying</Wavy></h2>

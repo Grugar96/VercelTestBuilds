@@ -51,7 +51,7 @@ export function SocialIcon({ kind, size = 44, title }) {
       <g filter={`url(#${id})`}>
         <circle cx="24" cy="24" r="22" fill={s.bg} />
         {s.spot && <circle cx="8" cy="42" r="15" fill={s.spot} clipPath={`url(#${id}-c)`} opacity=".9" />}
-        <g className="glyph">{GLYPH[kind]}</g>
+        <g className="glyph" transform={kind === 'whatsapp' ? 'translate(-.6 1.4)' : undefined}>{GLYPH[kind]}</g>
       </g>
     </svg>
   );

@@ -1,5 +1,5 @@
 import Wavy from '@/components/Wavy';
-import Doodle from '@/components/Doodle';
+import Doodle, { DoodleSvg } from '@/components/Doodle';
 import { SocialIcon } from '@/components/Social';
 import { PageHero, WaveSection, Faq, BookingBand } from '@/components/Sections';
 import { ADDRESS, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, PHONES, PHONE_LABEL, wa } from '@/lib/site';
@@ -12,6 +12,12 @@ const FAQ = [
   ['When is the surf season?', 'September to May. June to August is monsoon, when the sea is too rough for lessons.'],
   ['How do I pay?', 'Send a booking request and we confirm availability on WhatsApp. Surf Only needs full payment to confirm (no refund after booking). Stay & Surf needs a \u20b92,000 advance per person (non-refundable), and the rest is paid at check-in.'],
   ['Can you arrange an airport or station pickup?', 'Yes, on request. Tell us your arrival time and we’ll arrange a cab from Mangaluru airport or the station.'],
+];
+
+const GETTING = [
+  ['by air', 'plane', '25–45', 'min by road', 'Mangaluru airport (IXE)', 'Take a prepaid taxi (around ₹800–1,100) north on NH66, or ask us to arrange a pickup.'],
+  ['by train', 'train', '5–15', 'min by auto', 'Mulki or Surathkal station', 'Trains from Goa, Mumbai, Bengaluru and Kerala stop here. Autos wait outside.'],
+  ['by bus', 'bus', '~10', 'min by auto', 'Mulki bus stand, NH66', 'Overnight sleeper buses from Bengaluru and Mumbai drop you in Mulki town, a short auto ride away.'],
 ];
 
 export default function Contact() {
@@ -27,21 +33,33 @@ export default function Contact() {
             <ul className="contact-list">
               <li><SocialIcon kind="whatsapp" size={40} /><div><b>WhatsApp</b><a href={wa('Hi Mulki Surf Brothers!')}>{PHONE_LABEL}</a></div></li>
               <li><SocialIcon kind="call" size={40} /><div><b>Call</b>{PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</div></li>
-              <li><Doodle name="wave" /><div><b>Email</b><a href={`mailto:${EMAIL.value}`}>{EMAIL.value}</a></div></li>
+              <li><span className="mail-badge"><DoodleSvg name="mail" /></span><div><b>Email</b><a href={`mailto:${EMAIL.value}`}>{EMAIL.value}</a></div></li>
               <li><SocialIcon kind="maps" size={40} /><div><b>Address</b>{ADDRESS.join(', ')}<br /><a href={MAPS}>Open in Google Maps</a></div></li>
               <li><SocialIcon kind="instagram" size={40} /><div><b>Instagram</b><a href={INSTAGRAM}>{INSTAGRAM_HANDLE}</a></div></li>
             </ul>
           </div>
-          <div className="reveal">
-            <Wavy as="p" className="label eyebrow">{"Getting here"}</Wavy>
-            <div className="schedule">
-              <div><time>By air</time><div><h3>Mangaluru airport (IXE)</h3><p>About 25 minutes north by road on NH66. Take a prepaid taxi (around ₹800–1,100) or ask us to arrange a pickup.</p></div></div>
-              <div><time>By train</time><div><h3>Mulki or Surathkal station</h3><p>5–15 minutes away. Trains from Goa, Mumbai, Bengaluru and Kerala stop here. Autos wait outside.</p></div></div>
-              <div><time>By bus</time><div><h3>NH66, Mulki bus stand</h3><p>Overnight sleeper buses from Bengaluru and Mumbai drop you at Mulki, about 3 minutes from the river.</p></div></div>
-            </div>
-          </div>
+          <div className="reveal contact-photo"><figure><img src="/img/boat-sunset.jpg" alt="Sunset from a boat on the river" loading="lazy" /><Wavy as="figcaption">see you out here</Wavy></figure></div>
         </div>
       </WaveSection>
+      <section className="section getting-here" aria-labelledby="gh-title">
+        <div className="wrap">
+          <Wavy as="p" className="label eyebrow">getting here</Wavy>
+          <h2 id="gh-title" style={{ fontSize: 'var(--fs-h2)' }}>Three ways to reach the waves</h2>
+          <div className="gh-route">
+            <svg className="gh-line draw" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 20 C150 0 250 40 400 20 S650 0 800 20 S950 40 1000 20" /></svg>
+            {GETTING.map(([mode, icon, time, unit, title, text], k) => (
+              <article className={`gh-card gh-${k}`} key={mode}>
+                <span className="gh-icon"><DoodleSvg name={icon} /></span>
+                <Wavy as="p" className="gh-mode">{mode}</Wavy>
+                <p className="gh-time"><b>{time}</b> {unit}</p>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+            <div className="gh-dest"><span className="gh-icon"><DoodleSvg name="house" /></span><Wavy>you made it</Wavy><small>Surf Brothers, Bappanadu</small></div>
+          </div>
+        </div>
+      </section>
       <Faq items={FAQ} title="Good to know" bg="var(--sb-white)" />
       <BookingBand figure="kayaker" title={<>See you<br />in Mulki.</>} />
     </>
