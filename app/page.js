@@ -5,8 +5,9 @@ import AutoVideo from '@/components/AutoVideo';
 import MulkiMap from '@/components/MulkiMap';
 import HandLine from '@/components/HandLine';
 import WaveAnim from '@/components/WaveAnim';
-import { Kayaker, Shaka } from '@/components/kit/Kit';
-import { PackageCards, ProofStrip, Testimonials, CrewGrid, Faq, BookingBand } from '@/components/Sections';
+import { Shaka } from '@/components/kit/Kit';
+import { WarliKayaker } from '@/components/kit/Warli';
+import { PackageCards, ProofStrip, Testimonials, CrewGrid, Faq, BookingBand, FriezeBand } from '@/components/Sections';
 import { HOME_FAQ, HERO_RIDE, wa } from "@/lib/site";
 
 function Band({ cls, wave, n, icon, label, id, title, lead, price, priceNote, actions, media, flip }) {
@@ -115,7 +116,7 @@ export default function Home() {
         title={<>Paddle into<br />the glow.</>}
         lead="Drift through the mangroves by day. In season, head out after dark when the river lights up with bioluminescence."
         price="Day ₹600 · Night ₹700" priceNote="per person"
-        actions={<><Link className="btn btn-primary" href="/book?type=package&addon=kayak-night">Add a kayak trip</Link><Kayaker tone="dark" size={150} className="band-kayaker" title="" /></>}
+        actions={<><Link className="btn btn-primary" href="/book?type=package&addon=kayak-night">Add a kayak trip</Link><WarliKayaker tone="dark" size={160} className="band-kayaker" title="" /></>}
         media={<img className="wide tilt-l" src="/img/kayak-river.jpg" alt="Guests kayaking on the Shambhavi river" loading="lazy" width="1152" height="746" />} />
 
       <Band cls="band-lime" flip wave="var(--sb-lime)" n={2} icon="sun" label="Life around Mulki" id="b-life"
@@ -146,6 +147,8 @@ export default function Home() {
       </section>
 
       {/* 7 SCATTER */}
+      <FriezeBand />
+
       <section className="section scatter-section" aria-labelledby="sc-title" style={{ paddingTop: '2rem' }}>
         <div className="wrap">
           <p className="label">Freedom, humour, friendship</p>

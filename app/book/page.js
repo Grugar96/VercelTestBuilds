@@ -9,7 +9,7 @@ export default function Book() {
         <p className="label">Mulki Surf Brothers · booking request</p>
         <h1>Plan your stay</h1>
         <p className="muted" style={{ margin: 0 }}>One choice at a time. Nothing is charged here: we confirm availability and the final price with you on WhatsApp.</p>
-        <BookingFlow />
+        <div className="booking-flow"><BookingFlow /></div>
       </div>
     </div>
   );

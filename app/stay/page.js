@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Palm } from '@/components/kit/Kit';
+import { WarliPalm } from '@/components/kit/Warli';
 import { PageHero, WaveSection, BookingBand, Ticks, PackageIncludes } from '@/components/Sections';
 import { ROOMS, PACKAGE_DAYS, PACKAGE_PRICE, MEALS } from '@/lib/site';
 
@@ -41,7 +41,7 @@ export default function Stay() {
             <div style={{ fontSize: '1.15rem' }}><Ticks items={['Respect the ocean.', 'Respect each other.', 'Leave the place better.']} /></div>
             {/* placeholder: check-in/out times and quiet hours carried over from the draft site */}
             <p className="muted">Check-in from 1:00 PM, check-out by 11:00 AM. Quiet hours after 11 PM, because we're up early for the surf.</p>
-            <div className="kit-inline"><Palm size={120} title="" /><span className="hand">Slow down. Stay awhile.</span></div>
+            <div className="kit-inline"><WarliPalm size={120} title="" /><span className="hand">Slow down. Stay awhile.</span></div>
           </div>
           <div className="reveal"><img src="/img/morning-tea.jpg" alt="Morning tea on the beach" style={{ borderRadius: 20, transform: 'rotate(2deg)', aspectRatio: '4/5', objectFit: 'cover', width: '100%', height: 'auto' }} loading="lazy" width="1050" height="1400" /></div>
         </div>

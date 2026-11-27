@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Wave from './Wave';
 import Doodle from './Doodle';
 import WaveAnim from './WaveAnim';
-import { Surfer, Palm, Skater, Kayaker } from './kit/Kit';
+import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
 import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
 
 export function Ticks({ items }) {
@@ -144,10 +144,10 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
         <p className="phone">Call or WhatsApp {PHONES.map(([n, l], i) => <span key={n}>{i > 0 && ' · '}<a href={`tel:+${n}`}>{l}</a></span>)}</p>
         <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off per person on Stay &amp; Surf</p>
       </div>
-      {f === 'palm' ? <Palm tone="dark" size={170} className="band-surfer band-palm" title="" />
-        : f === 'skater' ? <Skater tone="dark" size={170} className="band-surfer" title="" />
-        : f === 'kayaker' ? <Kayaker tone="dark" size={170} className="band-surfer" title="" />
-        : <Surfer tone="dark" variant={f} size={170} className="band-surfer" title="" />}
+      {f === 'palm' ? <WarliPalm tone="dark" size={170} className="band-surfer band-palm" title="" />
+        : f === 'skater' ? <WarliSkater tone="dark" size={180} className="band-surfer" title="" />
+        : f === 'kayaker' ? <WarliKayaker tone="dark" size={180} className="band-surfer" title="" />
+        : <WarliSurfer tone="dark" variant={f} size={180} className="band-surfer" title="" />}
       <WaveAnim back="var(--sb-ocean)" mid="var(--sb-lime)" front="var(--sb-charcoal)" />
     </section>
   );
@@ -159,7 +159,7 @@ export function PageHero({ band, label, lines, lead, img, alt, doodle }) {
       <div className="wrap page-hero-grid">
         <div>
           <div className="band-head"><span className="badge-icon"><Doodle name={doodle} /></span><p className="label" style={{ margin: 0 }}>{label}</p></div>
-          <h1 className="poster">{lines.map((l) => <span key={l}>{l}</span>)}</h1>
+          <h1 className="poster">{lines.map((l) => <span key={l}><i>{l}</i></span>)}</h1>
           <p className="lead">{lead}</p>
         </div>
         <img src={img} alt={alt} width="1050" height="1400" />
@@ -173,6 +173,17 @@ export function WaveSection({ bg, n = 0, children, ...rest }) {
     <section className="section has-wave-top" style={{ background: `var(${bg})` }} {...rest}>
       <Wave color={`var(${bg})`} n={n} />
       <div className="wrap">{children}</div>
+    </section>
+  );
+}
+
+// Painted Warli frieze of everyday Mulki life, framed by zigzag borders like a village wall.
+export function FriezeBand({ edge = 'var(--sb-offwhite)' }) {
+  return (
+    <section className="frieze-band" aria-label="Life at Mulki Surf Brothers, painted Warli style">
+      <Zigzag color={edge} />
+      <div className="frieze-scroll"><WarliFrieze tone="dark" /></div>
+      <Zigzag color={edge} flip />
     </section>
   );
 }

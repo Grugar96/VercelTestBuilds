@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Wave from '@/components/Wave';
-import { Skater } from '@/components/kit/Kit';
+import { WarliSkater } from '@/components/kit/Warli';
 import Doodle from '@/components/Doodle';
 import { PageHero, WaveSection, Ticks, BookingBand } from '@/components/Sections';
 import { wa, SURF_BUNDLES, PRIVATE_SESSION, SURF_INCLUDES, POLICY } from '@/lib/site';
@@ -79,7 +79,7 @@ export default function SurfLessons() {
             <h2 id="sl-extra">More time<br />on the water.</h2>
             <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the river by day or under the stars, or dial in your technique on a surfskate.</p>
             <p className="price-from">Rentals from ₹500/hr · Kayaking ₹600 / ₹700 <small>per person</small></p>
-            <div className="band-actions"><a className="btn btn-primary" href={wa("Hi! I'd like to ask about board rentals / kayaking.")}>Ask on WhatsApp</a><Skater tone="light" size={150} className="band-kayaker" title="" /></div>
+            <div className="band-actions"><a className="btn btn-primary" href={wa("Hi! I'd like to ask about board rentals / kayaking.")}>Ask on WhatsApp</a><WarliSkater tone="light" size={160} className="band-kayaker" title="" /></div>
           </div>
           <div className="band-media reveal"><img className="wide tilt-l" src="/img/sunset-surfers.jpg" alt="Surfers waiting for waves at sunset" loading="lazy" width="1050" height="1400" /></div>
         </div>
