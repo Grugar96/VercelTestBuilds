@@ -1,11 +1,16 @@
-import { Shaka, Surfer, Kayaker, WaveStrip } from '@/components/kit/Kit';
+import { Shaka, Surfer, Kayaker, Palm, Skater, WaveStrip } from '@/components/kit/Kit';
 
 export const metadata = { title: 'Motion kit', robots: { index: false, follow: false } };
 
+const SurferMan = (p) => <Surfer variant="man" {...p} />;
+const SurferWoman = (p) => <Surfer variant="woman" {...p} />;
 const ITEMS = [
-  ['Shaka', 'The hand sign. Wiggles twice per loop with lime motion ticks.', Shaka],
-  ['Surfer', 'Silhouette riding a lime board, bobbing over drifting waves with spray.', Surfer],
-  ['Kayaker', 'Silhouette paddling a lime kayak, bobbing on the water.', Kayaker],
+  ['Shaka', 'Traced from the crew\'s own shaka. Wiggles twice per loop with lime motion ticks.', Shaka],
+  ['Surfer — man', 'Rides a longboard over drifting water with spray. Alternate with the woman.', SurferMan],
+  ['Surfer — woman', 'Same ride, hair in the wind. Alternate with the man.', SurferWoman],
+  ['Coconut tree', 'Fronds sway in the breeze.', Palm],
+  ['Kayaker', 'Paddles left-right, bobbing on the water.', Kayaker],
+  ['Skater', 'Rolls along with speed lines.', Skater],
 ];
 
 export default function KitPage() {
@@ -14,7 +19,7 @@ export default function KitPage() {
       <div className="wrap">
         <p className="label">Brand motion kit</p>
         <h1 style={{ fontSize: 'var(--fs-h2)' }}>Filler animations for reels and the website</h1>
-        <p className="muted">Hand-drawn style, brand colours, seamless loops (figures 4 s, waves 8 s). Light ink on footage or dark bands, dark ink on light backgrounds. Reel-ready transparent videos are in the GitHub repo under <code>brand/motion/</code>.</p>
+        <p className="muted">Solid stamp-style silhouettes with a printed grain, seamless loops (figures 4 s, waves 8 s). Light ink on footage or dark bands, dark ink on light backgrounds. Reel-ready transparent videos are in the GitHub repo under <code>brand/motion/</code>.</p>
         <div className="kit-grid">
           {ITEMS.map(([name, desc, C]) => (
             <article key={name} className="kit-card">

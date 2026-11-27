@@ -169,7 +169,7 @@ export default function Home() {
       <CrewGrid />
       <Testimonials />
       <Faq items={HOME_FAQ} bg="var(--sb-white)" />
-      <BookingBand />
+      <BookingBand surfer="woman" />
     </>
   );
 }

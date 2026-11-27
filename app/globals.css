@@ -602,22 +602,15 @@ p { margin: 0 0 1em; max-width: 68ch; }
 @media (max-width: 900px) { .site-header { --logo: 76px; } .site-header.scrolled { --logo: 56px; } .site-header .brand { margin-top: 6px; } }
 @media (prefers-reduced-motion: reduce) { .site-header .brand { transition: none; } }
 
-/* ---------- Motion kit (components/kit/Kit.js) — figure loops are 4 s, the wave strip 8 s, all seamless ---------- */
+/* ---------- Motion kit (components/kit/Kit.js): stamp silhouettes; figure loops 4 s, wave strip 8 s, all seamless ---------- */
 .kit { overflow: visible; display: block; --ink: #231F20; --lime: #CFDE58; --sea: #3B96B5; }
 .kit-dark { --ink: #F5F3EC; }
-.kit .ink, .kit .line, .kit .limb, .kit .paddle { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
-.kit .ink { stroke-width: 5; } .kit .ink.thin { stroke-width: 3.5; }
-.kit .line { stroke: var(--sea); stroke-width: 4; } .kit .line.thin { stroke-width: 3; stroke: #8FC3D6; }
-.kit-dark .line { stroke: var(--ink); opacity: .85; } .kit-dark .line.thin { opacity: .5; }
-.kit .accent { fill: none; stroke: var(--lime); stroke-width: 5; stroke-linecap: round; }
-.kit .fill, .kit .fill * { fill: var(--ink); }
-.kit .limb { stroke-width: 12; } .kit .limb.torso { stroke-width: 17; } .kit .limb.arm { stroke-width: 9; } .kit .limb.leg { stroke-width: 12; } .kit .paddle { stroke-width: 5; }
-.kit .crest { fill: var(--sea); } .kit-dark .crest { fill: var(--ink); opacity: .22; }
-.kit .crest-line { fill: none; stroke: #F5F3EC; stroke-width: 3; stroke-linecap: round; opacity: .8; } .kit-dark .crest-line { stroke: var(--ink); opacity: .7; }
-.kit-crest { transform-box: view-box; transform-origin: 40px 176px; animation: kitCrest 4s ease-in-out infinite; }
-@keyframes kitCrest { 0%, 100% { transform: rotate(0) scaleY(1); } 50% { transform: rotate(-2deg) scaleY(1.04); } }
-.kit .board { fill: var(--lime); stroke: var(--ink); stroke-width: 3; }
-.kit-spray circle { fill: var(--sea); } .kit-dark .kit-spray circle { fill: var(--ink); }
+.kit .ink-fill, .kit .ink-fill * { fill: var(--ink); }
+.kit .ink-stroke { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+.kit .line { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; opacity: .8; }
+.kit .line.dash { stroke-dasharray: 14 12; opacity: .6; }
+.kit .tick { fill: none; stroke: var(--lime); stroke-width: 5; stroke-linecap: round; }
+.kit-spray circle { fill: var(--ink); }
 
 .kit-shaka .kit-hand { transform-box: view-box; transform-origin: 97px 186px; animation: kitShaka 4s ease-in-out infinite; }
 .kit-shaka .kit-motion { animation: kitTicks 4s ease-in-out infinite; }
@@ -626,16 +619,28 @@ p { margin: 0 0 1em; max-width: 68ch; }
 
 .kit-waves { animation: kitDrift 4s linear infinite; }
 @keyframes kitDrift { from { transform: translateX(0); } to { transform: translateX(-100px); } }
-.kit-rider { transform-box: view-box; transform-origin: 124px 156px; animation: kitRide 4s ease-in-out infinite; }
-@keyframes kitRide { 0%, 100% { transform: translateY(0) rotate(-2deg); } 25% { transform: translateY(-6px) rotate(2deg); } 50% { transform: translateY(-2px) rotate(-3deg); } 75% { transform: translateY(-8px) rotate(1deg); } }
+.kit-rider { transform-box: view-box; transform-origin: 120px 160px; animation: kitRide 4s ease-in-out infinite; }
+@keyframes kitRide { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 25% { transform: translateY(-6px) rotate(1.5deg); } 50% { transform: translateY(-2px) rotate(-2.5deg); } 75% { transform: translateY(-8px) rotate(1deg); } }
 .kit-spray circle { animation: kitSpray 1s ease-out infinite; transform-box: fill-box; transform-origin: center; }
 .kit-spray circle:nth-child(2) { animation-delay: .33s; } .kit-spray circle:nth-child(3) { animation-delay: .66s; }
 @keyframes kitSpray { from { opacity: 1; transform: translate(0, 0) scale(1); } to { opacity: 0; transform: translate(14px, -10px) scale(.4); } }
 
-.kit-boat { transform-box: view-box; transform-origin: 120px 140px; animation: kitBob 2s ease-in-out infinite; }
+.kit-palm .kit-fronds { transform-box: view-box; transform-origin: 100px 64px; animation: kitSway 4s ease-in-out infinite; }
+.kit-palm .kit-trunk { transform-box: view-box; transform-origin: 94px 192px; animation: kitTrunk 4s ease-in-out infinite; }
+@keyframes kitSway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes kitTrunk { 0%, 100% { transform: skewX(-1deg); } 50% { transform: skewX(1deg); } }
+
+.kit-boat { transform-box: view-box; transform-origin: 120px 138px; animation: kitBob 2s ease-in-out infinite; }
 @keyframes kitBob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-5px) rotate(1.5deg); } }
-.kit-paddle { transform-box: view-box; transform-origin: 120px 118px; animation: kitPaddle 2s ease-in-out infinite; }
-@keyframes kitPaddle { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(22deg); } }
+.kit-paddle { transform-box: view-box; transform-origin: 121px 117px; animation: kitPaddle 2s ease-in-out infinite; }
+@keyframes kitPaddle { 0%, 100% { transform: rotate(-30deg); } 50% { transform: rotate(18deg); } }
+
+.kit-skate { transform-box: view-box; transform-origin: 134px 176px; animation: kitSkate 2s ease-in-out infinite; }
+@keyframes kitSkate { 0%, 100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-3px) rotate(-1.5deg); } 75% { transform: translateY(-1px) rotate(1deg); } }
+.kit-ground { animation: kitGround 1s linear infinite; }
+@keyframes kitGround { from { transform: translateX(0); } to { transform: translateX(-26px); } }
+.kit-speed { animation: kitSpeed 1s ease-in-out infinite; }
+@keyframes kitSpeed { 0%, 100% { opacity: .2; transform: translateX(6px); } 50% { opacity: .8; transform: translateX(-6px); } }
 
 .kit-wavestrip { position: relative; width: 100%; aspect-ratio: 1080 / 220; overflow: hidden; }
 .kit-wavestrip svg { position: absolute; left: 0; bottom: 0; width: 200%; max-width: none; height: 100%; }

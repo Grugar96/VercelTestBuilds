@@ -54,7 +54,7 @@ export default function Packages() {
           </div>
         </div>
       </section>
-      <BookingBand title={<>Lock in your<br />surf escape.</>} href="/book?type=package&days=5" btn="Plan your package" />
+      <BookingBand surfer="woman" title={<>Lock in your<br />surf escape.</>} href="/book?type=package&days=5" btn="Plan your package" />
     </>
   );
 }
