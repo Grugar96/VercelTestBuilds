@@ -908,3 +908,12 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .map-river { font-size: 18px; fill: #F5F3EC; }
 .map-north path { fill: #231F20; } .map-north text { font: 600 12px var(--font-display); fill: #231F20; }
 .pin.active text { fill: var(--sb-ocean-deep); }
+
+/* Home hero: big tilted video card that spills over the wave into the next section (like the inner page heroes) */
+@media (min-width: 861px) {
+  .hero { overflow: visible; padding-bottom: clamp(2.5rem, 4vw, 3.5rem); }
+  .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+  .hero-media { width: min(100%, 580px, calc((100svh - var(--header-h)) * .76)); min-width: 0; z-index: 4; }
+  .hero .video-frame { aspect-ratio: 4 / 5; transform: rotate(2deg); margin-bottom: -8.5rem; box-shadow: 0 30px 70px rgba(24,90,114,.35); }
+  .hero + .stat-cards { padding-top: clamp(6rem, 4rem + 4vw, 9rem); }
+}
