@@ -743,24 +743,41 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .voices-bg { position: absolute; inset: -40px; }
 .voices-bg img { width: 100%; height: 100%; object-fit: cover; filter: blur(38px) saturate(.9); opacity: .55; transform: scale(1.1); }
 .voices-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 10%, rgba(225,167,72,.18), transparent 55%), linear-gradient(180deg, rgba(18,62,77,.55), rgba(18,62,77,.85)); }
-.voices-grid { position: relative; display: grid; grid-template-columns: minmax(150px, .8fr) 2.4fr 2.4fr; column-gap: clamp(1.5rem, 4vw, 5rem); row-gap: clamp(2rem, 5vw, 4.5rem); }
-.voices-label { grid-column: 1; grid-row: 1; }
+.voices-grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 2rem); }
+.voices-label { grid-column: 1 / 3; grid-row: 1; align-self: start; position: relative; z-index: 3; }
 .voices-label .hand { color: var(--sb-offwhite); font-size: clamp(1.6rem, 1.3rem + .9vw, 2.1rem); line-height: 1.05; transform: rotate(-3deg); margin: .6rem 0 0; }
 .hand-arrow { width: 110px; height: auto; }
 .hand-arrow path { fill: none; stroke: var(--sb-offwhite); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.voice { margin: 0; max-width: 34rem; }
-.voice blockquote { margin: 0 0 1.1rem; font: 700 clamp(1.35rem, 1.1rem + 1vw, 2.1rem)/1.22 var(--font-body); letter-spacing: -.01em; text-wrap: pretty; }
-.voice figcaption { display: flex; gap: .6rem; align-items: baseline; font-size: .95rem; opacity: .9; }
+.voice-photo { margin: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.3); }
+.voice-photo img { width: 100%; height: 100%; object-fit: cover; }
+.vp1 { grid-column: 3 / 9; grid-row: 1; aspect-ratio: 16 / 10; align-self: start; z-index: 1; }
+.vp2 { grid-column: 11 / 13; grid-row: 2 / 4; aspect-ratio: 3 / 4; align-self: start; margin-top: 2rem; margin-right: calc(-1 * var(--gutter) - 4vw); z-index: 1; }
+.voice { margin: 0; position: relative; z-index: 2; }
+.voice blockquote { margin: 0 0 1.1rem; font: 700 clamp(1.45rem, 1rem + 1.7vw, 2.9rem)/1.15 var(--font-body); letter-spacing: -.015em; text-wrap: pretty; text-shadow: 0 2px 24px rgba(10,40,52,.55); }
+.voice figcaption { display: flex; gap: .6rem; align-items: baseline; font-size: 1.05rem; }
 .voice cite { font-style: normal; font-weight: 500; }
-.voice figcaption span { opacity: .75; }
-.voice .stars { display: block; margin-top: .5rem; letter-spacing: .2em; color: var(--sb-gold); }
-.voice.v1 { grid-column: 3; grid-row: 1; }
-.voice.v2 { grid-column: 2; grid-row: 2; margin-top: -2rem; }
-.voice.v3 { grid-column: 3; grid-row: 3; margin-top: -2rem; }
+.voice figcaption span { opacity: .7; }
+.voice .stars { display: block; margin-top: .4rem; letter-spacing: .2em; font-size: 1.2rem; color: var(--sb-offwhite); }
+.voice.v1 { grid-column: 9 / 13; grid-row: 1; align-self: start; }
+.voice.v2 { grid-column: 3 / 8; grid-row: 2; margin-top: clamp(-9rem, -9vw, -4rem); }
+.voice.v3 { grid-column: 7 / 11; grid-row: 3; margin-top: 2.5rem; }
+@supports (animation-timeline: view()) {
+  .voice-photo img { animation: voicePar linear both; animation-timeline: view(); scale: 1.15; }
+  @keyframes voicePar { from { translate: 0 -6%; } to { translate: 0 6%; } }
+  .vp1 { animation: voiceRise linear both; animation-timeline: view(); animation-range: entry 0% cover 60%; }
+  .vp2 { animation: voiceRise2 linear both; animation-timeline: view(); animation-range: entry 0% cover 80%; }
+  @keyframes voiceRise { from { translate: 0 60px; } to { translate: 0 0; } }
+  @keyframes voiceRise2 { from { translate: 0 120px; } to { translate: 0 -20px; } }
+}
 @media (max-width: 860px) {
-  .voices-grid { grid-template-columns: 1fr; }
-  .voice.v1, .voice.v2, .voice.v3 { grid-column: 1; grid-row: auto; margin-top: 0; }
-  .voice.v2 { justify-self: end; text-align: right; } .voice.v2 figcaption { justify-content: flex-end; }
+  .voices-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 1.5rem; }
+  .voices-label { grid-column: 1 / -1; grid-row: auto; order: 0; }
+  .vp1 { grid-column: 1 / 6; grid-row: auto; order: 1; }
+  .voice.v1, .voice.v2, .voice.v3 { grid-column: 1 / -1; grid-row: auto; margin-top: 0; align-self: auto; }
+  .voice.v1 { order: 2; margin-top: -1.5rem; padding-left: 1rem; }
+  .voice.v2 { order: 3; }
+  .vp2 { grid-column: 3 / -1; grid-row: auto; order: 4; margin: 0 calc(-1 * var(--gutter)) 0 0; aspect-ratio: 4 / 3; }
+  .voice.v3 { order: 5; margin-top: -1rem; padding-left: 1rem; }
 }
 
 /* ---------- Social icons + contact numbers ---------- */

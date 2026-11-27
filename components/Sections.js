@@ -74,6 +74,8 @@ export function Testimonials() {
           <svg className="hand-arrow" viewBox="0 0 130 30" aria-hidden="true"><path d="M3 17c30-4 70-6 118-3M106 4c7 4 12 7 16 10-5 3-10 7-15 12" /></svg>
           <h2 id="rev-title" className="hand">What our surfers<br />are saying</h2>
         </div>
+        <figure className="voice-photo vp1" aria-hidden="true"><img src="/img/sunset-surfers.jpg" alt="" loading="lazy" /></figure>
+        <figure className="voice-photo vp2" aria-hidden="true"><img src="/img/carry-board.jpg" alt="" loading="lazy" /></figure>
         {TESTIMONIALS.map((t, i) => (
           <figure className={`voice v${i + 1}`} key={t.name}>
             <blockquote>“{t.quote}”</blockquote>
