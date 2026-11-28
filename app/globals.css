@@ -1516,3 +1516,16 @@ html:not(.kbd) :focus-visible { outline: none; }
 .fw-tube { stroke: #A9BA3A; stroke-width: 1.5; stroke-linejoin: round; }
 .fw-tube { fill: url(#fw-tube-g); stroke: none; }
 .fw-inner { fill: none; stroke: rgba(245,243,236,.6); stroke-width: 2; stroke-linecap: round; }
+
+/* ---- booking band wave v4: poster-style curl in brand blues ---- */
+.sea-flow { height: clamp(220px, 19vw, 290px); overflow-x: clip; overflow-y: visible; }
+.fw-sea { fill: var(--sb-ocean); }
+.fw-hollow { fill: url(#fw-hollow-g); }
+.fw-streak { fill: none; stroke: #185A72; stroke-opacity: .55; stroke-width: 2.2; stroke-linecap: round; }
+.fw-line { stroke: rgba(245,243,236,.55); stroke-width: 2; }
+.fw-flat { fill: none; stroke: var(--sb-offwhite); stroke-width: 2.6; stroke-linecap: round; opacity: .9; }
+.fw-foam { fill: var(--sb-offwhite); }
+.fw-drop { fill: var(--sb-offwhite); }
+.fw-surfer .w-ride > path.ink-fill:first-child { fill: var(--sb-lime); }
+.fw-surfer .kit { filter: drop-shadow(0 2px 3px rgba(24,90,114,.35)); }
+.booking-band { padding-bottom: clamp(14rem, 10rem + 8vw, 18rem); }
