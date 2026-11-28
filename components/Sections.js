@@ -4,7 +4,7 @@ import Wave from './Wave';
 import Doodle, { DoodleSvg } from './Doodle';
 import WaveAnim from './WaveAnim';
 import AutoScroll from './AutoScroll';
-import RideWave from './RideWave';
+import FlowWave from './FlowWave';
 import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
 import TeamClip from './TeamClip';
 import { SocialLink } from './Social';
@@ -207,7 +207,7 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
         </div>
         <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off your Stay &amp; Surf booking</p>
       </div>
-      <RideWave variant={f === 'man' ? 'man' : 'woman'} />
+      <FlowWave variant={f === 'man' ? 'man' : 'woman'} />
     </section>
   );
 }
