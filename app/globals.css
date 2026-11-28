@@ -1514,3 +1514,5 @@ html:not(.kbd) :focus-visible { outline: none; }
 .fw-surfer .kit { filter: none; }
 .fw-surfer { transform-origin: 50% 84%; }
 .fw-tube { stroke: #A9BA3A; stroke-width: 1.5; stroke-linejoin: round; }
+.fw-tube { fill: url(#fw-tube-g); stroke: none; }
+.fw-inner { fill: none; stroke: rgba(245,243,236,.6); stroke-width: 2; stroke-linecap: round; }

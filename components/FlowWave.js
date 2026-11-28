@@ -35,19 +35,25 @@ function frame(W, H, t, cx) {
   const s0 = cx - 0.25 * L;
   const m = (lime(s0 + 1) - lime(s0 - 1)) / 2, kx = 0.45 * L;
   const c1 = `${(s0 + kx).toFixed(1)} ${(lime(s0) + m * kx).toFixed(1)}`;
-  const outer = `M${s0.toFixed(1)} ${lime(s0).toFixed(1)} C${c1} ${P(1.1, -0.36)} ${P(1.42, 0.22)} C${P(1.55, 0.5)} ${P(1.32, 0.78)} ${P(1.12, 0.62)} C${P(1.0, 0.52)} ${P(1.08, 0.4)} ${P(1.2, 0.46)}`;
-  const inner = `C${P(1.05, 0.3)} ${P(0.55, 0.0)} ${P(0, 0)}`; // underside of the lip, back to the face
-  const lip = `${outer} L${P(1.12, 0.62)} ${inner}Z`;
-  // inside of the tube: under the lip, above the face
-  const tubeFace = pts(lime, cx, cx + 1.3 * L);
-  const tube = `M${P(0, 0)} C${P(0.55, 0.0)} ${P(1.05, 0.3)} ${P(1.25, 0.6)} L${tubeFace.reverse().join(' L')}Z`;
-  const line = `M${pts(lime, 0, s0).join(' L')} ` + outer.slice(outer.indexOf('C')) + ` M${pts(lime, cx + 1.3 * L, W).join(' L')}`;
+  const fx = cx + 1.55 * L, fy = lime(fx);            // where the lip pours back onto the face
+  const F = `${fx.toFixed(1)} ${fy.toFixed(1)}`;
+  const outer = `M${s0.toFixed(1)} ${lime(s0).toFixed(1)} C${c1} ${P(1.12, -0.38)} ${P(1.45, 0.12)} C${P(1.78, 0.36)} ${P(1.74, 0.66)} ${F}`;
+  const under = `C${P(1.42, 0.5)} ${P(1.16, 0.12)} ${P(0.6, 0.02)} C${P(0.35, -0.01)} ${P(0.15, 0)} ${P(0, 0)}`; // underside of the lip
+  const lip = `${outer} ${under}Z`;
+  // inside of the curl: under the lip, above the face
+  const tubeFace = pts(lime, cx, fx);
+  const tube = `M${F} ${under} L${tubeFace.join(' L')}Z`;
+  const innerLine = `M${P(1.3, 0.5)} C${P(1.14, 0.24)} ${P(0.75, 0.12)} ${P(0.3, 0.12)}`;
+  const line = `M${pts(lime, 0, s0).join(' L')} ` + outer.slice(outer.indexOf('C')) + ` M${pts(lime, fx, W).join(' L')}`;
   // surfer in the pocket, upright, board on the face
   const sx = cx + 0.95 * L, sy = lime(sx);
   const slope = Math.atan2(lime(sx + 6) - lime(sx - 6), 12) * 180 / Math.PI;
-  const spray = [[1.5, -0.05, 3.2], [1.62, 0.12, 2.4], [1.38, -0.22, 2.2], [1.7, 0.32, 1.8], [-0.1, -0.38, 2], [0.35, -0.5, 1.6]]
+  const spray = [[1.58, -0.12, 3], [1.72, 0.05, 2.2], [1.4, -0.3, 2], [1.78, 0.42, 2.6], [1.88, 0.5, 1.8], [1.7, 0.62, 2.2], [0.3, -0.48, 1.6]]
     .map(([u, v, r]) => [cx + u * L, top + v * L, r * (H / 200)]);
-  return { back: area(back), lime: area(lime), flow1: `M${pts(flow1).join(' L')}`, flow2: `M${pts(flow2).join(' L')}`, front: area(front), lip, tube, line, sx, sy, slope: Math.max(-8, Math.min(16, slope * 0.45)), size: A * 0.95, spray };
+  const foam = [[-0.06, -0.02, 6], [0.04, -0.05, 5], [0.12, 0, 4.5], [-0.14, 0.02, 4], [0.2, -0.02, 3], [0.06, 0.03, 4.5]]
+    .map(([u, v, r]) => [fx + u * L, fy + v * L, r * (H / 200)]);
+  const curlLine = `M${P(1.36, 0.05)} C${P(1.54, 0.22)} ${P(1.56, 0.44)} ${P(1.47, 0.56)}`;
+  return { back: area(back), lime: area(lime), flow1: `M${pts(flow1).join(' L')}`, flow2: `M${pts(flow2).join(' L')}`, front: area(front), lip, tube, innerLine, line, sx, sy, slope: Math.max(-8, Math.min(16, slope * 0.45)), size: A * 0.85, spray, foam, curlLine };
 }
 
 export default function FlowWave({ variant = 'woman' }) {
@@ -91,9 +97,20 @@ export default function FlowWave({ variant = 'woman' }) {
         <path className="fw-lime" d={f.lime} />
         <path className="fw-flow" d={f.flow1} />
         <path className="fw-flow f2" d={f.flow2} />
+        <defs>
+          <linearGradient id="fw-tube-g" x1="1" y1="0" x2="0.15" y2="1">
+            <stop offset="0" stopColor="#A9BA3B" />
+            <stop offset="0.6" stopColor="#BFD04B" />
+            <stop offset="1" stopColor="#CFDE58" />
+          </linearGradient>
+        </defs>
+        <path className="fw-lime" d={f.tube} />
         <path className="fw-tube" d={f.tube} />
+        <path className="fw-inner" d={f.innerLine} />
         <path className="fw-lime fw-lip" d={f.lip} />
         <path className="fw-line" d={f.line} />
+        <path className="fw-inner" d={f.curlLine} />
+        {f.foam.map(([x, y, r], k) => <circle key={'f' + k} className="fw-drop" cx={x} cy={y} r={r} />)}
         {f.spray.map(([x, y, r], k) => <circle key={k} className="fw-drop" cx={x} cy={y} r={r} />)}
         <path className="fw-front" d={f.front} />
       </svg>
