@@ -38,7 +38,7 @@ export default function Header() {
           <nav className="nav" aria-label="Main">{links}</nav>
           <Link className="btn btn-primary header-cta" href="/book">Book</Link>
           <button ref={menuBtn} className="menu-btn" type="button" aria-label="Open menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M3 7c6-1.5 12 1.5 18 0M3 12h18M3 17c6 1.5 12-1.5 18 0" /></svg>
+            <svg className="menu-waves" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><defs><clipPath id="mw-clip"><rect x="2" y="2" width="20" height="20" rx="2" /></clipPath></defs><g clipPath="url(#mw-clip)"><path className="mw mw0" d="M-9 7 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0" /><path className="mw mw1" d="M-9 12 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0" /><path className="mw mw2" d="M-9 17 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0 q2.25 -1.4 4.5 0 t4.5 0" /></g></svg>
           </button>
         </div>
       </header>

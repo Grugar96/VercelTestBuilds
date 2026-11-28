@@ -23,7 +23,7 @@ export default function SurfLessons() {
           <li className="reveal"><h3>Into the whitewash</h3><p>Your coach helps you into broken waves until you're standing.</p></li>
           <li className="reveal"><h3>Green waves</h3><p>On longer programs you paddle out and learn to read and ride unbroken waves.</p></li>
         </ol>
-        <p className="muted" style={{ marginTop: '1.5rem' }}>Sessions run in the morning, between 8 and 11 AM. Exact start times follow the tide and are confirmed on WhatsApp the evening before.</p>
+        <p className="muted" style={{ marginTop: '1.5rem' }}>Sessions run in the morning, roughly between 8 and 11 AM. Exact times follow the tide, so we confirm them the evening before.</p>
       </WaveSection>
 
       {/* placeholder: safety figures carried over from the draft site */}
@@ -78,9 +78,10 @@ export default function SurfLessons() {
           <div className="reveal">
             <div className="band-head"><span className="badge-icon"><Doodle name="kayak" /></span><Wavy as="p" className="label eyebrow" style={{ margin: 0 }}>{"Beyond the lesson"}</Wavy></div>
             <h2 id="sl-extra">More time<br />on the water.</h2>
-            <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the river by day or under the stars, or work on your turns on a surfskate.</p>
-            <p className="price-from">Rentals from ₹500/hr · Kayaking ₹600 / ₹700 <small>per person</small></p>
-            <div className="band-actions"><a className="btn btn-primary" href={wa("Hi! I'd like to ask about board rentals / kayaking.")}>Ask on WhatsApp</a><WarliSkater tone="light" size={160} className="band-kayaker" title="" /></div>
+            <p className="lead">Already surfing? Rent a soft-top or epoxy board. Want a break from the waves? Paddle the mangroves in the morning, go out on a full-moon night, or in glow season watch the river light up blue with every stroke. Or work on your turns on a surfskate.</p>
+            <p className="price-from">Kayak ₹600 morning · ₹700 night <small>per person · surfskate ₹300/hr</small></p>
+            <p className="glow-note"><span aria-hidden="true">✦</span> Bioluminescence season is usually October to March. Night trips (₹700) go out when the river glows.</p>
+            <div className="band-actions"><a className="btn btn-primary" href="/book?type=stay&addon=kayak-night">Add a night kayak</a><WarliSkater tone="light" size={160} className="band-kayaker" title="" /></div>
           </div>
           <div className="band-media reveal"><img className="wide tilt-l" src="/img/sunset-surfers.jpg" alt="Surfers waiting for waves at sunset" loading="lazy" width="1050" height="1400" /></div>
         </div>

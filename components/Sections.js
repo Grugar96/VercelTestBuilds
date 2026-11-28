@@ -4,6 +4,7 @@ import Wave from './Wave';
 import Doodle, { DoodleSvg } from './Doodle';
 import WaveAnim from './WaveAnim';
 import AutoScroll from './AutoScroll';
+import RideWave from './RideWave';
 import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
 import TeamClip from './TeamClip';
 import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, OWNERS, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
@@ -41,20 +42,26 @@ export function Card({ label, title, price, unit = '/ guest', ticks, href, btn, 
   );
 }
 
+const PKG_FIG = { 3: 'man', 5: 'woman', 7: 'man', 10: 'woman' };
 export function PackageCards() {
   return (
-    <div className="cards-4">
+    <div className="cards-4 pkg-cards">
       {PACKAGES.map((p) => (
-        <article className="card reveal" key={p.days}>
-          {p.tag && <Wavy className="tag">{p.tag}</Wavy>}
-          <p className="label">{p.label}</p>
+        <article className={`card pkg${p.primary ? ' pkg-hot' : ''} reveal`} key={p.days}>
+          {p.tag && <Wavy className="tag board-tag">{p.tag}</Wavy>}
+          <div className="pkg-top">
+            <span className="pkg-num">{p.days}</span>
+            <span className="pkg-unit"><Wavy className="hand">days</Wavy><small>{p.days - 1} nights</small></span>
+            <WarliSurfer tone={p.primary ? 'dark' : 'light'} variant={PKG_FIG[p.days]} size={74} className="pkg-fig" noWater title="" />
+          </div>
+          <svg className="pkg-wave" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6 q12.5 -6 25 0 t25 0 t25 0 t25 0 t25 0 t25 0 t25 0 t25 0" /></svg>
           <h3>{p.title}</h3>
           <div className="price-pair">
             <div><span>Camping</span><b>{p.camp}</b></div>
             <div><span>AC hostel</span><b>{p.ac}</b></div>
           </div>
-          <p className="small muted" style={{ margin: '0 0 1.25rem' }}>Per person · stay + daily surf lessons</p>
-          <Link className={`btn ${p.primary ? 'btn-primary' : 'btn-secondary'}`} href={`/book?type=package&days=${p.days}`}>Choose {p.days} days</Link>
+          <p className="small pkg-note">Per person · stay + daily surf lessons</p>
+          <Link className={`btn ${p.primary ? 'btn-primary' : 'btn-secondary'}`} href={`/book?type=stay&days=${p.days}`}>Choose {p.days} days</Link>
         </article>
       ))}
     </div>
@@ -126,7 +133,7 @@ function CrewCard({ c }) {
     <article className="crew" key={c.name}>
       <div className="crew-clip"><TeamClip clip={c.clip} label={`${c.name} at Mulki Surf Brothers`} /></div>
       <div className="crew-body">
-        <div className="crew-id"><Face c={c} /><div><h3>{c.name}</h3><Wavy as="p" className="role">{c.role + (c.from ? ` · ${c.from}` : '')}</Wavy></div></div>
+        <div className="crew-id"><Face c={c} /><div><h3>{c.name}</h3><p className="role">{c.role}</p></div></div>
         <p>{c.bio}</p>
       </div>
     </article>
@@ -139,7 +146,7 @@ export function Founders() {
       {OWNERS.map((o) => (
         <article className="founder" key={o.name}>
           <span className="founder-photo">{o.photo ? <img src={o.photo} alt={o.name} loading="lazy" /> : <><b>{o.initial}</b><small>photo coming</small></>}</span>
-          <div><Wavy as="p" className="role">founder</Wavy><h3>{o.name}</h3><p>{o.role}</p></div>
+          <div><p className="role">founder</p><h3>{o.name}</h3><p>{o.role}</p></div>
         </article>
       ))}
     </div>
@@ -199,11 +206,7 @@ export function BookingBand({ title = <>Ready for your<br />first wave?</>, href
         </div>
         <p className="small" style={{ marginTop: '1rem', marginBottom: '2rem', opacity: 0.85 }}>Check in Monday to Thursday: ₹{WEEKDAY_OFFER.toLocaleString('en-IN')} off your Stay &amp; Surf booking</p>
       </div>
-      {f === 'palm' ? <WarliPalm tone="dark" size={170} className="band-surfer band-palm" title="" />
-        : f === 'skater' ? <WarliSkater tone="dark" size={180} className="band-surfer" title="" />
-        : f === 'kayaker' ? <WarliKayaker tone="dark" size={180} className="band-surfer" title="" />
-        : <WarliSurfer tone="dark" variant={f} size={180} className="band-surfer" title="" />}
-      <WaveAnim back="var(--sb-ocean)" mid="var(--sb-lime)" front="var(--sb-charcoal)" />
+      <RideWave variant={f === 'man' ? 'man' : 'woman'} />
     </section>
   );
 }
@@ -233,12 +236,12 @@ export function WaveSection({ bg, n = 0, children, ...rest }) {
 }
 
 // Painted Warli frieze of everyday Mulki life, framed by zigzag borders like a village wall.
-export function FriezeBand({ edge = 'var(--sb-offwhite)' }) {
+export function FriezeBand({ edge = 'var(--sb-offwhite)', edgeBottom }) {
   return (
     <section className="frieze-band" aria-label="Life at Mulki Surf Brothers, painted Warli style">
       <Zigzag color={edge} />
       <AutoScroll className="frieze-scroll" speed={0.3}><WarliFrieze tone="dark" /></AutoScroll>
-      <Zigzag color={edge} flip />
+      <Zigzag color={edgeBottom || edge} flip />
     </section>
   );
 }

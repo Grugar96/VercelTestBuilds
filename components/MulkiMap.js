@@ -20,19 +20,21 @@ export default function MulkiMap() {
   const s = MAP_SPOTS[i];
   return (
     <div className="wrap map-grid">
-      <div className="reveal">
+      <div className="map-text reveal">
         <Wavy as="p" className="label eyebrow">where everything is</Wavy>
         <h2 style={{ fontSize: 'var(--fs-h2)' }}>Everything is a short walk, paddle or jeep ride away</h2>
-        <p className="muted">Tap a place to see what happens there.</p>
-        <div className="map-chips" role="group" aria-label="Places">
-          {MAP_SPOTS.map((m, k) => <button key={m.name} type="button" aria-pressed={k === i} onClick={() => setI(k)}>{m.name}</button>)}
-        </div>
-        <div className="map-card" aria-live="polite">
-          <img src={s.img} alt={s.alt} width="120" height="100" />
-          <div><h3>{s.name}</h3><p>{s.text}</p></div>
-        </div>
+        <p className="muted">Tap a place on the map to see what happens there.</p>
+      </div>
+      <div className="map-card map-card-side" aria-live="polite" key={s.name}>
+        <img src={s.img} alt={s.alt} width="120" height="100" />
+        <div><h3>{s.name}</h3><p>{s.text}</p></div>
       </div>
       <div className="map-box warli-map reveal">
+        <div className={`map-card map-pop ${s.y > 260 ? 'above' : 'below'}`} aria-live="polite" key={'pop' + s.name}
+          style={{ '--py': `${(s.y / 520) * 100}%`, '--px': `${(s.x / 400) * 100}%` }}>
+          <img src={s.img} alt="" width="84" height="72" />
+          <div><h3>{s.name}</h3><p>{s.text}</p></div>
+        </div>
         <svg viewBox="0 0 400 520" role="group" aria-label="Map of the Surf Brothers area in Mulki">
           <defs>
             <filter id="map-paint" x="-2%" y="-2%" width="104%" height="104%">
@@ -76,7 +78,6 @@ export default function MulkiMap() {
           <text x="300" y="44" className="map-hand map-river" transform="rotate(-14 300 44)">Shambhavi</text>
           <text x="232" y="430" className="map-hand map-river" transform="rotate(-80 232 430)">backwater</text>
           <text x="156" y="300" className="map-hand map-sand" transform="rotate(-84 156 300)">Sasihitlu beach</text>
-          <text x="104" y="508" className="map-hand map-note">Surf Bros surf spot</text>
           <g className="map-north" transform="translate(370 488)"><path d="M0 -16l6 14h-12z" /><text y="12" textAnchor="middle">N</text></g>
           {MAP_SPOTS.map((m, k) => (
             <g key={m.name} className={`pin${k === i ? ' active' : ''}`} tabIndex={0} role="button" aria-label={m.name} aria-pressed={k === i}

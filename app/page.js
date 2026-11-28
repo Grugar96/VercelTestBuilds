@@ -10,18 +10,21 @@ import HandLine from '@/components/HandLine';
 import WaveAnim from '@/components/WaveAnim';
 import { PackageCards, Testimonials, CrewGrid, Faq, BookingBand, FriezeBand } from '@/components/Sections';
 import BookingBar from '@/components/BookingBar';
+import AutoScroll from '@/components/AutoScroll';
+import { WarliSurfer, WarliPalm, WarliKayaker, WarliSkater } from '@/components/kit/Warli';
 import { HOME_FAQ, wa } from "@/lib/site";
 import { HERO_TRACK } from "@/lib/heroTrack";
 
 
 
 const TILES = [
-  { icon: 'board', label: 'surf lessons', title: 'First wave, sorted', text: 'Two hours: theory on the sand, pop-ups, then gentle whitewash with an instructor beside you.', price: 'From ₹2,000 a session', href: '/surf-lessons', cta: 'How lessons work', video: '/video/beach-drill.mp4', poster: '/img/drill-poster.jpg', alt: 'An instructor teaching the pop-up on the sand' },
-  { icon: 'palm', label: 'stay', title: 'Sleep under the palms', text: 'Tents inside the property or an AC hostel room, with a surf lesson every day built in.', price: 'From ₹8,000 for 3 days', href: '/stay', cta: 'See the rooms', img: '/img/board-hostel.jpg', alt: 'A hand-painted surfboard leaning in the hostel doorway' },
-  { icon: 'sparkle', label: 'only with surf brothers', title: 'Night kayak on a glowing river', text: 'In glow season every paddle stroke lights the Shambhavi up blue. Day trips through the mangroves too.', price: 'Day ₹600 · Night ₹700', href: '/book?type=package&addon=kayak-night', cta: 'Add it to a stay', img: '/img/kayak-river.jpg', alt: 'Guests kayaking on the Shambhavi river' },
-  { icon: 'sun', label: 'life here', title: 'The only meeting is with the ocean', text: 'Volleyball at sunset, surfskate sessions, cycling into town, waterfall days with the crew.', price: 'Surfskate ₹300 an hour', href: '/gallery', cta: 'See more of Mulki', img: '/img/jeep-crew.jpg', alt: 'The crew heading out in the jeep through the coconut groves' },
+  { tone: 'ocean', icon: 'board', label: 'surf lessons', title: 'First wave, sorted', text: 'Two hours: theory on the sand, pop-ups, then gentle whitewash with an instructor right beside you.', price: '₹2,000', unit: 'a session', href: '/surf-lessons', cta: 'How lessons work', video: '/video/beach-drill.mp4', poster: '/img/drill-poster.jpg', alt: 'An instructor teaching the pop-up on the sand', sticker: 'pop up!', figure: 'surfer' },
+  { tone: 'lime', icon: 'palm', label: 'stay', title: 'Sleep under the palms', text: 'A tent inside the property or a bed in the AC hostel, with a surf lesson built into every day.', price: '₹8,000', unit: 'for 3 days', href: '/stay', cta: 'See the rooms', img: '/img/board-hostel.jpg', alt: 'A hand-painted surfboard leaning in the hostel doorway', sticker: 'home base', figure: 'palm' },
+  { tone: 'deep', icon: 'sparkle', label: 'only with surf brothers', title: 'Kayak a glowing river', text: 'Paddle the Shambhavi after dark. In glow season every stroke lights the water blue. Mangrove trips by day too.', price: '₹600', unit: 'morning · ₹700 at night', href: '/book?type=stay&addon=kayak-night', cta: 'Add it to a stay', img: '/img/kayak-river.jpg', alt: 'Guests kayaking on the Shambhavi river', sticker: 'bioluminescence', figure: 'kayaker' },
+  { tone: 'charcoal', icon: 'sun', label: 'life here', title: 'The only meeting is with the ocean', text: 'Volleyball at sunset, surfskate sessions, cycling into town and waterfall days with the crew.', price: '₹300', unit: 'an hour of surfskate', href: '/gallery', cta: 'See more of Mulki', img: '/img/jeep-crew.jpg', alt: 'The crew heading out in the jeep through the coconut groves', sticker: 'golden hour', figure: 'skater' },
 ];
-const HOME_FAQ_SHORT = HOME_FAQ.slice(0, 4);
+const FIG = { surfer: WarliSurfer, palm: WarliPalm, kayaker: WarliKayaker, skater: WarliSkater };
+const HOME_FAQ_SHORT = HOME_FAQ.slice(0, 6);
 
 export default function Home() {
   return (
@@ -34,13 +37,13 @@ export default function Home() {
             <h1 className="poster" id="hero-title"><span><i>Stay.</i></span><span><i>Surf.</i></span><span className="out"><i>Belong.</i></span></h1>
             <p className="lead">Surf lessons in the morning, the river in the afternoon, a bonfire at night. Most people who come here have never stood on a board.</p>
             <BookingBar />
-            <p className="hero-sub"><a className="link-arrow" href="#packages">See all packages</a><Link className="link-arrow" href="/book?type=surf">Just surf lessons</Link></p>
+            <p className="hero-sub"><a className="hero-chip" href="#packages">See all packages <span aria-hidden="true">→</span></a><Link className="hero-chip" href="/surf-lessons">Just surf lessons <span aria-hidden="true">→</span></Link></p>
           </div>
           <div className="hero-media">
             <div className="video-frame">
               <AutoVideo src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="A Surf Brothers student riding a wave in Mulki" track={HERO_TRACK} preload="metadata">
                 <div className="hero-stats">
-                  <div className="stat"><b>8–11 AM</b><span>morning sessions</span></div>
+                  <div className="stat"><b>8–11 AM</b><span>sessions follow the tide</span></div>
                   <div className="stat"><b>SEP–MAY</b><span>surf season</span></div>
                   <div className="stat"><b>₹2,000</b><span>first session</span></div>
                 </div>
@@ -65,22 +68,31 @@ export default function Home() {
             </div>
             <HandLine text="Find your flow" />
           </div>
-          <div className="tiles">
-            {TILES.map((t, i) => (
-              <article className={`tile t${i}`} key={t.title}>
-                <Link href={t.href} className="tile-media" tabIndex={-1} aria-hidden="true">
-                  {t.video ? <AutoVideo src={t.video} poster={t.poster} label={t.alt} /> : <img src={t.img} alt="" loading="lazy" />}
-                </Link>
-                <div className="tile-body">
-                  <div className="tile-head"><span className="tile-icon"><DoodleSvg name={t.icon} /></span><Wavy as="p" className="tile-label">{t.label}</Wavy></div>
-                  <h3>{t.title}</h3>
-                  <p>{t.text}</p>
-                  <p className="tile-price">{t.price}</p>
-                  <Link className="link-arrow" href={t.href}>{t.cta}</Link>
-                </div>
-              </article>
-            ))}
-          </div>
+          <AutoScroll className="tiles" speed={0.4}>
+            {TILES.map((t, i) => {
+              const Fig = FIG[t.figure];
+              const dark = t.tone === 'deep' || t.tone === 'charcoal';
+              return (
+                <article className={`tile tile-${t.tone}`} key={t.title}>
+                  {t.tone === 'charcoal' && <span className="gold-sun" aria-hidden="true" />}
+                  <Link href={t.href} className={`tile-media ${i % 2 ? 'tilt-r' : 'tilt-l'}`} tabIndex={-1} aria-hidden="true">
+                    {t.video ? <AutoVideo src={t.video} poster={t.poster} label={t.alt} /> : <img src={t.img} alt="" loading="lazy" />}
+                    <Wavy className="tile-sticker">{t.sticker}</Wavy>
+                  </Link>
+                  <div className="tile-body">
+                    <div className="tile-head"><span className="badge-icon"><DoodleSvg name={t.icon} className="doodle" /></span><Wavy as="p" className="tile-label">{t.label}</Wavy></div>
+                    <h3>{t.title}</h3>
+                    <p>{t.text}</p>
+                    <div className="tile-foot">
+                      <p className="tile-price">{t.price} <small>{t.unit}</small></p>
+                      <Link className="tile-cta" href={t.href}>{t.cta} <span aria-hidden="true">→</span></Link>
+                    </div>
+                  </div>
+                  <Fig tone={dark ? 'dark' : 'light'} size={120} className="tile-fig" title="" />
+                </article>
+              );
+            })}
+          </AutoScroll>
         </div>
       </section>
 
@@ -106,12 +118,11 @@ export default function Home() {
       </section>
 
       {/* 6 EVERYTHING THAT HAPPENS */}
-      <FriezeBand />
       <Happenings />
 
-      {/* 7 MAP */}
-      <section className="section map-section has-wave-top" id="mulki">
-        <Wave color="var(--sb-white)" n={1} />
+      {/* 7 MAP, opened by the painted frieze */}
+      <FriezeBand edgeBottom="var(--sb-white)" />
+      <section className="section map-section" id="mulki">
         <MulkiMap />
       </section>
 

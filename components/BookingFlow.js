@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Wavy from './Wavy';
 import { DoodleSvg } from './Doodle';
-import { wa, ROOMS, PACKAGE_DAYS, PACKAGE_PRICE, SURF_BUNDLES, PRIVATE_SESSION, MEALS, KAYAK, SKATE_HOUR, WEEKDAY_OFFER, ADVANCE_PER_PERSON, groupSurfPrice } from '@/lib/site';
+import { wa, ROOMS, PACKAGE_DAYS, PACKAGE_PRICE, SURF_BUNDLES, PRIVATE_SESSION, MEALS, KAYAK, SKATE_HOUR, isGlowSeason, WEEKDAY_OFFER, ADVANCE_PER_PERSON, groupSurfPrice } from '@/lib/site';
 
 // Four short steps: what & how long → when & who → make it yours → details & pay.
 // Prices follow Kiran's Nov 2026 sheet. Payment is not wired yet: Harsha's booking engine
@@ -126,6 +126,7 @@ export default function BookingFlow() {
   useEffect(() => { if (start && end && !inSurfSeason(end)) setStart(null); }, [start, end]); // length changed so the trip now runs into monsoon
   const moons = start ? fullMoonsBetween(addDays(start, -1), addDays(end, 1)) : [];
   const moonNight = moons[0];
+  const glow = start ? (isGlowSeason(start) || isGlowSeason(end)) : isGlowSeason();
 
   const lines = useMemo(() => {
     const L = [];
@@ -140,7 +141,7 @@ export default function BookingFlow() {
     }
     if (extras.night) L.push([`Night kayak × ${guests}`, KAYAK.night * guests]);
     if (extras.moon && moonNight) L.push([`Full-moon kayak × ${guests}`, KAYAK.moon * guests]);
-    if (extras.day) L.push([`Day kayak × ${guests}`, KAYAK.day * guests]);
+    if (extras.day) L.push([`Morning kayak × ${guests}`, KAYAK.day * guests]);
     if (extras.skate) L.push([`Surfskate · ${skateHours} hr × ${guests}`, SKATE_HOUR * skateHours * guests]);
     return L;
   }, [type, room, days, guests, meals, start, surfMode, surfDays, sessions, extras, skateHours, moonNight]);
@@ -291,14 +292,14 @@ export default function BookingFlow() {
               <ul className="bk-extras">
                 <li className={`featured${extras.night ? ' on' : ''}`}>
                   <span className="bk-x-icon"><DoodleSvg name="sparkle" /></span>
-                  <div><b>Night kayak <Wavy className="bk-only">only with Surf Brothers</Wavy></b><p>Paddle the Shambhavi after dark. In glow season the water lights up blue with every stroke.</p></div>
+                  <div><b>Night kayak <Wavy className="bk-only">only with Surf Brothers</Wavy></b>{glow && <span className="bk-glow">✦ glow season: good chance of bioluminescence</span>}<p>Paddle the Shambhavi after dark. {glow ? 'It’s bioluminescence season: on dark nights every stroke can light the water blue.' : 'Bioluminescence season is usually October to March.'} Timing follows the tide.</p></div>
                   <span className="bk-x-price">{inr(KAYAK.night)}<small>/person</small></span>
                   <button type="button" className="bk-toggle" aria-pressed={extras.night} onClick={() => toggle('night')}><span className="sr-only">Add night kayak</span></button>
                 </li>
                 {moonNight && (
                   <li className={extras.moon ? 'on' : ''}>
                     <span className="bk-x-icon"><DoodleSvg name="sun" /></span>
-                    <div><b>Full-moon kayak</b><p>Full moon on {fmt(moonNight)}. We go out that night or the nights either side, depending on cloud.</p></div>
+                    <div><b>Full-moon kayak</b><p>Full moon on {fmt(moonNight)}. We go out that night or the nights either side, depending on cloud. Same price as a night trip.</p></div>
                     <span className="bk-x-price">{inr(KAYAK.moon)}<small>/person</small></span>
                     <button type="button" className="bk-toggle" aria-pressed={extras.moon} onClick={() => toggle('moon')}><span className="sr-only">Add full-moon kayak</span></button>
                   </li>
@@ -311,9 +312,9 @@ export default function BookingFlow() {
                 </li>
                 <li className={extras.day ? 'on' : ''}>
                   <span className="bk-x-icon"><DoodleSvg name="kayak" /></span>
-                  <div><b>Day kayak</b><p>Through the mangroves on the river. Timing follows the tide.</p></div>
+                  <div><b>Morning kayak</b><p>Through the mangroves on the river. Timing follows the tide.</p></div>
                   <span className="bk-x-price">{inr(KAYAK.day)}<small>/person</small></span>
-                  <button type="button" className="bk-toggle" aria-pressed={extras.day} onClick={() => toggle('day')}><span className="sr-only">Add day kayak</span></button>
+                  <button type="button" className="bk-toggle" aria-pressed={extras.day} onClick={() => toggle('day')}><span className="sr-only">Add morning kayak</span></button>
                 </li>
               </ul>
             </section>

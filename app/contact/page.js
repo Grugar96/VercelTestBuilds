@@ -2,15 +2,14 @@ import Wavy from '@/components/Wavy';
 import Doodle, { DoodleSvg } from '@/components/Doodle';
 import { SocialIcon } from '@/components/Social';
 import { PageHero, WaveSection, Faq, BookingBand } from '@/components/Sections';
-import { ADDRESS, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, PHONES, PHONE_LABEL, wa } from '@/lib/site';
+import { HOME_FAQ, ADDRESS, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, PHONES, PHONE_LABEL, wa } from '@/lib/site';
 
 export const metadata = { title: 'Contact', description: 'How to reach Mulki Surf Brothers in Mulki, Karnataka: WhatsApp, phone, email, and getting here by train, bus or plane.' };
 
 const FAQ = [
+  ...HOME_FAQ,
   ['What are the check-in and check-out times?', 'Check-in from 1:00 PM, check-out by 11:00 AM. Arriving early? Tell us and we’ll keep your bags safe.'],
   ['Can I work remotely from here?', 'Yes. There’s high-speed fiber Wi-Fi across the hostel and riverside deck, and afternoons are quiet once the morning session is done.'],
-  ['When is the surf season?', 'September to May. June to August is monsoon, when the sea is too rough for lessons.'],
-  ['How do I pay?', 'Book online on the Book page. Surf Only needs full payment to confirm (no refund after booking). Stay & Surf needs a \u20b92,000 advance per person (non-refundable), and the rest is paid at check-in.'],
   ['Can you arrange an airport or station pickup?', 'Yes, on request. Tell us your arrival time and we’ll arrange a cab from Mangaluru airport or the station.'],
 ];
 

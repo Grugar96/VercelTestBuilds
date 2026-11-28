@@ -55,13 +55,13 @@ function Frame({ kind, tone, size, ratio = 200 / 240, vb = '0 0 240 200', classN
 }
 
 // ---------------- Surfer (man / woman — alternate) ----------------
-export function WarliSurfer({ tone = 'light', variant = 'man', size = 240, className, title }) {
+export function WarliSurfer({ tone = 'light', variant = 'man', size = 240, className, title, noWater = false }) {
   const woman = variant === 'woman';
   const label = title === undefined ? `${woman ? 'Woman' : 'Man'} surfing, Warli style` : title;
   return (
     <Frame kind={`surf-${variant}`} tone={tone} size={size} className={className} title={label}>
-      <path className="line" d={water(184, 20, 220, 4)} />
-      <path className="line" d={water(194, 50, 190, 3)} style={{ opacity: 0.5 }} />
+      {!noWater && <path className="line" d={water(184, 20, 220, 4)} />}
+      {!noWater && <path className="line" d={water(194, 50, 190, 3)} style={{ opacity: 0.5 }} />}
       <g className="w-ride">
         <path className="ink-fill" d="M24 162 C64 155 168 155 216 163 C206 171 64 172 24 162Z" />
         <path className="ink-fill" d="M48 166 L42 176 L58 167Z" />
@@ -176,10 +176,10 @@ export function WarliCircle({ tone = 'light', size = 240, className, title = 'Pe
 
 // ---------------- Frieze: a row of everyday Mulki moments, like a painted wall ----------------
 function Vignette({ x, children }) { return <g transform={`translate(${x} 0)`} className="w-vig">{children}</g>; }
-export function WarliFrieze({ tone = 'dark', className = '', title = 'Painted frieze of Mulki life: carrying boards, surfing, chai, cycling, music, kayaking' }) {
+export function WarliFrieze({ tone = 'dark', className = '', title = 'Painted frieze of Mulki life: carrying boards, chai, cycling, music, kayaking, the Surf Brothers jeep' }) {
   const id = `wp-frieze-${tone}`;
   return (
-    <svg className={`kit warli kit-${tone} warli-frieze ${className}`} viewBox="0 0 1180 170" preserveAspectRatio="xMidYMid meet" {...a11y(title)}>
+    <svg className={`kit warli kit-${tone} warli-frieze ${className}`} viewBox="0 0 1410 170" preserveAspectRatio="xMidYMid meet" {...a11y(title)}>
       <defs><Paint id={id} /></defs>
       <g filter={`url(#${id})`}>
         {/* 1. woman carrying a board on her head */}
@@ -236,8 +236,26 @@ export function WarliFrieze({ tone = 'dark', className = '', title = 'Painted fr
           <path className="ink-fill" d="M26 90 C30 83 38 83 42 90 C38 97 30 97 26 90Z M180 90 C184 83 192 83 196 90 C192 97 184 97 180 90Z" />
           <path className="line" d={water(136, 20, 210, 4)} />
         </Vignette>
-        {/* 7. shaka wave goodbye */}
-        <Vignette x={1070}>
+        {/* 7. the Surf Brothers jeep, board on the roll bar */}
+        <Vignette x={1060}>
+          <Person x={118} y={92} s={0.78}
+            arms={[[[10, 4], [24, 2]], [[12, 6], [26, 4]]]}
+            legs={[[], []]} />
+          <path className="ink-fill" d="M26 44 C40 35 124 33 162 41 C124 48 40 50 26 44Z" />
+          <path className="ink-stroke" strokeWidth="3.4" d="M42 102 L46 52 L104 52 L108 102 M134 100 L146 56" />
+          <path className="ink-fill" d="M18 100 L132 100 L138 94 L198 98 L206 108 L206 136 L18 136 Z" />
+          <circle className="knock-fill" cx="58" cy="138" r="23" />
+          <circle className="knock-fill" cx="166" cy="138" r="23" />
+          <circle className="ink-stroke" strokeWidth="7" cx="58" cy="138" r="15" />
+          <circle className="ink-stroke" strokeWidth="7" cx="166" cy="138" r="15" />
+          <circle className="ink-fill" cx="58" cy="138" r="4.5" />
+          <circle className="ink-fill" cx="166" cy="138" r="4.5" />
+          <path className="knock" strokeWidth="3" d="M152 108 L190 108 M152 116 L190 116 M152 124 L190 124" />
+          <circle className="knock" strokeWidth="3" cx="198" cy="112" r="4" />
+          <path className="ink-stroke" strokeWidth="3" d="M206 118 L214 118" />
+        </Vignette>
+        {/* 8. shaka wave goodbye */}
+        <Vignette x={1300}>
           <Person x={42} y={108} s={1}
             arms={[[[-12, 12], [-14, 28]], [[12, -10], [16, -28]]]}
             legs={[[[-6, 18], [-10, 34]], [[6, 18], [10, 34]]]} />

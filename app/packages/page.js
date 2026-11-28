@@ -12,7 +12,7 @@ const DAY = [
   ['After surf', 'Ice bath recovery', 'Cold plunge, then breakfast from the open kitchen or the meal plan.', 'snow', null],
   ['Afternoon', 'Slow time', 'Cycling, hammocks, work on the Wi-Fi, or a paddle on the river.', 'cycle', '/img/kayak-river.jpg'],
   ['Sunset', 'Beach evenings', 'Volleyball, football and the sun going down over the Arabian Sea.', 'sun', '/img/sunset-board.jpg'],
-  ['Night', 'Bonfire & music', 'Karaoke, movie nights and, in season, a night kayak on the glowing river.', 'fire', '/img/night-volley.jpg'],
+  ['Night', 'Bonfire & music', 'Karaoke, movie nights and, from October to March, a night kayak on the glowing river.', 'fire', '/img/night-volley.jpg'],
 ];
 
 function DayMedia({ src, alt, icon }) {
