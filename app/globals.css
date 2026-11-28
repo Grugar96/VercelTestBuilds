@@ -1529,3 +1529,16 @@ html:not(.kbd) :focus-visible { outline: none; }
 .fw-surfer .w-ride > path.ink-fill:first-child { fill: var(--sb-lime); }
 .fw-surfer .kit { filter: drop-shadow(0 2px 3px rgba(24,90,114,.35)); }
 .booking-band { padding-bottom: clamp(14rem, 10rem + 8vw, 18rem); }
+
+.board-tag, .card .tag, .bk-pick { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%2046%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M26%2031%20L31%2043%20L39%2032Z%22%20fill%3D%22%23231F20%22/%3E%3Cpath%20d%3D%22M9%2012.5%20L9%2028.5%20C40%2035%20120%2036%20168%2031%20C190%2029%20198%2023%20198%2020.5%20C198%2018%20190%2012%20168%2010%20C120%205%2040%206%209%2012.5Z%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23231F20%22%20stroke-width%3D%221.6%22%20vector-effect%3D%22non-scaling-stroke%22/%3E%3Cpath%20d%3D%22M176%2011.5%20C181%2015%20181%2026%20176%2029.5%22%20fill%3D%22none%22%20stroke%3D%22%231F6F8B%22%20stroke-width%3D%223%22%20vector-effect%3D%22non-scaling-stroke%22/%3E%3C/svg%3E") !important; }
+
+/* ---- map: show it's tappable ---- */
+.pin .hit { fill: transparent; }
+.pin .ring { fill: none; stroke: var(--sb-lime); stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: pinRing 2.7s ease-out infinite; pointer-events: none; }
+@keyframes pinRing { 0% { transform: scale(1); opacity: .95; } 70%, 100% { transform: scale(2.1); opacity: 0; } }
+.map-hint { pointer-events: none; }
+.map-hint .hand path { fill: var(--sb-offwhite); stroke: var(--sb-charcoal); stroke-width: 2; stroke-linejoin: round; }
+.map-hint .hand { animation: handTap 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 30% 10%; }
+@keyframes handTap { 0%, 100% { transform: translate(0, 0) scale(1); } 40% { transform: translate(-5px, -7px) scale(1.04); } 55% { transform: translate(-2px, -2px) scale(.94); } }
+.map-hint .hint-text { font-size: 19px; fill: var(--sb-charcoal); paint-order: stroke; stroke: var(--sb-offwhite); stroke-width: 4px; }
+@media (prefers-reduced-motion: reduce) { .pin .ring, .map-hint .hand { animation: none; } .pin .ring { opacity: .6; transform: scale(1.4); } }

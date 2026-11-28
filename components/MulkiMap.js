@@ -17,6 +17,8 @@ function ripples(d, n, x0, y0, dx, dy) {
 
 export default function MulkiMap() {
   const [i, setI] = useState(null); // nothing open until someone taps a pin
+  const [touched, setTouched] = useState(false); // hide the 'tap me' hints after the first tap
+  const pick = (k) => { setI(k); setTouched(true); };
   const box = useRef(null);
   useEffect(() => {
     if (i === null) return;
@@ -98,12 +100,22 @@ export default function MulkiMap() {
           <g className="map-north" transform="translate(370 488)"><path d="M0 -16l6 14h-12z" /><text y="12" textAnchor="middle">N</text></g>
           {MAP_SPOTS.map((m, k) => (
             <g key={m.name} className={`pin${k === i ? ' active' : ''}`} tabIndex={0} role="button" aria-label={m.name} aria-pressed={k === i}
-              onClick={() => setI(k)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setI(k); } }}>
+              onClick={() => pick(k)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(k); } }}>
+              <circle className="hit" cx={m.x} cy={m.y} r="28" />
+              {!touched && <circle className="ring" cx={m.x} cy={m.y} r="17" style={{ animationDelay: `${k * 0.45}s` }} />}
               <circle className="bg" cx={m.x} cy={m.y} r="17" />
               <g transform={`translate(${m.x - 12} ${m.y - 12}) scale(.5)`}>{DOODLE_PATHS[m.icon]}</g>
               <text x={m.lx} y={m.ly} textAnchor={m.anchor || 'start'}>{m.name}</text>
             </g>
           ))}
+          {!touched && (() => { const m = MAP_SPOTS[1]; return (
+            <g className="map-hint" transform={`translate(${m.x + 8} ${m.y + 10})`} aria-hidden="true">
+              <g className="hand">
+                <path d="M6 2c2.2 0 3.5 1.6 3.5 3.6v9.2l1.5-.9c1.7-1 3.7-.3 4.4 1.4l.2.5 1.6-.7c1.6-.7 3.4 0 4.1 1.6l.3.7 1.2-.4c1.7-.5 3.4.5 3.8 2.2.8 3.7.5 7.7-1.3 11L23 36c-1.3 2.4-3.8 3.9-6.5 3.9h-3.6c-2.6 0-5-1.3-6.4-3.5L1.4 28.9c-1-1.5-.6-3.5.9-4.5 1.3-.9 3.1-.7 4.2.4l-4.1-1V5.6C2.4 3.6 3.8 2 6 2z" />
+              </g>
+              <text x="34" y="44" className="map-hand hint-text" transform="rotate(-8 34 44)">tap me</text>
+            </g>
+          ); })()}
         </svg>
       </div>
     </div>
