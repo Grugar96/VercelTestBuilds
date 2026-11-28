@@ -1490,3 +1490,7 @@ html:not(.kbd) :focus-visible { outline: none; }
 .voice figcaption span { opacity: .95; }
 .voice .stars { font-size: 1.55rem; }
 .tile p.tile-label { font: 600 1.6rem/1 var(--font-hand); }
+/* rider's wave: same lime as the water it rises from, so it reads as one body of water */
+.rw-travel .rw-crest-body { fill: var(--sb-lime); }
+.rw-travel .rw-foam { stroke: var(--sb-offwhite); }
+.rw-travel .rw-surfer .kit { filter: drop-shadow(0 1px 1.5px rgba(24,90,114,.55)); }
