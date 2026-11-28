@@ -1505,3 +1505,12 @@ html:not(.kbd) :focus-visible { outline: none; }
 .fw-surfer { position: absolute; left: 0; top: 0; transform-origin: 50% 86%; will-change: transform; }
 .fw-surfer .kit { width: 100%; height: 100%; display: block; filter: drop-shadow(0 1px 1.5px rgba(24,90,114,.55)); }
 .fw-lip { stroke: var(--sb-lime); stroke-width: 2; stroke-linejoin: round; }
+.sea-flow { height: clamp(200px, 17vw, 260px); }
+.booking-band { padding-bottom: clamp(11rem, 8rem + 8vw, 15rem); }
+.fw-tube { fill: #A9BA3A; }
+.fw-flow { fill: none; stroke: rgba(245,243,236,.55); stroke-width: 2; stroke-linecap: round; }
+.fw-flow.f2 { stroke: rgba(245,243,236,.35); }
+.fw-drop { fill: var(--sb-offwhite); }
+.fw-surfer .kit { filter: none; }
+.fw-surfer { transform-origin: 50% 84%; }
+.fw-tube { stroke: #A9BA3A; stroke-width: 1.5; stroke-linejoin: round; }
