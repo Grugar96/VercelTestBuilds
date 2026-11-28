@@ -1,3 +1,4 @@
+import { SocialLink } from '@/components/Social';
 import Wavy from '@/components/Wavy';
 import { PageHero, WaveSection, PackageCards, PackageIncludes, BookingBand } from '@/components/Sections';
 import { PACKAGE_DAYS, PACKAGE_PRICE, MEALS, POLICY, wa } from '@/lib/site';
@@ -44,7 +45,7 @@ export default function Packages() {
             </div>
             <p className="label" style={{ marginTop: '1.75rem' }}>Booking information</p>
             <ul className="policy">{POLICY.package.map((x) => <li key={x}>{x}</li>)}<li>{POLICY.general}</li></ul>
-            <p className="small muted" style={{ marginTop: '1rem' }}>Groups and longer stays: <a href={wa("Hi! I'd like a custom package for a group / long stay.")}>message us</a>.</p>
+            <p className="small muted" style={{ marginTop: '1rem' }}>Groups and longer stays: <SocialLink kind="whatsapp" href={wa("Hi! I'd like a custom package for a group / long stay.")}>message us on WhatsApp</SocialLink></p>
           </div>
         </div>
         <PackageIncludes />

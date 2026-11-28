@@ -2,7 +2,7 @@
 import Wavy from './Wavy';
 import { useEffect, useRef, useState } from 'react';
 import { DoodleSvg } from './Doodle';
-import { WarliSurfer } from './kit/Warli';
+import { Rider, LineWave } from './RideWave';
 import { PROOF } from '@/lib/site';
 
 // Dawn-Patrol-style number cards. Digits roll like an odometer; on the video card the ring fills once
@@ -18,17 +18,38 @@ function useInView(ref, threshold = 0.45) {
 }
 
 // Odometer: each digit is a 0–9 column that slides to its value. Non-digits render as-is.
-export function Roll({ value, run = true, stagger = 90, className = '' }) {
+// `forward` columns always roll upwards (9 → 0 carries on to the next 0 instead of spinning back).
+function ForwardCol({ d }) {
+  const [pos, setPos] = useState(d);
+  const [snap, setSnap] = useState(false);
+  const prev = useRef(d);
+  useEffect(() => {
+    if (d === prev.current % 10) return;
+    setSnap(false);
+    setPos((p) => p + ((d - (p % 10) + 10) % 10));
+    prev.current = d;
+  }, [d]);
+  const onEnd = () => { if (pos >= 10) { setSnap(true); setPos(pos % 10); } };
+  return (
+    <span className="roll-col" aria-hidden="true">
+      <span className={`roll-strip${snap ? ' snap' : ''}`} style={{ transform: `translateY(-${pos * 5}%)` }} onTransitionEnd={onEnd}>
+        {'01234567890123456789'.split('').map((x, k) => <span key={k}>{x}</span>)}
+      </span>
+    </span>
+  );
+}
+
+export function Roll({ value, run = true, stagger = 90, forward = false, className = '' }) {
   const chars = String(value).split('');
   return (
     <b className={`roll ${className}`} aria-label={String(value)}>
-      {chars.map((ch, i) => /\d/.test(ch) ? (
+      {chars.map((ch, i) => /\d/.test(ch) ? (forward ? <ForwardCol key={i} d={Number(ch)} /> : (
         <span className="roll-col" key={i} aria-hidden="true">
           <span className="roll-strip" style={{ transform: `translateY(-${run ? Number(ch) * 10 : 0}%)`, transitionDelay: `${i * stagger}ms` }}>
             {'0123456789'.split('').map((d) => <span key={d}>{d}</span>)}
           </span>
         </span>
-      ) : <span className="roll-ch" key={i} aria-hidden="true">{ch}</span>)}
+      )) : <span className="roll-ch" key={i} aria-hidden="true">{ch}</span>)}
     </b>
   );
 }
@@ -44,7 +65,7 @@ function Clip({ src, poster, label }) {
   return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-label={label} />;
 }
 
-const START = 988, END = 1000, RIDE = 1600;
+const START = 988, END = 1000, RIDE = 2200;
 
 function Card({ className, children }) {
   const ref = useRef(null);
@@ -68,11 +89,11 @@ function CountCard({ label }) {
       <Clip src="/video/hero-surf.mp4" poster="/img/hero-poster.jpg" label="Students riding waves in Mulki" />
       <div className="sc-over">
         <b className="sc-num" aria-label={`${END}+ ${label}`}>
-          <Roll value={n} stagger={0} />{done && <span className="roll-ch" aria-hidden="true">+</span>}
+          <Roll value={n} stagger={0} forward />{done && <span className="roll-ch" aria-hidden="true">+</span>}
         </b>
         <div className="sc-ring" aria-hidden="true">
           <svg viewBox="0 0 100 100"><circle className="sc-track" cx="50" cy="50" r="46" /><circle key={n} className="sc-fill" cx="50" cy="50" r="46" pathLength="100" /></svg>
-          <div className="sc-rider"><WarliSurfer tone="dark" variant="woman" size={120} noWater title="" /></div>
+          <div className="sc-ride"><LineWave base={80} amp={5} len={300} /><Rider className="sc-travel" /></div>
         </div>
         <span>{label}</span>
       </div>
@@ -85,7 +106,7 @@ export default function StatCards() {
   return (
     <section className="stat-cards" aria-label="Surf Brothers in numbers">
       <div className="wrap stat-grid">
-        <Card className="sc-warm">{(on) => (<>
+        <Card className="sc-ocean">{(on) => (<>
           <DoodleSvg name="wave" className="doodle sc-icon" />
           <Roll value={rating.value} run={on} /><span>{rating.label}</span>
         </>)}</Card>
@@ -93,7 +114,7 @@ export default function StatCards() {
           <Clip src="/video/beach-drill.mp4" poster="/img/drill-poster.jpg" label="Pop-up drills on the sand" />
           <Wavy className="sc-tag hand">pop-up drills</Wavy>
         </>)}</Card>
-        <Card className="sc-light">{(on) => (<>
+        <Card className="sc-lime2">{(on) => (<>
           <DoodleSvg name="group" className="doodle sc-icon" />
           <Roll value={ratio.value} run={on} /><span>Max students per ISA-certified coach</span>
         </>)}</Card>

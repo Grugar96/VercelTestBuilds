@@ -45,7 +45,7 @@ export default function Header() {
       <div className={`mobile-menu${open ? ' open' : ''}`} id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu"
         onKeyDown={(e) => { if (e.key === 'Escape') { setOpen(false); menuBtn.current?.focus(); } }}>
         <button ref={closeBtn} className="close" type="button" aria-label="Close menu" onClick={() => { setOpen(false); menuBtn.current?.focus(); }}>×</button>
-        <nav aria-label="Mobile">{links}<Link href="/">Home</Link></nav>
+        <nav aria-label="Mobile"><Link href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</Link>{links}</nav>
         <Link className="btn btn-primary" href="/book">Plan your stay</Link>
       </div>
     </>

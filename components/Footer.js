@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Wave from './Wave';
 import { Shaka } from './kit/Kit';
-import { SocialIcon, SocialRow } from './Social';
+import { SocialIcon, SocialRow, SocialLink } from './Social';
 import { NAV, ADDRESS, PHONES, PHONE_LABEL, EMAIL, INSTAGRAM, INSTAGRAM_HANDLE, MAPS, TAGLINE, wa } from '@/lib/site';
 
 export default function Footer() {
@@ -18,16 +18,16 @@ export default function Footer() {
             </div>
             <div>
               <h4>Visit</h4>
-              <ul className="small"><li>{ADDRESS.map((l, i) => <span key={l}>{l}{i < ADDRESS.length - 1 && <br />}</span>)}</li><li><a href={MAPS}>Open in Google Maps</a></li></ul>
+              <ul className="small"><li>{ADDRESS.map((l, i) => <span key={l}>{l}{i < ADDRESS.length - 1 && <br />}</span>)}</li><li><SocialLink kind="maps" href={MAPS}>Open in Google Maps</SocialLink></li></ul>
             </div>
             <div>
               <h4>Talk to us</h4>
               <ul className="small">
-                <li><a href={wa('Hi Mulki Surf Brothers!')}>WhatsApp {PHONE_LABEL}</a></li>
-                {PHONES.map(([n, l]) => <li key={n}><a href={`tel:+${n}`}>Call {l}</a></li>)}
+                <li><SocialLink kind="whatsapp" href={wa('Hi Mulki Surf Brothers!')}>WhatsApp {PHONE_LABEL}</SocialLink></li>
+                {PHONES.map(([n, l]) => <li key={n}><SocialLink kind="call" href={`tel:+${n}`}>Call {l}</SocialLink></li>)}
                 {/* placeholder: confirm this inbox exists */}
-                <li><a href={`mailto:${EMAIL.value}`}>{EMAIL.value}</a></li>
-                <li><a href={INSTAGRAM}>Instagram {INSTAGRAM_HANDLE}</a></li>
+                <li><SocialLink kind="email" href={`mailto:${EMAIL.value}`}>{EMAIL.value}</SocialLink></li>
+                <li><SocialLink kind="instagram" href={INSTAGRAM}>{INSTAGRAM_HANDLE}</SocialLink></li>
               </ul>
             </div>
             <div>

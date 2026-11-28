@@ -7,6 +7,7 @@ export const SOCIAL = {
   instagram: { label: 'Instagram', bg: '#D6407A', spot: '#E1A748' },
   call: { label: 'Call', bg: '#CFDE58', ink: '#231F20' },
   maps: { label: 'Google Maps', bg: '#D4533F' },
+  email: { label: 'Email', bg: '#1F6F8B' },
 };
 
 const GLYPH = {
@@ -25,6 +26,12 @@ const GLYPH = {
   ),
   call: (
     <path className="g-fill" d="M15.2 11.6c.9-.9 2.3-.8 3 .2l2.9 4.1c.6.8.5 1.9-.2 2.6l-1.7 1.7c1.5 3.3 4.2 6 7.5 7.5l1.7-1.7c.7-.7 1.8-.8 2.6-.2l4.1 2.9c1 .7 1.1 2.1.2 3l-1.9 1.9c-1.5 1.5-3.8 2-5.8 1.2-7.1-2.8-12.6-8.3-15.4-15.4-.8-2-.3-4.3 1.2-5.8Z" />
+  ),
+  email: (
+    <>
+      <rect className="g-stroke" x="11" y="15" width="26" height="18" rx="3" />
+      <path className="g-stroke" d="M12.5 17l11.5 8.5 11.5-8.5" />
+    </>
   ),
   maps: (
     <>
@@ -86,4 +93,9 @@ export function SocialRow({ size = 44, className = '' }) {
       ))}
     </div>
   );
+}
+
+// Inline text link with its platform icon in front. Use for any WhatsApp / Instagram / email / call / maps link in body text.
+export function SocialLink({ kind, href, children, size = 22, className = '' }) {
+  return <a className={`social-link ${className}`} href={href}><SocialIcon kind={kind} size={size} /><span>{children}</span></a>;
 }

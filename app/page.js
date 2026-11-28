@@ -24,7 +24,7 @@ const TILES = [
   { tone: 'charcoal', icon: 'sun', label: 'life here', title: 'The only meeting is with the ocean', text: 'Volleyball at sunset, surfskate sessions, cycling into town and waterfall days with the crew.', price: '₹300', unit: 'an hour of surfskate', href: '/gallery', cta: 'See more of Mulki', img: '/img/jeep-crew.jpg', alt: 'The crew heading out in the jeep through the coconut groves', sticker: 'golden hour', figure: 'skater' },
 ];
 const FIG = { surfer: WarliSurfer, palm: WarliPalm, kayaker: WarliKayaker, skater: WarliSkater };
-const HOME_FAQ_SHORT = HOME_FAQ.slice(0, 6);
+const HOME_FAQ_SHORT = [...HOME_FAQ.slice(0, 5), HOME_FAQ.find(([q]) => q.startsWith('What is your refund'))];
 
 export default function Home() {
   return (
@@ -80,7 +80,7 @@ export default function Home() {
                     <Wavy className="tile-sticker">{t.sticker}</Wavy>
                   </Link>
                   <div className="tile-body">
-                    <div className="tile-head"><span className="badge-icon"><DoodleSvg name={t.icon} className="doodle" /></span><Wavy as="p" className="tile-label">{t.label}</Wavy></div>
+                    <div className="tile-head"><span className="badge-icon"><DoodleSvg name={t.icon} className="doodle" /></span><p className="tile-label">{t.label}</p></div>
                     <h3>{t.title}</h3>
                     <p>{t.text}</p>
                     <div className="tile-foot">

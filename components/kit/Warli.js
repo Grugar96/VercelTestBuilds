@@ -179,7 +179,7 @@ function Vignette({ x, children }) { return <g transform={`translate(${x} 0)`} c
 export function WarliFrieze({ tone = 'dark', className = '', title = 'Painted frieze of Mulki life: carrying boards, chai, cycling, music, kayaking, the Surf Brothers jeep' }) {
   const id = `wp-frieze-${tone}`;
   return (
-    <svg className={`kit warli kit-${tone} warli-frieze ${className}`} viewBox="0 0 1410 170" preserveAspectRatio="xMidYMid meet" {...a11y(title)}>
+    <svg className={`kit warli kit-${tone} warli-frieze ${className}`} viewBox="0 0 1450 170" preserveAspectRatio="xMidYMid meet" {...a11y(title)}>
       <defs><Paint id={id} /></defs>
       <g filter={`url(#${id})`}>
         {/* 1. woman carrying a board on her head */}
@@ -237,7 +237,7 @@ export function WarliFrieze({ tone = 'dark', className = '', title = 'Painted fr
           <path className="line" d={water(136, 20, 210, 4)} />
         </Vignette>
         {/* 7. the Surf Brothers jeep, board on the roll bar */}
-        <Vignette x={1060}>
+        <Vignette x={1090}>
           <Person x={118} y={92} s={0.78}
             arms={[[[10, 4], [24, 2]], [[12, 6], [26, 4]]]}
             legs={[[], []]} />
@@ -255,7 +255,7 @@ export function WarliFrieze({ tone = 'dark', className = '', title = 'Painted fr
           <path className="ink-stroke" strokeWidth="3" d="M206 118 L214 118" />
         </Vignette>
         {/* 8. shaka wave goodbye */}
-        <Vignette x={1300}>
+        <Vignette x={1340}>
           <Person x={42} y={108} s={1}
             arms={[[[-12, 12], [-14, 28]], [[12, -10], [16, -28]]]}
             legs={[[[-6, 18], [-10, 34]], [[6, 18], [10, 34]]]} />

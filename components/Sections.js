@@ -7,6 +7,7 @@ import AutoScroll from './AutoScroll';
 import RideWave from './RideWave';
 import { WarliSurfer, WarliPalm, WarliSkater, WarliKayaker, WarliFrieze, Zigzag } from './kit/Warli';
 import TeamClip from './TeamClip';
+import { SocialLink } from './Social';
 import { PACKAGES, PACKAGE_INCLUDES, PROOF, TESTIMONIALS, CREW, OWNERS, PHONES, WEEKDAY_OFFER, wa } from '@/lib/site';
 
 // Picks a painted icon for a list item from its words; falls back to a painted tick.
@@ -123,7 +124,7 @@ export function Testimonials({ tone = 'ocean' }) {
 function Face({ c, size = 'md' }) {
   return (
     <span className={`crew-face ${size}`} aria-hidden="true">
-      {c.face ? <img src={`/img/crew/${c.clip || c.name.toLowerCase()}.jpg`} alt="" loading="lazy" /> : <b>{c.name[0]}</b>}
+      {c.face ? <img src={`/img/crew/${c.clip || c.name.toLowerCase()}.jpg`} alt="" loading="lazy" /> : <b>{c.name.replace(/^Dr\.\s*/, '')[0]}</b>}
     </span>
   );
 }
@@ -181,7 +182,7 @@ export function Faq({ items, title = 'Questions we get a lot', label = 'Before y
         <div>
           <Wavy as="p" className="label eyebrow">{label}</Wavy>
           <h2 id="faq-title" style={{ fontSize: 'var(--fs-h2)' }}>{title}</h2>
-          <p className="muted">Anything else? <a href={wa('Hi! I have a question before booking.')}>Ask us on WhatsApp</a>.</p>
+          <p className="muted faq-ask">Anything else? <SocialLink kind="whatsapp" href={wa('Hi! I have a question before booking.')}>Ask us on WhatsApp</SocialLink></p>
           {more && <Link className="link-arrow" href="/contact#faq">All questions</Link>}
         </div>
         <div className="faq">

@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Wavy from './Wavy';
 import { MAP_SPOTS } from '@/lib/site';
 import { DOODLE_PATHS } from './Doodle';
@@ -16,8 +16,16 @@ function ripples(d, n, x0, y0, dx, dy) {
 }
 
 export default function MulkiMap() {
-  const [i, setI] = useState(1);
-  const s = MAP_SPOTS[i];
+  const [i, setI] = useState(null); // nothing open until someone taps a pin
+  const box = useRef(null);
+  useEffect(() => {
+    if (i === null) return;
+    const close = (e) => { if (box.current && !box.current.querySelector('svg').contains(e.target) && !e.target.closest('.map-pop')) setI(null); };
+    const esc = (e) => { if (e.key === 'Escape') setI(null); };
+    document.addEventListener('pointerdown', close); document.addEventListener('keydown', esc);
+    return () => { document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', esc); };
+  }, [i]);
+  const s = MAP_SPOTS[i ?? 1]; // the side card on desktop falls back to home base
   return (
     <div className="wrap map-grid">
       <div className="map-text reveal">
@@ -29,12 +37,12 @@ export default function MulkiMap() {
         <img src={s.img} alt={s.alt} width="120" height="100" />
         <div><h3>{s.name}</h3><p>{s.text}</p></div>
       </div>
-      <div className="map-box warli-map reveal">
-        <div className={`map-card map-pop ${s.y > 260 ? 'above' : 'below'}`} aria-live="polite" key={'pop' + s.name}
+      <div className="map-box warli-map reveal" ref={box}>
+        {i !== null && <div className={`map-card map-pop ${s.y > 260 ? 'above' : 'below'}`} aria-live="polite" key={'pop' + s.name}
           style={{ '--py': `${(s.y / 520) * 100}%`, '--px': `${(s.x / 400) * 100}%` }}>
           <img src={s.img} alt="" width="84" height="72" />
           <div><h3>{s.name}</h3><p>{s.text}</p></div>
-        </div>
+        </div>}
         <svg viewBox="0 0 400 520" role="group" aria-label="Map of the Surf Brothers area in Mulki">
           <defs>
             <filter id="map-paint" x="-2%" y="-2%" width="104%" height="104%">
@@ -58,7 +66,7 @@ export default function MulkiMap() {
             </g>
             {/* palms and huts on land, Warli style */}
             <g className="map-ink">
-              {[[310, 150], [350, 210], [330, 330], [370, 400], [300, 450], [280, 140], [350, 480]].map(([x, y], k) => (
+              {[[310, 150], [350, 210], [330, 330], [370, 400], [280, 140], [350, 480]].map(([x, y], k) => (
                 <g key={k} transform={`translate(${x} ${y})`}>
                   <path d="M-1 0C0 -8 0 -16 -2 -24h3C3 -16 3 -8 2 0z" />
                   <path className="map-stroke" d="M0 -24c-4 -4 -10 -4 -13 -1M0 -24c4 -5 10 -5 13 -1M0 -24c-2 -5 0 -8 3 -10M0 -24c-3 3 -4 6 -4 9M0 -24c3 3 5 5 5 9" />
@@ -68,11 +76,20 @@ export default function MulkiMap() {
               <path d="M326 236l9 -8 9 8zM328 236h14v9h-14z" />
             </g>
             {/* jeep route from the hostel to the surf point */}
-            <path className="map-route" d="M280 268C290 330 280 410 250 452C222 488 176 486 146 452" />
-            <text className="map-hand map-note" x="262" y="476" transform="rotate(-18 262 476)">jeep ride</text>
+            {/* jeep route: no shortcut over the water, it loops round by road and over the bridge (~15 min) */}
+            <path className="map-route" d="M282 268C302 330 300 420 276 468C264 492 248 506 226 509C202 512 184 500 172 482C162 466 154 454 148 450" />
+            <path className="map-bridge" d="M214 500v16M238 500v16M212 504h28M212 512h28" />
+            <g className="map-jeep" transform="translate(281 372)">
+              <path d="M-20 4h28l3-4h12l3 5v9h-46z" />
+              <path className="map-stroke" d="M-15 4l1-10h14l1 10M10 0l3-9" />
+              <circle cx="-11" cy="15" r="5.5" /><circle cx="15" cy="15" r="5.5" />
+              <circle className="hub" cx="-11" cy="15" r="2" /><circle className="hub" cx="15" cy="15" r="2" />
+            </g>
+            <text className="map-hand map-note" x="318" y="428" textAnchor="middle" transform="rotate(-8 318 428)">15 min</text>
+            <text className="map-hand map-note" x="318" y="446" textAnchor="middle" transform="rotate(-8 318 446)">jeep ride</text>
             {/* little Warli people doing their thing */}
             <g className="map-ink map-ink-on-dark" transform="translate(76 432)"><path d="M-22 22C-10 18 10 18 24 22C14 26 -12 26 -22 22Z" /><Person x={0} y={10} s={0.48} arms={[[[-9, 4]], [[9, 4]]]} legs={[[[-5, 8]], [[5, 8]]]} limb={3} /></g>
-            <g className="map-ink map-ink-on-dark" transform="translate(240 330)"><path d="M-20 4C-8 0 8 0 20 4C12 10 -12 10 -20 4Z" /><path d="M0 2l-6 -9h12z" /><circle cx="0" cy="-11" r="3" /><path className="map-stroke" d="M-14 6L14 -10" /></g>
+            <g className="map-kayak" transform="translate(249 346) rotate(-76)"><path className="hull" d="M-20 4C-8 0 8 0 20 4C12 10 -12 10 -20 4Z" /><path d="M0 2l-6 -9h12z" /><circle cx="0" cy="-11" r="3" /><path className="paddle" d="M-14 6L14 -10" /></g>
           </g>
           <text x="40" y="300" className="map-hand map-sea" transform="rotate(-84 40 300)">Arabian Sea</text>
           <text x="300" y="44" className="map-hand map-river" transform="rotate(-14 300 44)">Shambhavi</text>
